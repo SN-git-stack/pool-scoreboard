@@ -349,24 +349,13 @@ h2 {
     flex: 1;
     margin-right: 1rem;
     overflow-y: hidden;
-    flex-basis: 60%; /* Left section takes 60% */
-}
-
-.right-section {
-    flex-basis: 40%;
 }
 
 @media (min-width: 800px) {
     .left-section {
        margin-right: 1rem;
-       flex-basis: auto;
-    }
-
-    .right-section {
-         flex-basis: auto;
     }
 }
-
 
 /* Scoreboard Styling */
 .scoreboard {
@@ -484,8 +473,8 @@ h2 {
     box-shadow: 0 0.8rem 1.6rem rgba(0, 0, 0, 0.1);
     width: 100%;
     max-width: 50vw; /* Set max width to 50% of viewport width*/
-    display: flex;
-    flex-direction: column;
+     display: flex;
+     flex-direction: column;
      max-height: 50rem;
 }
 
@@ -698,5 +687,5 @@ h2 {
 .fullscreen-modal-dialog p {
     margin-bottom: 1rem;
     font-size: 1.1rem;
-    font-weight: bold;
+        font-weight: bold;
 }
