@@ -311,29 +311,23 @@ h2 {
 }
 #match-history {
     margin-top: 0.5rem;
-    /*border-top: 0.2rem solid #ddd; Removed top border*/
+  /*   border-top: 0.2rem solid #ddd; Removed Border*/
     padding-top: 0.5rem;
-     max-height: 20rem;
-  /*    overflow-y: auto; removed overflow, see next section*/
+  /*  max-height: 20rem; REMOVED MAX-HEIGH FOR HISTORY, IT SHOULD BE APPLIED TO HISTORY LIST ONLY*/
+   /*  overflow-y: auto; removed overflow*/
 }
 
 #match-history-header {
-    position: sticky;
+      position: sticky;
     top: 0;
-    background-color: #fff;
-   padding-bottom: 0.4rem;
-   /* border-bottom: 0.2rem solid #eee; remove border bottom */
+      background-color: #fff;
+    padding-bottom: 0.4rem;
+  /* border-bottom: 0.2rem solid #eee; REMOVED BOTTOM BORDER*/
 }
-
  #history-list {
-      overflow-y: auto;
-         max-height: 100%;
-}
-
-#history-list {
-    list-style: none;
-    padding: 0;
-}
+     overflow-y: auto;
+          max-height: 18rem; /*Added Max Height to enable overflow if necessary*/
+     }
 
 #history-list li {
     margin-bottom: 0.4rem;
