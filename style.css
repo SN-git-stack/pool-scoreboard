@@ -437,12 +437,14 @@ h2 {
 /* Input Area Styling */
 .input-area {
     text-align: center;
-    margin-top: 5rem;
+    margin-top: 1rem; /* Reduced Margin */
     padding: 0.8rem;
     border: 0.3rem solid #ddd;
     border-radius: 0.8rem;
     background-color: #f4f4f4;
     box-shadow: 0 0.8rem 1.6rem rgba(0, 0, 0, 0.1);
+     max-height: 20rem;
+    overflow-y: auto;
 }
 
 .buttons-remaining {
@@ -496,13 +498,13 @@ h2 {
     display: flex;
     flex-direction: column;
     flex: 1;
-    max-height: 30rem;
+    max-height: 35rem; /* Increased max-height for table */
 }
 
 @media (min-width: 800px) {
     .inning-table {
         max-height: 30rem;
-        width: 90%;
+          width: 90%;
         margin-left: auto;
         margin-right: auto;
     }
@@ -612,7 +614,7 @@ h2 {
 }
 
 .controls {
-    margin: 0;
+   margin: 0;
     padding: 0.8rem;
     border: 0.3rem solid #ddd;
     border-radius: 0.8rem;
