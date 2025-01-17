@@ -433,9 +433,8 @@ h2 {
     flex: 1;
     display: flex;
     flex-direction: column;
-    justify-content: flex-end;
     align-items: stretch;
-    padding: 0 1rem;
+    padding: 14px 4rem;
 }
 
 /* Input Area Styling */
