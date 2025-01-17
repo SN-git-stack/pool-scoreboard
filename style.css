@@ -303,24 +303,24 @@ h2 {
 #match-history {
     margin-top: 0.5rem;
    /* max-width: 100%; REMOVE MAX-WIDTH */
-       width: 100%; /* ADD FULL WIDTH */
+        width: 80%; /* Set to 80% */
+    margin-left: auto; /* Center the element horizontally */
+    margin-right: auto; /* Center the element horizontally */
 }
 
 #match-history-header {
-      position: sticky;
+    position: sticky;
     top: 0;
-      background-color: #fff;
+    background-color: #fff;
     padding-bottom: 0.4rem;
     padding-top: 0.4rem;
-  /* border-bottom: 0.2rem solid #eee; remove border*/
 }
- #history-list {
+
+#history-list {
      overflow-y: auto;
           max-height: 11rem;
 }
-
-
-#history-controls {
+ #history-controls {
     display: flex;
     justify-content: center;
     width: 100%;
