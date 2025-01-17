@@ -58,6 +58,7 @@ h2 {
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    
 }
 
 .game-buttons {
@@ -301,28 +302,28 @@ h2 {
 
 #match-history {
     margin-top: 0.5rem;
-   /*  max-width: 100%; REMOVE MAX-WIDTH HERE*/
-    /* border-top: 0.2rem solid #ddd; Remove Border */
+   /* max-width: 100%; REMOVE MAX-WIDTH */
+       width: 100%; /* ADD FULL WIDTH */
 }
 
 #match-history-header {
-    position: sticky;
+      position: sticky;
     top: 0;
-    background-color: #fff;
+      background-color: #fff;
     padding-bottom: 0.4rem;
     padding-top: 0.4rem;
-  /* border-bottom: 0.2rem solid #eee; remove border */
+  /* border-bottom: 0.2rem solid #eee; remove border*/
+}
+ #history-list {
+     overflow-y: auto;
+          max-height: 11rem;
 }
 
-#history-list {
-    overflow-y: auto;
-    max-height: 11rem;
-}
 
 #history-controls {
     display: flex;
     justify-content: center;
-    width: 100%; /* ADD FULL WIDTH HERE */
+    width: 100%;
     margin-top: 0.5rem;
     margin-bottom: 0.5rem;
 }
