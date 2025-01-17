@@ -1,0 +1,9 @@
+version: "3.9"
+services:
+  web:
+    build: .
+    ports:
+      - "8084:80" # Map container port 80 to host port 8084
+    volumes:
+      - %directory%/:/usr/share/nginx/html # Mount the current directory to the container's webroot
+    restart: unless-stopped # Restart the container if it stops unless you explicitly stop it.
