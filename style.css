@@ -356,10 +356,9 @@ h2 {
     flex: 1;
     margin-right: 0rem;
     overflow-y: hidden;
-        padding: 0.5rem 0; /* added padding for top and bottom */
+        padding: 0.5rem 0rem; /* added padding for top and bottom */
 
 }
-
 
 @media (min-width: 800px) {
     .left-section {
@@ -375,7 +374,7 @@ h2 {
     border-radius: 0.8rem;
     background-color: #f4f4f4;
     box-shadow: 0 0.8rem 1.6rem rgba(0, 0, 0, 0.1);
-        overflow: hidden;
+     overflow: hidden;
 }
 
 .scoreboard label {
@@ -427,12 +426,12 @@ h2 {
     flex: 1;
     text-align: center;
     margin-top: 0.5rem;
-    padding: 0.3rem;
+    padding: 0.3rem 0rem; /* reduce top/bottom padding*/
     border: 0.3rem solid #ddd;
     border-radius: 0.8rem;
     background-color: #f4f4f4;
     box-shadow: 0 0.8rem 1.6rem rgba(0, 0, 0, 0.1);
-     overflow: hidden;
+      overflow: hidden;
 }
 
 .buttons-remaining {
@@ -486,8 +485,8 @@ h2 {
     box-shadow: 0 0.8rem 1.6rem rgba(0, 0, 0, 0.1);
     width: 100%;
     max-width: 50vw;
-    display: flex;
-    flex-direction: column;
+     display: flex;
+     flex-direction: column;
     max-height: 50rem;
 }
 
@@ -623,7 +622,7 @@ h2 {
     margin-top: 0.8rem;
     justify-content: space-between;
     align-items: center;
-        padding: 0 0.5rem;
+    padding: 0 0.5rem;
 }
 
 .controls #foul,
