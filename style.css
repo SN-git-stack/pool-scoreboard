@@ -51,7 +51,7 @@ h2 {
     text-align: center;
     margin-bottom: 0.8rem;
     color: #2c3e50;
-  /* text-shadow: 0.2rem 0.2rem 0.4rem rgba(0, 0, 0, 0.1);*/
+    /*text-shadow: 0.2rem 0.2rem 0.4rem rgba(0, 0, 0, 0.1);*/ /* Remove shadow from h2*/
     font-weight: bold;
 }
 
@@ -80,13 +80,13 @@ h2 {
     border: none;
     border-radius: 1rem;
     transition: background-color 0.3s ease, transform 0.2s ease-in-out;
-   /* box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.3);  Removed shadow */
+    /*box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.3); REMOVED SHADOW*/
 }
 
 #game-selection button:hover {
     background-color: #2980b9;
     transform: scale(1.05);
- /*   box-shadow: 0 0.8rem 1.4rem rgba(0, 0, 0, 0.4);   Removed shadow */
+     /*box-shadow: 0 0.8rem 1.4rem rgba(0, 0, 0, 0.4); Removed shadow*/
 }
 
 #game-selection .secondary-button {
@@ -98,13 +98,13 @@ h2 {
     border: none;
     border-radius: 0.8rem;
     transition: background-color 0.3s ease, transform 0.2s ease-in-out;
- /*   box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.3); Remove shadow */
+  /* box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.3); REMOVED SHADOW */
 }
 
 #game-selection .secondary-button:hover {
     background-color: #2980b9;
     transform: scale(1.05);
-  /*  box-shadow: 0 0.8rem 1.4rem rgba(0, 0, 0, 0.4);   Removed shadow */
+ /*  box-shadow: 0 0.8rem 1.4rem rgba(0, 0, 0, 0.4);   Removed Shadow */
 }
 
 #history-controls {
@@ -139,7 +139,7 @@ h2 {
     padding: 0.8rem;
     background-color: #f9f9f9;
     border-radius: 0.8rem;
-   /* box-shadow: inset 0 0.2rem 0.4rem rgba(0, 0, 0, 0.05);  Removed Shadow*/
+  /* box-shadow: inset 0 0.2rem 0.4rem rgba(0, 0, 0, 0.05);  Removed shadow */
 }
 
 #player-input h2 {
@@ -166,26 +166,26 @@ h2 {
     font-size: 1.1rem;
     margin-bottom: 0.8rem;
     width: calc(100% - 9.8rem);
-    /* box-shadow: inset 0 0.2rem 0.4rem rgba(0, 0, 0, 0.1); REMOVED SHADOW */
+  /*  box-shadow: inset 0 0.2rem 0.4rem rgba(0, 0, 0, 0.1); REMOVED SHADOW */
     font-weight: bold;
 }
 
 #scoreboard {
     margin-top: 7.5rem;
     padding: 0.8rem;
-    /* border: 0.3rem solid #ddd; Removed the borders*/
+    /*border: 0.3rem solid #ddd; remove border*/
     border-radius: 0.8rem;
     background-color: #f4f4f4;
-    /* box-shadow: 0 0.8rem 1.6rem rgba(0, 0, 0, 0.1); REMOVED SHADOW */
+ /*   box-shadow: 0 0.8rem 1.6rem rgba(0, 0, 0, 0.1); Remove Shadow */
     display: flex;
     flex-direction: column;
-    overflow: hidden;
+      overflow: hidden;
 }
 
 #scoreboard h2 {
     font-size: 2rem;
     color: #e74c3c;
-   /* text-shadow: 0.2rem 0.2rem 0.4rem rgba(0, 0, 0, 0.1); Removed Shadow */
+    /*text-shadow: 0.2rem 0.2rem 0.4rem rgba(0, 0, 0, 0.1);  Removed shadow*/
     margin-bottom: 0.8rem;
     font-weight: bold;
 }
@@ -199,9 +199,9 @@ h2 {
 .awesome-player {
     flex: 1;
     padding: 0.8rem;
-    background-color: #f9f9f9;
+     background-color: #f9f9f9;/* set player background */
     border-radius: 0.8rem;
-  /*  box-shadow: 0 0.4rem 0.8rem rgba(0, 0, 0, 0.1); REMOVED SHADOW*/
+   /* box-shadow: 0 0.4rem 0.8rem rgba(0, 0, 0, 0.1); Removed Shadow*/
     margin: 0 0.8rem;
     display: flex;
     flex-direction: column;
@@ -214,7 +214,7 @@ h2 {
     color: #2c3e50;
     text-align: center;
     font-weight: bold;
-      margin-bottom: 0.2rem;
+    margin-bottom: 0.2rem;
 }
 
 .score {
@@ -223,7 +223,7 @@ h2 {
     margin-bottom: 0.8rem;
     text-align: center;
     color: #3498db;
-   /* text-shadow: 0.2rem 0.2rem 0.4rem rgba(0, 0, 0, 0.1);  Removed Shadow*/
+    /*text-shadow: 0.2rem 0.2rem 0.4rem rgba(0, 0, 0, 0.1); Remove shadow */
 }
 
 /* Styles for 8,9, and 10 ball game modes*/
@@ -238,7 +238,7 @@ h2 {
 }
 
 #standard-scoreboard .score-controls button {
-    padding: 0.8rem 1.2rem;
+   padding: 0.8rem 1.2rem;
     font-size: 1.4rem;
     cursor: pointer;
     color: white;
@@ -246,16 +246,15 @@ h2 {
     border-radius: 1rem;
     margin: -0.2rem 0.8rem;
     transition: background-color 0.3s ease, transform 0.2s ease-in-out;
- /*   box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.3); REMOVED SHADOW */
+    /* box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.3); Remove shadow*/
     display: flex;
-    text-align: center;
+     text-align: center;
     align-items: center;
-    justify-content: center;
+     justify-content: center;
 }
-
 #standard-scoreboard .score-controls button:hover {
     transform: scale(1.05);
- /*   box-shadow: 0 0.8rem 1.4rem rgba(0, 0, 0, 0.4); Removed SHADOW */
+    /* box-shadow: 0 0.8rem 1.4rem rgba(0, 0, 0, 0.4); Remove shadow */
 }
 
 
@@ -271,9 +270,9 @@ h2 {
 
 /* Styles for 8,9, and 10 ball game modes*/
 #standard-scoreboard .score-controls button {
-     padding: 1rem 1.4rem;
-   /*  margin-top: 0rem; Remove margin */
-   /*   margin-bottom: 0rem; Remove margin */
+   padding: 1rem 1.4rem;
+  /*    margin-top: 0rem; Remove top margin */
+   /*   margin-bottom: 0rem; Removed margin*/
 }
 
 #standard-scoreboard .score-controls button:first-child {
@@ -302,13 +301,13 @@ h2 {
     border-radius: 1rem;
     margin-top: auto;
     transition: background-color 0.3s ease, transform 0.2s ease-in-out;
-  /*  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.3); Removed shadow*/
+    /*box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.3); Remove shadow*/
 }
 
 #scoreboard button:hover {
     background-color: #6a7778;
     transform: scale(1.05);
-  /*  box-shadow: 0 0.8rem 1.4rem rgba(0, 0, 0, 0.4); Removed Shadow*/
+    /* box-shadow: 0 0.8rem 1.4rem rgba(0, 0, 0, 0.4); REmOVE shadow */
 }
 
 #match-history {
@@ -331,7 +330,7 @@ h2 {
     border-radius: 0.6rem;
     background-color: #fdfdfd;
     font-size: 1rem;
-  /*  box-shadow: 0 0.1rem 0.3rem rgba(0, 0, 0, 0.1); Remove Shadow */
+  /*  box-shadow: 0 0.1rem 0.3rem rgba(0, 0, 0, 0.1); REmOVE shadow*/
     font-weight: bold;
 }
 
@@ -370,9 +369,8 @@ h2 {
     flex: 1;
     margin-right: 0rem;
     overflow-y: hidden;
-       padding: 0.5rem 0rem;
+    padding: 0.5rem 0rem;
 }
-
 
 @media (min-width: 800px) {
     .left-section {
@@ -384,10 +382,10 @@ h2 {
 .scoreboard {
     margin-bottom: 0.3rem;
     padding: 0.8rem;
-  /* border: 0.3rem solid #ddd;  remove border*/
+  /* border: 0.3rem solid #ddd; Remove Borders*/
     border-radius: 0.8rem;
     background-color: #f4f4f4;
-  /* box-shadow: 0 0.8rem 1.6rem rgba(0, 0, 0, 0.1); Remove Shadow*/
+    /*box-shadow: 0 0.8rem 1.6rem rgba(0, 0, 0, 0.1); Remove Shadow*/
     overflow: hidden;
 }
 
@@ -400,7 +398,7 @@ h2 {
 }
 
 .scoreboard span {
-    font-size: 1.3rem;
+   font-size: 1.7rem;  /* adjusted text-size to match the number style*/
     font-weight: bold;
     color: #004d00;
 }
@@ -441,11 +439,11 @@ h2 {
     text-align: center;
     margin-top: 0.5rem;
     padding: 0.3rem 0rem;
-    /*border: 0.3rem solid #ddd; Removed Border*/
+  /*  border: 0.3rem solid #ddd; Remove Borders */
     border-radius: 0.8rem;
     background-color: #f4f4f4;
- /*   box-shadow: 0 0.8rem 1.6rem rgba(0, 0, 0, 0.1); Remove Shadow */
-     overflow: hidden;
+  /*   box-shadow: 0 0.8rem 1.6rem rgba(0, 0, 0, 0.1); remove shadow */
+      overflow: hidden;
 }
 
 .buttons-remaining {
@@ -476,7 +474,7 @@ h2 {
     cursor: pointer;
     border-radius: 0.8rem;
     transition: background-color 0.2s ease-in-out;
-  /*  box-shadow: 0 0 0.3rem rgba(0, 123, 255, 0.5); removed shadow */
+ /*   box-shadow: 0 0 0.3rem rgba(0, 123, 255, 0.5);  removed shadow*/
     font-weight: bold;
 }
 
@@ -486,7 +484,7 @@ h2 {
 
 .ball-buttons button:focus {
     outline: none;
-    /*box-shadow: 0 0 0.3rem rgba(0, 123, 255, 0.5);  Removed SHADOW */
+  /*   box-shadow: 0 0 0.3rem rgba(0, 123, 255, 0.5); remove Shadow*/
 }
 
 /* Inning Table Styling */
@@ -494,10 +492,10 @@ h2 {
     overflow: hidden;
     margin: 0;
     padding: 0.8rem;
-  /*  border: 0.3rem solid #ddd; Remove border */
+  /* border: 0.3rem solid #ddd; remove Border*/
     border-radius: 0.8rem;
     background-color: #f4f4f4;
-    /* box-shadow: 0 0.8rem 1.6rem rgba(0, 0, 0, 0.1);  removed Shadow*/
+   /* box-shadow: 0 0.8rem 1.6rem rgba(0, 0, 0, 0.1); Remove Shadow*/
     width: 100%;
     max-width: 50vw;
      display: flex;
@@ -622,6 +620,7 @@ h2 {
 .controls {
     margin: 0;
     padding: 0.8rem;
+    border: 0.3rem solid #ddd;
     border-radius: 0.8rem;
     background-color: #f4f4f4;
     display: flex;
@@ -636,7 +635,29 @@ h2 {
     margin-top: 0.8rem;
     justify-content: space-between;
     align-items: center;
-        padding: 0 0.5rem;
+    padding: 0 0.5rem;
+}
+
+.controls #foul {
+   background-color: #ffeb3b;
+    color: #000;
+}
+
+.controls #safety {
+    background-color: #2ecc71;
+}
+
+.controls #end-game {
+    background-color: #3498db;
+}
+
+
+.controls #undo {
+    background-color: #95a5a6;
+}
+
+.controls #reset {
+    background-color: #e74c3c;
 }
 
 .controls #foul,
