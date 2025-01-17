@@ -192,34 +192,34 @@ const showGameScreen = (mode) => {
 };
 
 const loadGameHistory = () => {
-    const history = JSON.parse(localStorage.getItem('gameHistory')) || [];
-     const historyList = document.getElementById('history-list');
-     historyList.innerHTML = ''; // Clear the list
- 
-   //  const limitedHistory = history.slice(-5).reverse(); <== REMOVED THIS LIMIT!
- 
-     if (history.length === 0) { //Changed this logic so an empty array message appears on the screen, the previous check was wrong
-         const listItem = document.createElement('li');
-         listItem.textContent = 'No games played yet.';
-         historyList.appendChild(listItem);
-     } else {
-         history.slice().reverse().forEach((game, index) => { // <== Show history and also Reverse the game history
-             const listItem = document.createElement('li');
-             listItem.innerHTML = '';
-             let text = "";
-             if (game.mode === '14.1 Continuous') {
-                 text = `<strong>${game.mode}:</strong> ${game.date} - <strong>Player 1:</strong> ${game.player1} (Innings: ${game.inningsP1}, Balls Potted: ${game.ballsPottedP1}); <strong>Player 2:</strong> ${game.player2} (Innings: ${game.inningsP2}, Balls Potted: ${game.ballsPottedP2})`;
-             } else if (game.mode === '14.1 Continuous Trainer') {
-                 text = `<strong>${game.mode}:</strong> ${game.date} - Player: ${game.player1} (Innings: ${game.inningsP1}, Balls Potted: ${game.ballsPottedP1})`;
-             }
-             else {
-                 text = `<strong>${game.mode}:</strong> ${game.player1} ${game.score1} - ${game.score2} ${game.player2}`;
-             }
-             listItem.innerHTML = text;
-             historyList.appendChild(listItem);
-         });
-     }
- };
+   const history = JSON.parse(localStorage.getItem('gameHistory')) || [];
+    const historyList = document.getElementById('history-list');
+    historyList.innerHTML = ''; // Clear the list
+
+   const limitedHistory = history.slice(-100).reverse();
+
+    if (limitedHistory.length === 0) {
+        const listItem = document.createElement('li');
+        listItem.textContent = 'No games played yet.';
+        historyList.appendChild(listItem);
+    } else {
+        limitedHistory.forEach((game, index) => {
+            const listItem = document.createElement('li');
+            listItem.innerHTML = '';
+            let text = "";
+            if (game.mode === '14.1 Continuous') {
+                text = `<strong>${game.mode}:</strong> ${game.date} - <strong>Player 1:</strong> ${game.player1} (Innings: ${game.inningsP1}, Balls Potted: ${game.ballsPottedP1}); <strong>Player 2:</strong> ${game.player2} (Innings: ${game.inningsP2}, Balls Potted: ${game.ballsPottedP2})`;
+            } else if (game.mode === '14.1 Continuous Trainer') {
+                text = `<strong>${game.mode}:</strong> ${game.date} - Player: ${game.player1} (Innings: ${game.inningsP1}, Balls Potted: ${game.ballsPottedP1})`;
+            }
+            else {
+                text = `<strong>${game.mode}:</strong> ${game.player1} ${game.score1} - ${game.score2} ${game.player2}`;
+            }
+            listItem.innerHTML = text;
+            historyList.appendChild(listItem);
+        });
+    }
+};
 
 const saveGameToHistory = (endedGameMode) => {
     const history = JSON.parse(localStorage.getItem('gameHistory')) || [];
