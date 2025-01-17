@@ -301,9 +301,9 @@ h2 {
 }
 
 #match-history {
-    margin-top: 0.5rem;
+    margin-top: 0rem;
    /* max-width: 100%; REMOVE MAX-WIDTH */
-        width: 80%; /* Set to 80% */
+        width: 60%; /* Set to 80% */
     margin-left: auto; /* Center the element horizontally */
     margin-right: auto; /* Center the element horizontally */
 }
