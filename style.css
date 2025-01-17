@@ -343,7 +343,7 @@ h2 {
     display: flex;
     flex: 1;
     overflow: hidden;
-    margin: 5px 0rem;
+    margin: 3px 0rem;
     flex-direction: column;
 }
 
@@ -372,6 +372,7 @@ h2 {
     flex-direction: column;
     flex: 1;
     margin-right: 0rem;
+    margin-left: 0.5rem
     overflow-y: hidden;
        padding: 0.5rem 0rem;
 }
@@ -442,7 +443,7 @@ h2 {
     flex: 1;
     text-align: center;
     margin-top: 0.5rem;
-    padding: 0.3rem 0rem;
+    padding: 0.3rem 0.5rem;
  /*   border: 0.3rem solid #ddd; Remove Border */
     border-radius: 0.8rem;
     background-color: #f4f4f4;
@@ -624,9 +625,7 @@ h2 {
 .controls {
     margin: 0;
     padding: 0.8rem;
-    border: 0.3rem solid #ddd;
     border-radius: 0.8rem;
-    background-color: #f4f4f4;
     display: flex;
     flex-wrap: wrap;
     justify-content: flex-start;
@@ -637,6 +636,7 @@ h2 {
     display: flex;
     flex-wrap: wrap;
     margin-top: 0.8rem;
+    margin-bottom: 0.5rem;
     justify-content: space-between;
     align-items: center;
      padding: 0 0.5rem;
