@@ -23,7 +23,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 100vh;
+    min-height: 100%; /* Reduced min-height to 100% */
 }
 
 .container {
@@ -35,7 +35,7 @@ body {
     display: flex;
     flex-direction: column;
     margin: auto;
-     margin-top: 0; /* Removed the margin-top*/
+    margin-top: 0;
     margin-bottom: 0;
     flex: 1;
     overflow-y: auto;
@@ -336,6 +336,13 @@ h2 {
     }
 }
 
+.game-screen-wrapper {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    overflow: hidden;
+    height: 100%; /* Ensure it takes full height */
+}
 
 .left-section-wrapper {
     display: flex;
