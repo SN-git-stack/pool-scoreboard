@@ -64,6 +64,24 @@ A sleek, responsive web application for effortlessly tracking scores in your fav
 2.  Select your desired pool game on the initial splash page
 3.  Follow on screen prompts, or enjoy the 14.1 functionality via your appropriate interface.
 
+## 🐳 Deployment with Docker
+
+This project can be deployed using Docker for more portability and easier access:
+
+1.  **Docker Image:** Build the Docker image using the provided `Dockerfile`:
+
+    ```bash
+    docker build -t pool-scoreboard .
+    ```
+2.  **Run using `docker-compose`**: Use `docker-compose.yml` to deploy quickly
+     ```bash
+     docker-compose up
+      ```
+
+  The Docker setup automatically serves the application on [http://localhost:8084](http://localhost:8084). Your files will be dynamically updated as edits are made with its bind-mounted volume using `docker-compose`. The `Dockerfile` itself creates an nginx environment
+
+ *Remember to install docker and ensure you can build using the command prompt (or terminal)*
+
 ## 🛠️ Contribution
 
 This application is developed in basic web technologies: plain HTML, CSS, and JavaScript. All are invited to fork the project and customize for their own use cases. Create a branch, submit a pull request if there are contributions you wish to share to this open source code.
