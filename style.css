@@ -104,14 +104,6 @@ h2 {
    /*  box-shadow: 0 0.8rem 1.4rem rgba(0, 0, 0, 0.4); Remove SHadow */
 }
 
-#history-controls {
-    display: flex;
-    justify-content: center;
-    width: 100%;
-    margin-top: 0.5rem;
-    margin-bottom: 0.5rem;
-}
-
 #game-selection #clear-history,
 #game-selection #export-history,
 #game-selection #import-history-button {
@@ -306,25 +298,34 @@ h2 {
     transform: scale(1.05);
  /*  box-shadow: 0 0.8rem 1.4rem rgba(0, 0, 0, 0.4);  removed Shadow*/
 }
+
 #match-history {
     margin-top: 0.5rem;
-  /*   border-top: 0.2rem solid #ddd; Removed Border*/
-    padding-top: 0.5rem;
-  /*  max-height: 20rem; REMOVED MAX-HEIGH FOR HISTORY, IT SHOULD BE APPLIED TO HISTORY LIST ONLY*/
-   /*  overflow-y: auto; removed overflow*/
+   /*  max-width: 100%; REMOVE MAX-WIDTH HERE*/
+    /* border-top: 0.2rem solid #ddd; Remove Border */
 }
 
 #match-history-header {
-      position: sticky;
+    position: sticky;
     top: 0;
-      background-color: #fff;
+    background-color: #fff;
     padding-bottom: 0.4rem;
-  /* border-bottom: 0.2rem solid #eee; REMOVED BOTTOM BORDER*/
+    padding-top: 0.4rem;
+  /* border-bottom: 0.2rem solid #eee; remove border */
 }
- #history-list {
-     overflow-y: auto;
-          max-height: 18rem; /*Added Max Height to enable overflow if necessary*/
-     }
+
+#history-list {
+    overflow-y: auto;
+    max-height: 11rem;
+}
+
+#history-controls {
+    display: flex;
+    justify-content: center;
+    width: 100%; /* ADD FULL WIDTH HERE */
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+}
 
 #history-list li {
     margin-bottom: 0.4rem;
