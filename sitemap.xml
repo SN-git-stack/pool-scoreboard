@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+    <url>
+        <loc>https://stephannjo.github.io/pool-scoreboard/</loc>
+         <changefreq>monthly</changefreq>  <!-- updated this to from previous to monthly for variable timespan changes. use weekly/ daily if content is consistently that usage type or has such intended use from what that description may entail or do. The values listed do not have a guarantee how bots will function since other proprietary mechanism take effect, it serves more like documentation, use that info correctly via external documentation if you want to further investigate this and related aspects as some tools from external online site tests may help that type of behavior further or test what Google bots or similar bots respond (crawls) better using certain setups with higher rank based or external references back. That is why is said "never" could also have benefits due to the fact, resources at `assets/*` for instance typically rarely changes after creation -->
+         <priority>1.0</priority> <!-- if multiple content priority 1 is given more value -->
+   </url>
+      <url>
+      <loc>https://stephannjo.github.io/pool-scoreboard/assets/game_selection.png</loc>
+      <changefreq>never</changefreq>  <!-- Since assets dont often change I put here "never", though using "monthly" or daily isnt as bad unless crawling rate issues arise when that URL has that "frequency" on content that hardly changes or doesn't make sense for other aspects by bots proprietary logic for other sites. Such changes tend to be negligibly impactful in real-world usage anyway for any scenario here-->
+  </url>
+  <url>
+  <loc>https://stephannjo.github.io/pool-scoreboard/assets/standard_game_mode.png</loc>
+      <changefreq>never</changefreq>
+     </url>
+     <url>
+         <loc>https://stephannjo.github.io/pool-scoreboard/assets/continuous_game_mode.png</loc>
+            <changefreq>never</changefreq>
+   </url>
+      <url>
+     <loc>https://stephannjo.github.io/pool-scoreboard/assets/trainer_mode.png</loc>
+          <changefreq>never</changefreq>
+   </url>
+       <url>
+       <loc>https://stephannjo.github.io/pool-scoreboard/#import-history</loc>
+           <changefreq>never</changefreq>
+      </url>
+</urlset>
