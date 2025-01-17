@@ -51,9 +51,8 @@ A sleek, responsive web application for effortlessly tracking scores in your fav
 <p> <img src="https://stephannjo.github.io/pool-scoreboard/assets/continuous_game_mode.png" width= 280px height= auto  alt="14.1 Continuous Game Screen">
  <br> Continuous game mode screen where we track number of potted balls</p>
 <br>
-
-<p>  <img src="https://stephannjo.github.io/pool-scoreboard/assets/match_history.png"  width= 280px height= auto alt ="Match History Screen">
- <br> A view at the recent history table recording previous games</p>
+<p> <img src="https://stephannjo.github.io/pool-scoreboard/assets/trainer_mode.png"  width= 280px height= auto alt ="14.1 Continuous Trainer Game Mode Screen">
+ <br> A view at the 14.1 continuous training view of score management.</p>
 </div>
 
 ###
@@ -85,6 +84,18 @@ This project can be deployed using Docker for more portability and easier access
 ## 🛠️ Contribution
 
 This application is developed in basic web technologies: plain HTML, CSS, and JavaScript. All are invited to fork the project and customize for their own use cases. Create a branch, submit a pull request if there are contributions you wish to share to this open source code.
+
+## ⚠️ Limitations
+
+*   **Local Storage Only:** Game history and scores are stored in your browser's local storage. Data can be cleared when browser data is purged by user via clear browser cache functionality or if localStorage is explicitly wiped out (including during development).
+
+*  **No Multiple Tables:** At the moment, it can only track one pool table (game) at any one time. You may run other windows but they will each function in their own unique sessions independently of one another, with no sync abilities.
+
+*  **No Server Side:** Because we are only using a client application based view, it is incapable of server side functionality or accessing system or native files outside your own individual browser's data storage capability.
+  * Saving a set of different history per days to separate json files cannot be performed natively.
+   * If importing the wrong format of history file for data types can potentially fail depending on specific type parameters or if its empty.
+
+*   **No Native Application Access:** This will mean for data access to files and system permissions such functionality will have limitations, this will not work well in that format as data storage is designed around only browser APIs and localStorage access
 
 ## 📜 License
 MIT licensed code, fully free and open.
