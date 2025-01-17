@@ -359,7 +359,8 @@ h2 {
 
 /* Scoreboard Styling */
 .scoreboard {
-    margin-bottom: 0; /* Removed margin here */
+     flex: 1; /* Added flex: 1 here*/
+    margin-bottom: 0;
     padding: 0.8rem;
     border: 0.3rem solid #ddd;
     border-radius: 0.8rem;
@@ -413,10 +414,10 @@ h2 {
 
 /* Input Area Styling */
 .input-area {
-        flex: 1; /* added flex 1 here*/
+    flex: 1;
     text-align: center;
-    margin-top: 0.5rem;/* reduce the margin here*/
-    padding: 0.5rem; /* Reduced top and bottom padding here*/
+    margin-top: 0.5rem;
+    padding: 0.5rem;
     border: 0.3rem solid #ddd;
     border-radius: 0.8rem;
     background-color: #f4f4f4;
