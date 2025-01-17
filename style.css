@@ -227,7 +227,7 @@ h2 {
 }
 
 #standard-scoreboard .score-controls button {
-    padding: 1rem 4rem;
+    padding: 1rem 3.4rem;
     font-size: 1.4rem;
     cursor: pointer;
     color: white;
@@ -255,13 +255,6 @@ h2 {
        justify-content: center;
          margin-bottom: 0rem;
         font-size: 1.5rem;
-}
-
-/* Styles for 8,9, and 10 ball game modes*/
-#standard-scoreboard .score-controls button {
-    padding: 1rem 1.4rem;
-     /*  margin-top: 0rem;  removed Top Margin*/
-       /*  margin-bottom: 0rem; removed bottom margin */
 }
 
 #standard-scoreboard .score-controls button:first-child {
