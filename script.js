@@ -192,21 +192,19 @@ const showGameScreen = (mode) => {
 };
 
 const loadGameHistory = () => {
-   const history = JSON.parse(localStorage.getItem('gameHistory')) || [];
+    const history = JSON.parse(localStorage.getItem('gameHistory')) || [];
     const historyList = document.getElementById('history-list');
     historyList.innerHTML = ''; // Clear the list
 
-   const limitedHistory = history.slice(-100).reverse();
-
-    if (limitedHistory.length === 0) {
+    if (history.length === 0) {
         const listItem = document.createElement('li');
         listItem.textContent = 'No games played yet.';
         historyList.appendChild(listItem);
     } else {
-        limitedHistory.forEach((game, index) => {
-            const listItem = document.createElement('li');
+      history.slice().reverse().forEach((game, index) => {
+             const listItem = document.createElement('li');
             listItem.innerHTML = '';
-            let text = "";
+             let text = "";
             if (game.mode === '14.1 Continuous') {
                 text = `<strong>${game.mode}:</strong> ${game.date} - <strong>Player 1:</strong> ${game.player1} (Innings: ${game.inningsP1}, Balls Potted: ${game.ballsPottedP1}); <strong>Player 2:</strong> ${game.player2} (Innings: ${game.inningsP2}, Balls Potted: ${game.ballsPottedP2})`;
             } else if (game.mode === '14.1 Continuous Trainer') {
@@ -217,7 +215,7 @@ const loadGameHistory = () => {
             }
             listItem.innerHTML = text;
             historyList.appendChild(listItem);
-        });
+      });
     }
 };
 
