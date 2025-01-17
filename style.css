@@ -173,7 +173,7 @@ h2 {
 #scoreboard {
     margin-top: 7.5rem;
     padding: 0.8rem;
-    border: 0.3rem solid #ddd;
+   /* border: 0.3rem solid #ddd; removed this line*/
     border-radius: 0.8rem;
     background-color: #f4f4f4;
     box-shadow: 0 0.8rem 1.6rem rgba(0, 0, 0, 0.1);
@@ -356,7 +356,7 @@ h2 {
     flex: 1;
     margin-right: 0rem;
     overflow-y: hidden;
-        padding: 0.5rem 0rem; /* added padding for top and bottom */
+       padding: 0.5rem 0rem;
 
 }
 
@@ -370,7 +370,7 @@ h2 {
 .scoreboard {
     margin-bottom: 0.3rem;
     padding: 0.8rem;
-    border: 0.3rem solid #ddd;
+ /*   border: 0.3rem solid #ddd; REMOVE BORDER*/
     border-radius: 0.8rem;
     background-color: #f4f4f4;
     box-shadow: 0 0.8rem 1.6rem rgba(0, 0, 0, 0.1);
@@ -426,12 +426,12 @@ h2 {
     flex: 1;
     text-align: center;
     margin-top: 0.5rem;
-    padding: 0.3rem 0rem; /* reduce top/bottom padding*/
-    border: 0.3rem solid #ddd;
+    padding: 0.3rem 0rem;
+    border: 0.3rem solid #ddd; /*Removed border*/
     border-radius: 0.8rem;
     background-color: #f4f4f4;
     box-shadow: 0 0.8rem 1.6rem rgba(0, 0, 0, 0.1);
-      overflow: hidden;
+       overflow: hidden;
 }
 
 .buttons-remaining {
@@ -479,7 +479,7 @@ h2 {
     overflow: hidden;
     margin: 0;
     padding: 0.8rem;
-    border: 0.3rem solid #ddd;
+   /*  border: 0.3rem solid #ddd; Remove the border here */
     border-radius: 0.8rem;
     background-color: #f4f4f4;
     box-shadow: 0 0.8rem 1.6rem rgba(0, 0, 0, 0.1);
