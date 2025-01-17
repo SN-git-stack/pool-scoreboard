@@ -41,9 +41,9 @@ document.addEventListener('DOMContentLoaded', function() {
     initializeGame();
 
     // Show fullscreen prompt for Chrome on tablets
-    if (isTabletChrome()) {
+/*    if (isTabletChrome()) {
         showFullscreenPrompt();
-    }
+    } */
 
 });
 function startGame() {
@@ -614,6 +614,7 @@ const switchPlayer = () => {
 
 
 // Fullscreen Prompt Logic
+/*
 function isTabletChrome() {
     const userAgent = navigator.userAgent.toLowerCase();
     return /ipad|android(?!.*mobile)/.test(userAgent) && /chrome/.test(userAgent);
@@ -652,6 +653,7 @@ function requestFullscreen() {
          alert('Fullscreen mode is not supported or could not be enabled in this browser.');
     }
 }
+*/
 
 // Event Listeners for non Continuous game modes
 document.getElementById('clear-history').addEventListener('click', clearGameHistory);
