@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Pool Club Scoreboard</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+</head>
+<body>
+    <div class="container">
+        <h1>Pool Club Scoreboard</h1>
+
+        <div id="game-selection">
+            <h2>Select Game Mode</h2>
+            <div class="game-buttons">
+                <button onclick="selectGameMode('8-ball')">8-Ball</button>
+                <button onclick="selectGameMode('9-ball')">9-Ball</button>
+                <button onclick="selectGameMode('10-ball')">10-Ball</button>
+                <button onclick="selectGameMode('14.1 Continuous')">14.1 Continuous</button>
+                <button onclick="selectGameMode('14.1 Continuous Trainer')">14.1 Continuous Trainer</button>
+            </div>
+            <div id="match-history">
+                <h2>Match History</h2>
+                <ul id="history-list"></ul>
+            </div>
+           <div id="history-controls">
+                <button id="clear-history" class="secondary-button">Clear History</button>
+                <button id="export-history" class="secondary-button">Export History</button>
+                <input type="file" id="import-history" accept=".json" style="display: none;">
+                <button id="import-history-button" class="secondary-button">Import History</button>
+           </div>
+        </div>
+
+        <div id="player-input" style="display: none;">
+            <h2>Enter Player Names</h2>
+            <label for="player1">Home:</label>
+            <input type="text" id="player1" placeholder="Home Player Name" value="Home"><br>
+            <label for="player2">Guest:</label>
+            <input type="text" id="player2" placeholder="Guest Player Name" value="Guest"><br>
+            <button onclick="startGame()">Start Game</button>
+        </div>
+
+        <div id="scoreboard" style="display: none;">
+            <h2 id="game-title"></h2>
+            <div id="standard-scoreboard" style="display: none;">
+                <div class="player awesome-player">
+                    <h3 id="player1-name">Home</h3>
+                    <p class="score" id="player1-score">0</p>
+                    <div class="score-controls">
+                        <button onclick="decrementScore(1)">-</button>
+                        <button onclick="incrementScore(1)">+</button>
+                    </div>
+                </div>
+                <div class="player awesome-player">
+                    <h3 id="player2-name">Guest</h3>
+                    <p class="score" id="player2-score">0</p>
+                    <div class="score-controls">
+                        <button onclick="decrementScore(2)">-</button>
+                        <button onclick="incrementScore(2)">+</button>
+                    </div>
+                </div>
+            </div>
+             <button onclick="endGame()">End Game</button>
+        </div>
+ <div id="game-screen" style="display: none;">
+
+                <div class="main-content">
+                    <div class="left-section-wrapper">
+                         <section class="left-section">
+                            <section class="scoreboard">
+                                <table class="player-stats-table">
+                                    <tr>
+                                        <td class="player-label"><input type="text" id="player1-name-continuous" value="Player 1"></td>
+                                        <td class="empty-cell"></td>
+                                        <td class="player-label"><input type="text" id="player2-name-continuous" value="Player 2"></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="player-stats">
+                                            <div class="stat">
+                                                <label for="current-score-p1">Score:</label>
+                                                <span id="current-score-p1">0</span>
+                                            </div>
+                                            <div class="stat">
+                                                <label for="high-run-p1">High Run:</label>
+                                                <span id="high-run-p1">0</span>
+                                            </div>
+                                            <div class="stat">
+                                                <label for="innings-p1">Innings:</label>
+                                                <span id="innings-p1">0</span>
+                                            </div>
+                                        </td>
+                                        <td class="middle-stats">
+                                            <div class="stat" id="current-player-display">
+                                                <label for="current-player">Current Player:</label>
+                                                <span id="current-player">1</span>
+                                            </div>
+                                            <div class="stat" id="balls-on-table-display">
+                                                <label for="balls-on-table">Balls on Table:</label>
+                                                <span id="balls-on-table">15</span>
+                                            </div>
+            
+                                        </td>
+                                        <td class="player-stats">
+                                            <div class="stat">
+                                                <label for="current-score-p2">Score:</label>
+                                                <span id="current-score-p2">0</span>
+                                            </div>
+                                            <div class="stat">
+                                                <label for="high-run-p2">High Run:</label>
+                                                <span id="high-run-p2">0</span>
+                                            </div>
+                                            <div class="stat">
+                                                <label for="innings-p2">Innings:</label>
+                                                <span id="innings-p2">0</span>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </section>
+                             <section class="input-area">
+                                <div class="buttons-remaining">
+                                    <p>Balls Remaining:</p>
+                                    <div class="ball-buttons">
+                                        </div>
+                                </div>
+                             </section>
+                        </section>
+                    </div>
+                    <section class="right-section">
+                         <section class="inning-table">
+                            <h2>Inning Details</h2>
+                            <div class="inning-table-container">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>Inning</th>
+                                            <th>Player</th>
+                                            <th>Balls Potted</th>
+                                            <th>Score</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="inning-details">
+                                        </tbody>
+                                </table>
+                            </div>
+                        </section>
+                    </section>
+                </div>
+                 <section class="controls">
+                     <button id="foul" class="secondary-button">Foul</button>
+                    <button id="safety" class="secondary-button">Safety</button>
+                    <button id="undo" class="secondary-button">Undo</button>
+                    <button id="reset" class="secondary-button">Reset Game</button>
+                    <button id="end-game" class="secondary-button">End Game</button>
+                     <button id="new-rack" class="primary-button" disabled>New Rack (+14 balls)</button>
+                </section>
+            </div>
+    </div>
+
+    <div id="modal-overlay" style="display: none;">
+        <div id="modal-dialog">
+            <p id="modal-message"></p>
+            <button id="modal-confirm" class="primary-button">Yes</button>
+            <button id="modal-cancel" class="secondary-button">No</button>
+        </div>
+    </div>
+    
+     <div id="fullscreen-modal" style="display: none;">
+        <div class="fullscreen-modal-dialog">
+            <p>For the best experience, please enable Fullscreen mode on your tablet.</p>
+            <button id="fullscreen-confirm" class="primary-button">Yes, Enable Fullscreen</button>
+            <button id="fullscreen-cancel" class="secondary-button">No, Thanks</button>
+        </div>
+    </div>
+
+    <script src="script.js" defer></script>
+</body>
+</html>
