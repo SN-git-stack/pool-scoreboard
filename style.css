@@ -27,7 +27,7 @@ body {
 }
 
 .container {
-    background-color: #fff; /* Remove for full page color or try:#f0f0f0; for a greyish tint*/
+    background-color: #fff;
     border-radius: 1.5rem;
     box-shadow: 0 0.8rem 2rem rgba(0, 0, 0, 0.2);
     width: 100%;
@@ -173,7 +173,7 @@ h2 {
 #scoreboard {
     margin-top: 7.5rem;
     padding: 0.8rem;
-  /*  border: 0.3rem solid #ddd; REMOVE BORDER */
+  /*  border: 0.3rem solid #ddd; REMOVE BORDER*/
     border-radius: 0.8rem;
     background-color: #f4f4f4;
     box-shadow: 0 0.8rem 1.6rem rgba(0, 0, 0, 0.1);
@@ -209,11 +209,12 @@ h2 {
 }
 
 .awesome-player h3 {
-    margin-top: 0;
-    font-size: 1.4rem;
+    margin-top: 0.5rem;/* adjusted top margin of the player name */
+    font-size: 1.6rem; /* Increased player name font size */
     color: #2c3e50;
     text-align: center;
     font-weight: bold;
+    margin-bottom: 0.2rem; /* adjusted bottom margin of the player name */
 }
 
 .score {
@@ -237,33 +238,44 @@ h2 {
 }
 
 #standard-scoreboard .score-controls button {
-   padding: 1.5rem 2.5rem;
-    font-size: 1.4rem; /* increase the button font size */
-    cursor: pointer;
+    padding: 0.8rem 1.2rem;/* Reduce Button padding */
+    font-size: 1.4rem;
+     cursor: pointer;
     color: white;
     border: none;
     border-radius: 1rem;
-    margin: 0 0.8rem;
+     margin: -0.2rem 0.8rem;/* Negative top margin for aligning elements */
     transition: background-color 0.3s ease, transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
     box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.3);
     display: flex;
-    align-items: center;
-    justify-content: center;
+        text-align: center; /* center text inside button */
+    align-items: center; /* vertically align */
+        justify-content: center; /* Horizontally align content in buttons */
 }
-
-/* Styles for 8,9, and 10 ball game modes*/
-#standard-scoreboard .score-controls button {
-  padding: 1.5rem 2.5rem;
-    font-size: 1.4rem;
-}
-
-
-.score-controls button:hover {
+#standard-scoreboard .score-controls button:hover {
     transform: scale(1.05);
     box-shadow: 0 0.8rem 1.4rem rgba(0, 0, 0, 0.4);
 }
 
-/* Swapped colors and order for standard scoreboard */
+
+/* Styles for 8,9, and 10 ball game modes*/
+#standard-scoreboard .score-controls button span {
+   display: flex;
+       align-items: center; /* vertically align */
+       justify-content: center;
+          margin-bottom: 0rem; /* Reduce margin bottom of text inside button*/
+         font-size: 1.5rem; /* adjusted text size in button */
+}
+
+
+/* Styles for 8,9, and 10 ball game modes*/
+#standard-scoreboard .score-controls button {
+      padding: 1rem 1.4rem; /* added top/bottom padding */
+  /*   margin-top: 0rem; Reduced top margin*/
+      margin-bottom: 0rem;  /*  Removed bottom margin*/
+
+}
+
 #standard-scoreboard .score-controls button:first-child {
     background-color: #e74c3c;
 }
@@ -353,13 +365,14 @@ h2 {
 }
 
 .left-section, .right-section {
-      display: flex;
+    display: flex;
     flex-direction: column;
     flex: 1;
     margin-right: 0rem;
     overflow-y: hidden;
-       padding: 0.5rem 0rem;
+    padding: 0.5rem 0rem;
 }
+
 
 @media (min-width: 800px) {
     .left-section {
@@ -371,11 +384,11 @@ h2 {
 .scoreboard {
     margin-bottom: 0.3rem;
     padding: 0.8rem;
-    /* border: 0.3rem solid #ddd; REMOVED BORDER*/
+  /*  border: 0.3rem solid #ddd; remove borders*/
     border-radius: 0.8rem;
     background-color: #f4f4f4;
     box-shadow: 0 0.8rem 1.6rem rgba(0, 0, 0, 0.1);
-      overflow: hidden;
+     overflow: hidden;
 }
 
 .scoreboard label {
@@ -428,11 +441,11 @@ h2 {
     text-align: center;
     margin-top: 0.5rem;
     padding: 0.3rem 0rem;
-     /* border: 0.3rem solid #ddd; removed border here*/
+  /*  border: 0.3rem solid #ddd; remove borders*/
     border-radius: 0.8rem;
     background-color: #f4f4f4;
     box-shadow: 0 0.8rem 1.6rem rgba(0, 0, 0, 0.1);
-     overflow: hidden;
+      overflow: hidden;
 }
 
 .buttons-remaining {
@@ -480,7 +493,7 @@ h2 {
     overflow: hidden;
     margin: 0;
     padding: 0.8rem;
-    /*  border: 0.3rem solid #ddd; removed border*/
+     /*border: 0.3rem solid #ddd; REMOVE BORDER*/
     border-radius: 0.8rem;
     background-color: #f4f4f4;
     box-shadow: 0 0.8rem 1.6rem rgba(0, 0, 0, 0.1);
