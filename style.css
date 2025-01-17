@@ -28,7 +28,7 @@ body {
 
 .container {
     background-color: #fff;
-    border-radius: 1.5rem;
+    border-radius: 1rem;
     box-shadow: 0 0.8rem 2rem rgba(0, 0, 0, 0.2);
     width: 100%;
     max-width: 1250px;
@@ -363,6 +363,7 @@ h2 {
 @media (min-width: 800px) {
     .left-section {
        margin-right: 1rem;
+       margin-left: 0.2rem;
     }
 }
 
@@ -623,6 +624,9 @@ h2 {
     justify-content: space-between;
     align-items: center;
     padding: 0 0.5rem;
+    margin-left: 0.2rem;
+    margin-right: 0.2rem;
+    margin-bottom: 0.4em;
 }
 
 .controls #foul,
