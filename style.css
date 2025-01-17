@@ -344,33 +344,37 @@ h2 {
 }
 
 .left-section, .right-section {
-    display: flex;
+     display: flex;
     flex-direction: column;
     flex: 1;
     margin-right: 1rem;
     overflow-y: hidden;
-    flex-basis: 50%; /* Set flex-basis to 50% for both left and right sections */
+    flex-basis: 50%;
 }
+
 
 @media (min-width: 800px) {
     .left-section {
        margin-right: 1rem;
-       flex-basis: auto; /* Reset flex basis for larger screens*/
+       flex-basis: auto;
     }
 
         .right-section {
-            flex-basis: auto; /* Reset flex basis for larger screens*/
+          flex-basis: auto;
     }
 }
 
 /* Scoreboard Styling */
 .scoreboard {
+        flex: 1;
     margin-bottom: 0.8rem;
     padding: 0.8rem;
     border: 0.3rem solid #ddd;
     border-radius: 0.8rem;
     background-color: #f4f4f4;
     box-shadow: 0 0.8rem 1.6rem rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
 }
 
 .scoreboard label {
@@ -419,6 +423,7 @@ h2 {
 
 /* Input Area Styling */
 .input-area {
+        flex: 1;
     text-align: center;
     margin-top: 2rem;
     padding: 0.8rem;
@@ -426,6 +431,9 @@ h2 {
     border-radius: 0.8rem;
     background-color: #f4f4f4;
     box-shadow: 0 0.8rem 1.6rem rgba(0, 0, 0, 0.1);
+       display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
 }
 
 .buttons-remaining {
@@ -470,6 +478,7 @@ h2 {
 
 /* Inning Table Styling */
 .inning-table {
+     flex: 1;
     overflow: hidden;
     margin: 0;
     padding: 0.8rem;
@@ -478,10 +487,9 @@ h2 {
     background-color: #f4f4f4;
     box-shadow: 0 0.8rem 1.6rem rgba(0, 0, 0, 0.1);
     width: 100%;
-     display: flex;
-     flex-direction: column;
-     flex: 1;
-    max-height: 50rem;
+    display: flex;
+    flex-direction: column;
+     max-height: 50rem;
 }
 
 @media (min-width: 800px) {
