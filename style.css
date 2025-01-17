@@ -32,15 +32,13 @@ body {
     box-shadow: 0 0.8rem 2rem rgba(0, 0, 0, 0.2);
     width: 100%;
     max-width: 1250px;
-    /* Removed height constraint and rely on flex-grow to expand */
     display: flex;
     flex-direction: column;
     margin: auto;
-    margin-top: 0; /* Removed margin top */
-    margin-bottom: 0;  /* Removed margin bottom */
-    flex: 1; /* Makes the container take all the available space */
-    overflow-y: auto; /* Allow scrolling inside if content exceeds available height */
-
+     margin-top: 0;
+    margin-bottom: 0;
+    flex: 1;
+    overflow-y: auto;
 }
 
 h1 {
@@ -54,6 +52,7 @@ h2 {
     margin-bottom: 0.8rem;
     color: #2c3e50;
     text-shadow: 0.2rem 0.2rem 0.4rem rgba(0, 0, 0, 0.1);
+    font-weight: bold; /* Make headings bold */
 }
 
 #game-selection {
@@ -147,6 +146,7 @@ h2 {
     margin-top: 0;
     color: #34495e;
     font-size: 1.8rem;
+        font-weight: bold; /* Make headings bold */
 }
 
 #player-input label {
@@ -156,6 +156,7 @@ h2 {
     margin-right: 0.8rem;
     font-size: 1.1rem;
     color: #555;
+        font-weight: bold; /* Make labels bold */
 }
 
 #player-input input {
@@ -166,6 +167,7 @@ h2 {
     margin-bottom: 0.8rem;
     width: calc(100% - 9.8rem);
     box-shadow: inset 0 0.2rem 0.4rem rgba(0, 0, 0, 0.1);
+        font-weight: bold; /* Make input text bold */
 }
 
 #scoreboard {
@@ -184,6 +186,7 @@ h2 {
     color: #e74c3c;
     text-shadow: 0.2rem 0.2rem 0.4rem rgba(0, 0, 0, 0.1);
     margin-bottom: 0.8rem;
+       font-weight: bold; /* Make headings bold */
 }
 
 #standard-scoreboard {
@@ -209,6 +212,7 @@ h2 {
     font-size: 1.4rem;
     color: #2c3e50;
     text-align: center;
+        font-weight: bold; /* Make headings bold */
 }
 
 .score {
@@ -314,6 +318,7 @@ h2 {
     background-color: #fdfdfd;
     font-size: 1rem;
     box-shadow: 0 0.1rem 0.3rem rgba(0, 0, 0, 0.1);
+        font-weight: bold; /* Make match history bold */
 }
 
 /* Game Screen Styling */
@@ -373,6 +378,7 @@ h2 {
     margin-bottom: 0.2rem;
     color: #555;
     font-size: 1rem;
+        font-weight: bold; /* Make labels bold */
 }
 
 .scoreboard span {
@@ -389,7 +395,9 @@ h2 {
 .scoreboard #high-run-p2,
 .scoreboard #innings-p2
 {
-    font-size: 1.4rem;
+    font-size: 1.7rem; /* increase the green number font sizes*/
+        font-weight: bold; /* Make score numbers bold */
+
 }
 
 .player-stats-table {
@@ -430,6 +438,7 @@ h2 {
     margin-bottom: 0.2rem;
     color: #555;
     font-size: 1rem;
+        font-weight: bold; /* Make paragraph text bold */
 }
 
 .ball-buttons {
@@ -448,6 +457,7 @@ h2 {
     cursor: pointer;
     border-radius: 0.8rem;
     transition: background-color 0.2s ease-in-out;
+        font-weight: bold; /* Make ball number buttons bold */
 }
 
 .ball-buttons button:hover {
@@ -472,7 +482,7 @@ h2 {
      display: flex;
      flex-direction: column;
      flex: 1;
-     max-height: 50rem; /* Reduced max-height */
+     max-height: 50rem;
 }
 
 @media (min-width: 800px) {
@@ -489,6 +499,7 @@ h2 {
     margin-bottom: 0.4rem;
     text-align: center;
     font-size: 1.2rem;
+       font-weight: bold; /* Make headings bold */
 }
 
 .inning-table-container {
@@ -509,6 +520,7 @@ h2 {
     border-bottom: 0.1rem solid #ddd;
     font-size: 1rem;
     word-break: break-word;
+    font-weight: bold; /* Make table text bold */
 }
 
 .inning-table-container th {
@@ -558,6 +570,7 @@ h2 {
 #modal-message {
     margin-bottom: 1rem;
     font-size: 1.1rem;
+        font-weight: bold; /* Make modal message bold */
 }
 
 .primary-button, .secondary-button {
@@ -594,7 +607,7 @@ h2 {
     background-color: #f4f4f4;
     display: flex;
     flex-wrap: wrap;
-    justify-content: flex-start; /* Keep this for general button alignment */
+    justify-content: flex-start;
     align-items: center;
 }
 
@@ -602,8 +615,8 @@ h2 {
     display: flex;
     flex-wrap: wrap;
     margin-top: 0.8rem;
-    justify-content: space-between; /* NEW: Distribute space between items */
-    align-items: center; /* NEW: Center items vertically */
+    justify-content: space-between;
+    align-items: center;
 }
 
 .controls #foul,
@@ -666,7 +679,7 @@ h2 {
     display: flex;
     justify-content: center;
     align-items: center;
-    z-index: 1001; /* Ensure it's on top of everything */
+    z-index: 1001;
 }
 
 .fullscreen-modal-dialog {
@@ -681,4 +694,5 @@ h2 {
 .fullscreen-modal-dialog p {
     margin-bottom: 1rem;
     font-size: 1.1rem;
+        font-weight: bold; /* Make modal message bold */
 }
