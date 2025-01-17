@@ -2,7 +2,7 @@
 
 /* Root Font Size */
 html {
-    font-size: 16px; /* Increased base font size */
+    font-size: 16px;
 }
 
 /* Basic Styling */
@@ -32,14 +32,15 @@ body {
     box-shadow: 0 0.8rem 2rem rgba(0, 0, 0, 0.2);
     width: 100%;
     max-width: 1250px;
-    max-height: 800px;
-    height: 80%;
+    /* Removed height constraint and rely on flex-grow to expand */
     display: flex;
     flex-direction: column;
     margin: auto;
-    margin-top: 2.5rem;
-    overflow-y: auto;
-    margin-bottom: auto;
+    margin-top: 0; /* Removed margin top */
+    margin-bottom: 0;  /* Removed margin bottom */
+    flex: 1; /* Makes the container take all the available space */
+    overflow-y: auto; /* Allow scrolling inside if content exceeds available height */
+
 }
 
 h1 {
@@ -48,7 +49,7 @@ h1 {
 
 
 h2 {
-    font-size: 2rem; /* Increased h2 font size */
+    font-size: 2rem;
     text-align: center;
     margin-bottom: 0.8rem;
     color: #2c3e50;
@@ -71,9 +72,9 @@ h2 {
 }
 
 #game-selection button {
-    padding: 1rem 2rem; /* Increased padding */
+    padding: 1rem 2rem;
     margin: 0.5rem;
-    font-size: 1.2rem; /* Increased font size */
+    font-size: 1.2rem;
     cursor: pointer;
     background-color: #3498db;
     color: white;
@@ -211,7 +212,7 @@ h2 {
 }
 
 .score {
-    font-size: 3.5rem; /* Increased Score font size */
+    font-size: 3.5rem;
     font-weight: bold;
     margin-bottom: 0.8rem;
     text-align: center;
@@ -231,8 +232,8 @@ h2 {
 }
 
 #standard-scoreboard .score-controls button {
-    padding: 1.5rem 2.5rem; /* Increased padding */
-    font-size: 1.4rem; /* Increased font size */
+    padding: 1.5rem 2.5rem;
+    font-size: 1.4rem;
     cursor: pointer;
     color: white;
     border: none;
@@ -247,8 +248,8 @@ h2 {
 
 /* Styles for 8,9, and 10 ball game modes*/
 #standard-scoreboard .score-controls button {
-    padding: 1.5rem 2.5rem; /* Increased padding */
-    font-size: 1.4rem; /* Increased font size */
+    padding: 1.5rem 2.5rem;
+    font-size: 1.4rem;
 }
 
 .score-controls button:hover {
@@ -311,7 +312,7 @@ h2 {
     border: 0.1rem solid #eee;
     border-radius: 0.6rem;
     background-color: #fdfdfd;
-    font-size: 1rem; /* Increase match history list item font size*/
+    font-size: 1rem;
     box-shadow: 0 0.1rem 0.3rem rgba(0, 0, 0, 0.1);
 }
 
@@ -321,12 +322,12 @@ h2 {
     flex: 1;
     overflow: hidden;
     margin: 5px 0rem;
-    flex-direction: column; /* Default to column for smaller screens */
+    flex-direction: column;
 }
 
 @media (min-width: 800px) {
     .main-content {
-        flex-direction: row; /* Switch to row for larger screens */
+        flex-direction: row;
     }
 }
 
@@ -343,19 +344,17 @@ h2 {
     flex: 1;
     margin-right: 1rem;
     overflow-y: hidden;
-    flex-basis: 100%; /* Ensure items take full width on small screens */
-
+    flex-basis: 100%;
 }
-
 
 @media (min-width: 800px) {
     .left-section {
        margin-right: 1rem;
-       flex-basis: auto; /* Reset flex-basis to allow proper flex behavior on wider screens */
+       flex-basis: auto;
     }
 
-    .right-section {
-        flex-basis: auto; /* Reset flex-basis to allow proper flex behavior on wider screens */
+        .right-section {
+       flex-basis: auto;
     }
 }
 
@@ -414,7 +413,7 @@ h2 {
 /* Input Area Styling */
 .input-area {
     text-align: center;
-    margin-top: 2rem; /* Adjusted margin to prevent overlap */
+    margin-top: 2rem;
     padding: 0.8rem;
     border: 0.3rem solid #ddd;
     border-radius: 0.8rem;
@@ -444,8 +443,8 @@ h2 {
     background-color: #eee;
     border: 0.1rem solid #ddd;
     color: #333;
-    padding: 0.6rem; /* Increased button padding */
-    font-size: 1rem; /* Increased font size */
+    padding: 0.6rem;
+    font-size: 1rem;
     cursor: pointer;
     border-radius: 0.8rem;
     transition: background-color 0.2s ease-in-out;
@@ -473,7 +472,7 @@ h2 {
      display: flex;
      flex-direction: column;
      flex: 1;
-    max-height: 50rem; /* Reduced max-height */
+     max-height: 50rem; /* Reduced max-height */
 }
 
 @media (min-width: 800px) {
@@ -495,7 +494,7 @@ h2 {
 .inning-table-container {
     scroll-behavior: smooth;
     flex: 1;
-    overflow-y: auto; /* Make the table scrollable within the inning table container*/
+    overflow-y: auto;
 }
 
 .inning-table-container table {
@@ -508,7 +507,7 @@ h2 {
     text-align: left;
     padding: 0.5rem;
     border-bottom: 0.1rem solid #ddd;
-    font-size: 1rem; /* Increase font size for table cells*/
+    font-size: 1rem;
     word-break: break-word;
 }
 
@@ -675,7 +674,7 @@ h2 {
     padding: 1rem;
     border-radius: 0.5rem;
     text-align: center;
-    max-width: 90%; /* Limit max width for better readability on tablets */
+    max-width: 90%;
     width: 30rem;
 }
 
