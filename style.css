@@ -58,23 +58,24 @@ body {
     border-radius: 1.5rem;
     box-shadow: 0 0.8rem 2rem rgba(0, 0, 0, 0.2);
     width: 95%;
-    max-width: 1250px;
-    max-height: 750px; /* Adjusted max-height */
-    height: 75%;
+    max-width: 900px; /* Reduced max-width for better sizing on larger screens */
+      max-height: 750px; /* Adjusted max-height */
+    height: auto; /* Remove fixed height for container */
     display: flex;
     flex-direction: column;
     margin: auto;
     margin-top: 2.5rem;
     overflow-y: auto;
-    margin-bottom: auto;
+     margin-bottom: auto;
 }
+
 
 h1 {
     display: none;
 }
 
 h2 {
-    font-size: 1.8rem;
+   font-size: 1.8rem;
     text-align: center;
     margin-bottom: 0.8rem;
     color: #2c3e50;
@@ -93,13 +94,13 @@ h2 {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    margin-bottom: 0.8rem;
+    margin-bottom: 1rem;
 }
 
 #game-selection button {
     padding: 0.8rem 1.5rem;
     margin: 0.4rem;
-    font-size: 1rem;
+    font-size: 1rem; /* Relative font size for buttons */
     cursor: pointer;
     background-color: #3498db;
     color: white;
@@ -118,7 +119,7 @@ h2 {
 #game-selection .secondary-button {
     padding: 0.6rem 1.2rem;
     margin: 0.4rem;
-    font-size: 0.9rem;
+    font-size: 0.9rem; /* Relative font size for secondary buttons */
     cursor: pointer;
     color: white;
     border: none;
@@ -319,10 +320,10 @@ h2 {
 }
 
 #match-history {
-    margin-top: 0.5rem;
+   margin-top: 0.5rem;
     border-top: 0.2rem solid #ddd;
     padding-top: 0.5rem;
-    max-height: 20rem;
+    max-height: 12rem;
     overflow-y: auto;
 }
 
