@@ -28,7 +28,6 @@ function selectGameMode(mode) {
             if (playerInput) playerInput.style.display = 'block';
         }
     }
-    loadGameHistory(); // Refresh history when game mode is selected
 }
 
 document.addEventListener('DOMContentLoaded', function() {
@@ -101,10 +100,10 @@ function endGame() {
     document.getElementById('game-screen').style.display = 'none';
     document.getElementById('standard-scoreboard').style.display = 'none';
     selectGameMode(null);
-
+    
     saveGameToHistory(endedGameMode);
     resetGameState();
-
+    
     loadGameHistory();
       currentGameMode = null;
 }
@@ -170,7 +169,7 @@ const showGameScreen = (mode) => {
     document.getElementById('scoreboard').style.display = 'none';
     document.getElementById('game-screen').style.display = 'flex';
     document.getElementById('game-title').textContent = mode;
-
+    
     gameState.gameMode = (mode === '14.1 Continuous') ? 2 : 1;
 
     if (mode === '14.1 Continuous Trainer') {
