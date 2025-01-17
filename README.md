@@ -1,85 +1,72 @@
-# Pool Club Scoreboard
+# 🏆 Pool Club Scoreboard 🏆
 
-A simple, responsive web application for keeping score in various pool and billiards games. This project aims to provide a clean and easy-to-use interface for score tracking, whether you're playing casually at home or more seriously at a club.
+A sleek, responsive web application for effortlessly tracking scores in your favorite pool and billiards games. 🎱 Designed for an optimal user experience on tablets, smartphones, and desktops alike! ✨
 
-## Features
+[🚀 **Live Demo**](https://stephannjo.github.io/pool-scoreboard/)
 
-*   **Multiple Game Modes:** Supports popular game modes like 8-ball, 9-ball, 10-ball, and 14.1 Continuous (with a training mode).
-*   **Player Input:** Allows users to enter custom player names for a personalized experience.
-*   **Real-time Score Tracking:** Keeps track of scores with intuitive increment and decrement buttons.
-*   **Match History:** Saves a history of previous games in the browser's local storage, so you can review previous games.
-*   **14.1 Continuous Detailed Stats**: Provides detailed stats for the 14.1 continuous game mode, with innings, scores and balls potted.
-*   **Responsive Design:** Works well on various devices, including tablets and desktops.
+<br>
 
-## Screenshots
+## 🎉 Key Features
 
-### Game Selection Screen
+*   **🕹️ Versatile Game Modes**: Supports an extensive range of popular pool game styles:
+    *   🎱 8-Ball
+    *   9️⃣ 9-Ball
+    *   🔟 10-Ball
+    *   ♾️ 14.1 Continuous
+    *   💪 14.1 Continuous Trainer
 
-[Replace this with a screenshot of your game selection screen]
-![Game Selection Screen](path-to-your-game-selection-screenshot.png)
+*   **🎯 Streamlined Interface**:
+    *   👍  Intuitive score tracking with large, responsive +/- buttons.
+    *   ✨  Adaptive layouts optimized for all game modes.
+    *  📱  Effortless control through large, touch-friendly elements perfect for tablets and smartphones.
 
-### Standard Scoreboard (8-ball, 9-ball, 10-ball)
+*  📜 **Persistent Game History:** Remembers your previous matches: scores, key statistics, dates! 💾 Export, import and clear features available.
+     *  ✅ Scrollable list displaying at least your 5 latest games, ready to take as many as you can play.
 
-[Replace this with a screenshot of the scoreboard for 8-ball, 9-ball, and 10-ball games]
-![Standard Scoreboard](path-to-your-standard-scoreboard-screenshot.png)
+*   **💡 Specialized 14.1 Continuous Mode**:
+    *   🧮 Potted ball counting for highly accurate scoring
+    *   🚩 Support for fouls and safety
+    *   🔄 Full implementation of the re-rack feature.
+    *  🎭 Player vs Player or Solo trainer functionality
 
-### 14.1 Continuous Game Screen
+*   **📱 ↔️🖥️ Truly Responsive**: Adapts fluidly to provide a seamless visual experience across tablets, smartphones, and PCs.
+    * Uses full screen prompts when viewing via chrome in tablet for best viewing
+*   **🍪 Local Storage Magic**: Scores and match histories stay put on your device using LocalStorage. No account, no login required.
 
-[Replace this with a screenshot of the 14.1 Continuous Game screen, with the scoreboard on the left and the inning table on the right]
-![14.1 Continuous Game Screen](path-to-your-141-continuous-game-screenshot.png)
+<br>
 
-## Usage
+## 🖼️ Visuals Speak Louder!
 
-1.  **Select a Game Mode:** Choose from the available game modes on the main screen.
-2.  **Enter Player Names (If Required):** If the game mode requires player names, enter them in the provided input fields.
-3.  **Start the Game:** Click the "Start Game" button to begin.
-4.  **Track Scores:** Use the "+" and "-" buttons to adjust scores.
-5.  **End Game:** Click "End Game" button to finish the match, then the scores will be saved to history.
-6.  **14.1 Continuous Specific Controls**:
-    *    Use the number buttons to set the number of balls remaining on the table, and it will calculate the balls potted.
-    *    Use foul and safety buttons to mark fouls and safeties.
-    *    Use the new rack button to give you more balls, and increase the total remaining.
-7. **Match History:** Review your previous games, export or import your saved history.
+###
 
-## Technical Details
+ <div align="center">
 
-*   **Languages:** HTML, CSS, JavaScript
-*   **Libraries/Frameworks:** None (pure VanillaJS)
-*   **Storage:** Match history is stored in the browser's `localStorage`.
-*   **Responsive:** CSS based layout with a focus on tablet responsiveness.
+<p> <img src="https://stephannjo.github.io/pool-scoreboard/assets/game_selection.png" width= 280px height= auto alt = "Game Selection Screen">
+<br> The home screen for choosing your different pool modes </p>
+<br>
 
-## Development
+<p><img src="https://stephannjo.github.io/pool-scoreboard/assets/standard_game_mode.png"  width= 280px height= auto alt="Standard Game Mode Screen">
+<br>Basic scoring screen for typical 2 player scoring</p>
+<br>
+<p> <img src="https://stephannjo.github.io/pool-scoreboard/assets/continuous_game_mode.png" width= 280px height= auto  alt="14.1 Continuous Game Screen">
+ <br> Continuous game mode screen where we track number of potted balls</p>
+<br>
 
-### Prerequisites
+<p>  <img src="https://stephannjo.github.io/pool-scoreboard/assets/match_history.png"  width= 280px height= auto alt ="Match History Screen">
+ <br> A view at the recent history table recording previous games</p>
+</div>
 
-*   VS Code
-*   Git
-*  A web browser
+###
 
-### Local Setup
+## ⚙️ Getting Started
 
-1.  Clone the repository: `git clone https://github.com/<your-username>/pool-scoreboard.git`
-2.  Open the project folder in VS Code.
-3.  Open the `index.html` file in your browser.
+1.  Access the Scoreboard via your web browser using [this link](https://stephannjo.github.io/pool-scoreboard/).
+2.  Select your desired pool game on the initial splash page
+3.  Follow on screen prompts, or enjoy the 14.1 functionality via your appropriate interface.
 
-## Contributing
+## 🛠️ Contribution
 
-Contributions are welcome! If you'd like to contribute, please follow these steps:
+This application is developed in basic web technologies: plain HTML, CSS, and JavaScript. All are invited to fork the project and customize for their own use cases. Create a branch, submit a pull request if there are contributions you wish to share to this open source code.
 
-1.  **Fork the Repository:** Click on the "Fork" button on the repository page to create a copy in your GitHub account.
-2.  **Clone Your Fork:** Clone the forked repository to your local machine using `git clone <your-fork-url>`.
-3.  **Create a Branch:** Create a new branch for your changes using `git checkout -b feature/your-new-feature`.
-4.  **Make Your Changes:** Implement your desired changes, tests and improvements.
-5.  **Commit Your Changes:** Use `git add .` and then `git commit -m "Your commit message"`.
-6. **Push Your Changes**: Use `git push origin feature/your-new-feature` (replace `feature/your-new-feature` with the name of your branch).
-7. **Create a Pull Request**: Submit a pull request from your branch to the original repository, detailing the changes made.
-
-## License
-
-This project is licensed under the [MIT License](LICENSE).
-
-[View the full license text here](LICENSE) or [at the SPDX website](https://spdx.org/licenses/MIT.html)
-
-## Feedback
-
-Any feedback on the design, usability, features or bugs are welcome! Feel free to create an issue on GitHub or contact me directly.
+## 📜 License
+MIT licensed code, fully free and open.
