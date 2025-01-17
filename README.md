@@ -72,7 +72,8 @@ This project can be deployed using Docker for more portability and easier access
     ```bash
     docker build -t pool-scoreboard .
     ```
-2.  **Run using `docker-compose`**: Use `docker-compose.yml` to deploy quickly
+2.  **Run using `docker-compose`**: Use `docker-compose.yml` to deploy quickly with dynamic folder bind, update `%directory%` as needed. Replace  `%directory%`  with absolute path for appropriate folder on your machine for it to be properly linked via  bind-mount
+
      ```bash
      docker-compose up
       ```
