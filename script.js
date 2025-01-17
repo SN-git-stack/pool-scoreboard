@@ -463,7 +463,6 @@ const endGameContinuous = () => {
         modalOverlay.style.display = 'none';
         saveGameToHistory(currentGameMode);
         resetGameState();
-         loadGameHistory();
         selectGameMode(null);
     };
 
@@ -495,26 +494,25 @@ const resetGame = (saveToHistory = true) => {
 };
 
 const resetGameState = () => {
-    // Reset values for standard game modes
-player1Score = 0;
-player2Score = 0;
-updateStandardScoreboard();
+        // Reset values for standard game modes
+    player1Score = 0;
+    player2Score = 0;
+    updateStandardScoreboard();
 
-// Reset values for 14.1 Continuous game modes
-gameState.currentScoreP1 = 0;
-gameState.highRunP1 = 0;
-gameState.inningsP1 = 1;
-gameState.currentScoreP2 = 0;
-gameState.highRunP2 = 0;
-gameState.inningsP2 = 1;
-gameState.ballsRemaining = 15;
-gameState.currentInningBallsPotted = 0;
-gameState.history = [];
-gameState.rackHistory = [];
-gameState.inningHistory = [];
-gameState.currentPlayer = 1;
-gameState.gameMode = null;
-  loadGameHistory();
+    // Reset values for 14.1 Continuous game modes
+    gameState.currentScoreP1 = 0;
+    gameState.highRunP1 = 0;
+    gameState.inningsP1 = 1;
+    gameState.currentScoreP2 = 0;
+    gameState.highRunP2 = 0;
+    gameState.inningsP2 = 1;
+    gameState.ballsRemaining = 15;
+    gameState.currentInningBallsPotted = 0;
+    gameState.history = [];
+    gameState.rackHistory = [];
+    gameState.inningHistory = [];
+    gameState.currentPlayer = 1;
+    gameState.gameMode = null;
 };
 
 const updateDisplay = () => {
