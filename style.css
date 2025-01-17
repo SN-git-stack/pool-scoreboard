@@ -320,15 +320,16 @@ h2 {
     display: flex;
     flex: 1;
     overflow: hidden;
-    margin: 5px 0rem; /* Left and right margins to make symmetrical */
-    flex-direction: column;
+    margin: 5px 0rem;
+    flex-direction: column; /* Default to column for smaller screens */
 }
 
 @media (min-width: 800px) {
-     .main-content {
-          flex-direction: row;
-     }
+    .main-content {
+        flex-direction: row; /* Switch to row for larger screens */
+    }
 }
+
 
 .left-section-wrapper {
     display: flex;
@@ -340,13 +341,21 @@ h2 {
     display: flex;
     flex-direction: column;
     flex: 1;
-        margin-right: 1rem;
+    margin-right: 1rem;
     overflow-y: hidden;
+    flex-basis: 100%; /* Ensure items take full width on small screens */
+
 }
+
 
 @media (min-width: 800px) {
     .left-section {
        margin-right: 1rem;
+       flex-basis: auto; /* Reset flex-basis to allow proper flex behavior on wider screens */
+    }
+
+    .right-section {
+        flex-basis: auto; /* Reset flex-basis to allow proper flex behavior on wider screens */
     }
 }
 
@@ -405,7 +414,7 @@ h2 {
 /* Input Area Styling */
 .input-area {
     text-align: center;
-    margin-top: 5rem;
+    margin-top: 2rem; /* Adjusted margin to prevent overlap */
     padding: 0.8rem;
     border: 0.3rem solid #ddd;
     border-radius: 0.8rem;
@@ -464,7 +473,7 @@ h2 {
      display: flex;
      flex-direction: column;
      flex: 1;
-    max-height: 30rem;
+    max-height: 50rem; /* Reduced max-height */
 }
 
 @media (min-width: 800px) {
