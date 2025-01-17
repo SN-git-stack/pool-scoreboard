@@ -188,7 +188,6 @@ const showGameScreen = (mode) => {
     }
     resetGame(false);
     createRemainingBallsButtons();
-    playerNameInputP1.focus();
 };
 
 const loadGameHistory = () => {
