@@ -1,768 +1,675 @@
-/* Updated CSS for Tablet Responsiveness */
+let currentGameMode = null;
+let player1Name = 'Home';
+let player2Name = 'Guest';
+let player1Score = 0;
+let player2Score = 0;
+const matchHistory = [];
 
-/* Root Font Size */
-html {
-    font-size: 16px;
-}
+function selectGameMode(mode) {
+    currentGameMode = mode;
 
-/* Basic Styling */
-html, body {
-    height: 100%;
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-}
+    // Ensure elements exist before accessing their style property
+    const gameSelection = document.getElementById('game-selection');
+    const playerInput = document.getElementById('player-input');
+    const scoreboard = document.getElementById('scoreboard');
+    const gameScreen = document.getElementById('game-screen');
 
-body {
-    font-family: 'Oswald', sans-serif;
-    margin: 0;
-    background-color: #f0f8ff;
-    color: #333;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100%;
-}
+    if (gameSelection) gameSelection.style.display = 'flex';
+    if (playerInput) playerInput.style.display = 'none';
+    if (scoreboard) scoreboard.style.display = 'none';
+    if (gameScreen) gameScreen.style.display = 'none';
 
-.container {
-    background-color: #fff;
-    border-radius: 1.5rem;
-   /* box-shadow: 0 0.8rem 2rem rgba(0, 0, 0, 0.2); REmOVED Shadow*/
-    width: 100%;
-    max-width: 1250px;
-    display: flex;
-    flex-direction: column;
-    margin: auto;
-    margin-top: 0;
-    margin-bottom: 0;
-    flex: 1;
-    overflow-y: auto;
-}
-
-h1 {
-    display: none;
-}
-
-
-h2 {
-    font-size: 2rem;
-    text-align: center;
-    margin-bottom: 0.8rem;
-    color: #2c3e50;
-   /* text-shadow: 0.2rem 0.2rem 0.4rem rgba(0, 0, 0, 0.1); remove text-shadow*/
-    font-weight: bold;
-}
-
-#game-selection {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-}
-
-.game-buttons {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    margin-bottom: 0.8rem;
-}
-
-#game-selection button {
-    padding: 1rem 2rem;
-    margin: 0.5rem;
-    font-size: 1.2rem;
-    cursor: pointer;
-    background-color: #3498db;
-    color: white;
-    border: none;
-    border-radius: 1rem;
-    transition: background-color 0.3s ease, transform 0.2s ease-in-out;
-   /*  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.3); REmove Shadow */
-}
-
-#game-selection button:hover {
-    background-color: #2980b9;
-    transform: scale(1.05);
-   /*  box-shadow: 0 0.8rem 1.4rem rgba(0, 0, 0, 0.4); Removed Shadow*/
-}
-
-#game-selection .secondary-button {
-    padding: 0.8rem 1.5rem;
-    margin: 0.5rem;
-    font-size: 1rem;
-    cursor: pointer;
-    color: white;
-    border: none;
-    border-radius: 0.8rem;
-    transition: background-color 0.3s ease, transform 0.2s ease-in-out;
-    /* box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.3); REMOVED SHADOW*/
-}
-
-#game-selection .secondary-button:hover {
-    background-color: #2980b9;
-    transform: scale(1.05);
-  /*  box-shadow: 0 0.8rem 1.4rem rgba(0, 0, 0, 0.4); REMOVED SHADOW*/
-}
-
-#history-controls {
-    display: flex;
-    justify-content: center;
-    width: 100%;
-    margin-top: 0.5rem;
-    margin-bottom: 0.5rem;
-}
-
-#game-selection #clear-history,
-#game-selection #export-history,
-#game-selection #import-history-button {
-    display: inline-block;
-    margin: 0.3rem;
-}
-
-#game-selection #clear-history {
-    background-color: #f44336;
-}
-
-#game-selection #export-history {
-    background-color: #008CBA;
-}
-
-#game-selection #import-history-button {
-    background-color: #008CBA;
-}
-
-#player-input {
-    margin-bottom: 0.5rem;
-    padding: 0.8rem;
-    background-color: #f9f9f9;
-    border-radius: 0.8rem;
-   /* box-shadow: inset 0 0.2rem 0.4rem rgba(0, 0, 0, 0.05); Removed shadow*/
-}
-
-#player-input h2 {
-    margin-top: 0;
-    color: #34495e;
-    font-size: 1.8rem;
-    font-weight: bold;
-}
-
-#player-input label {
-    display: inline-block;
-    width: 8rem;
-    text-align: right;
-    margin-right: 0.8rem;
-    font-size: 1.1rem;
-    color: #555;
-    font-weight: bold;
-}
-
-#player-input input {
-    padding: 1rem;
-    border: 0.2rem solid #ddd;
-    border-radius: 0.4rem;
-    font-size: 1.1rem;
-    margin-bottom: 0.8rem;
-    width: calc(100% - 9.8rem);
-   /* box-shadow: inset 0 0.2rem 0.4rem rgba(0, 0, 0, 0.1); Remove Shadow */
-    font-weight: bold;
-}
-
-#scoreboard {
-    margin-top: 7.5rem;
-    padding: 0.8rem;
-   /* border: 0.3rem solid #ddd; Remove border */
-    border-radius: 0.8rem;
-    background-color: #f4f4f4;
-    /*box-shadow: 0 0.8rem 1.6rem rgba(0, 0, 0, 0.1); REMOVE shadow */
-    display: flex;
-    flex-direction: column;
-       overflow: hidden;
-}
-
-#scoreboard h2 {
-    font-size: 2rem;
-    color: #e74c3c;
-  /*  text-shadow: 0.2rem 0.2rem 0.4rem rgba(0, 0, 0, 0.1); REmOVE shadow*/
-    margin-bottom: 0.8rem;
-    font-weight: bold;
-}
-
-#standard-scoreboard {
-    display: flex;
-    justify-content: space-around;
-    margin-bottom: 1rem;
-}
-
-.awesome-player {
-    flex: 1;
-    padding: 0.8rem;
-       background-color: #f9f9f9; /*player background*/
-    border-radius: 0.8rem;
-   /*  box-shadow: 0 0.4rem 0.8rem rgba(0, 0, 0, 0.1); Remove shadow*/
-    margin: 0 0.8rem;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.awesome-player h3 {
-    margin-top: 0.5rem;
-    font-size: 1.6rem;
-    color: #2c3e50;
-    text-align: center;
-    font-weight: bold;
-       margin-bottom: 0.2rem;
-}
-
-.score {
-    font-size: 4rem;
-    font-weight: bold;
-    margin-bottom: 0.8rem;
-    text-align: center;
-    color: #3498db;
- /*  text-shadow: 0.2rem 0.2rem 0.4rem rgba(0, 0, 0, 0.1); REMOVE SHADOW*/
-}
-
-/* Styles for 8,9, and 10 ball game modes*/
-#standard-scoreboard .score {
-  font-size: 3rem;
-}
-
-.score-controls {
-    display: flex;
-    justify-content: center;
-    width: 100%;
-}
-
-#standard-scoreboard .score-controls button {
-     padding: 0.8rem 1.2rem;
-    font-size: 1.4rem;
-    cursor: pointer;
-    color: white;
-    border: none;
-    border-radius: 1rem;
-     margin: -0.2rem 0.8rem;
-    transition: background-color 0.3s ease, transform 0.2s ease-in-out;
-   /*  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.3); remove shadow*/
-    display: flex;
-         text-align: center;
-    align-items: center;
-       justify-content: center;
-}
-
-#standard-scoreboard .score-controls button:hover {
-    transform: scale(1.05);
-    /*  box-shadow: 0 0.8rem 1.4rem rgba(0, 0, 0, 0.4); Remove shadow */
-}
-
-
-/* Styles for 8,9, and 10 ball game modes*/
-#standard-scoreboard .score-controls button span {
-   display: flex;
-    align-items: center;
-       justify-content: center;
-        margin-bottom: 0rem;
-        font-size: 1.5rem;
-}
-
-
-/* Styles for 8,9, and 10 ball game modes*/
-#standard-scoreboard .score-controls button {
-       padding: 1rem 1.4rem;
-     /*   margin-top: 0rem; Reduced margin top*/
-    /*   margin-bottom: 0rem; remove margin */
-}
-
-
-#standard-scoreboard .score-controls button:first-child {
-    background-color: #e74c3c;
-}
-
-#standard-scoreboard .score-controls button:first-child:hover {
-    background-color: #c0392b;
-}
-
-#standard-scoreboard .score-controls button:last-child {
-    background-color: #2ecc71;
-}
-
-#standard-scoreboard .score-controls button:last-child:hover {
-    background-color: #27ae60;
-}
-
-#scoreboard button {
-    padding: 1rem 2rem;
-    font-size: 1.4rem;
-    cursor: pointer;
-      background-color: #3498db;
-    color: white;
-    border: none;
-    border-radius: 1rem;
-    margin-top: auto;
-    transition: background-color 0.3s ease, transform 0.2s ease-in-out;
-  /*   box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.3);  Remove SHADOW */
-}
-
-#scoreboard button:hover {
-    background-color: #2980b9;
-    transform: scale(1.05);
- /*   box-shadow: 0 0.8rem 1.4rem rgba(0, 0, 0, 0.4); Removed Shadow*/
-}
-
-#match-history {
-    margin-top: 0.5rem;
-  /*   border-top: 0.2rem solid #ddd;  removed Border*/
-    padding-top: 0.5rem;
-    max-height: 20rem;
-    overflow-y: auto;
-}
-#match-history h2 {
-     position: sticky;
-    top: 0;
-     background-color: #fff; /* Optional: Set a background color for the header if you'd like */
-    padding-bottom: 0.4rem; /* added paddign*/
-     /*border-bottom: 0.2rem solid #eee; remove bottom border */
-}
-
-
-#history-list {
-    list-style: none;
-    padding: 0;
-}
-
-#history-list li {
-    margin-bottom: 0.4rem;
-    padding: 0.8rem 1rem;
-    border: 0.1rem solid #eee;
-    border-radius: 0.6rem;
-    background-color: #fdfdfd;
-    font-size: 1rem;
-   /* box-shadow: 0 0.1rem 0.3rem rgba(0, 0, 0, 0.1); remove Shadow*/
-    font-weight: bold;
-}
-
-/* Game Screen Styling */
-.main-content {
-    display: flex;
-    flex: 1;
-    overflow: hidden;
-    margin: 5px 0rem;
-    flex-direction: column;
-}
-
-@media (min-width: 800px) {
-    .main-content {
-        flex-direction: row;
+    if (mode === '14.1 Continuous' || mode === '14.1 Continuous Trainer') {
+        showGameScreen(mode);
+    } else if (mode) {
+        if (mode === '8-ball' || mode === '9-ball' || mode === '10-ball') {
+            startGame();
+        } else {
+            if (playerInput) playerInput.style.display = 'block';
+        }
     }
 }
 
-.game-screen-wrapper {
-    display: flex;
-    flex-direction: column;
-    flex: 1;
-    overflow: hidden;
-    height: 100%;
+document.addEventListener('DOMContentLoaded', function() {
+    // Select initial game mode to setup the page (e.g., null or a default mode)
+    selectGameMode(null); // or selectGameMode('8-ball'); if you want 8-ball to be the default
+
+    // Now load the game history
+    loadGameHistory();
+
+    // Initialize other game elements, if necessary
+    initializeGame();
+
+    // Show fullscreen prompt for Chrome on tablets
+    if (isTabletChrome()) {
+        showFullscreenPrompt();
+    }
+
+});
+function startGame() {
+    if (currentGameMode !== '8-ball' && currentGameMode !== '9-ball' && currentGameMode !== '10-ball') {
+        player1Name = document.getElementById('player1').value;
+        player2Name = document.getElementById('player2').value;
+
+        if (!player1Name || !player2Name) {
+            alert('Please enter names for both players.');
+            return;
+        }
+    }
+
+    player1Score = 0;
+    player2Score = 0;
+    updateStandardScoreboard();
+    document.getElementById('game-selection').style.display = 'none';
+    document.getElementById('player-input').style.display = 'none';
+    document.getElementById('scoreboard').style.display = 'block';
+    document.getElementById('standard-scoreboard').style.display = 'flex';
+    document.getElementById('game-screen').style.display = 'none';
+    document.getElementById('game-title').textContent = currentGameMode;
+    document.getElementById('player1-name').textContent = player1Name;
+    document.getElementById('player2-name').textContent = player2Name;
 }
 
-.left-section-wrapper {
-    display: flex;
-    flex: 2;
-    flex-direction: column;
+function incrementScore(player) {
+    if (player === 1) {
+        player1Score++;
+    } else {
+        player2Score++;
+    }
+    updateStandardScoreboard();
 }
 
-.left-section, .right-section {
-   display: flex;
-    flex-direction: column;
-    flex: 1;
-    margin-right: 0rem;
-    overflow-y: hidden;
-     padding: 0.5rem 0rem;
+function decrementScore(player) {
+    if (player === 1) {
+        player1Score = Math.max(0, player1Score - 1);
+    } else {
+        player2Score = Math.max(0, player2Score - 1);
+    }
+    updateStandardScoreboard();
 }
 
-@media (min-width: 800px) {
-    .left-section {
-       margin-right: 1rem;
+function updateStandardScoreboard() {
+    document.getElementById('player1-score').textContent = player1Score;
+    document.getElementById('player2-score').textContent = player2Score;
+}
+
+function endGame() {
+    const endedGameMode = currentGameMode;
+
+    document.getElementById('scoreboard').style.display = 'none';
+    document.getElementById('game-screen').style.display = 'none';
+    document.getElementById('standard-scoreboard').style.display = 'none';
+    selectGameMode(null);
+    
+    saveGameToHistory(endedGameMode);
+    resetGameState();
+    
+    loadGameHistory();
+      currentGameMode = null;
+}
+
+// Game Screen Functions and Variables
+
+// Game Screen Elements
+const playerNameInputP1 = document.getElementById('player1-name-continuous');
+const playerNameInputP2 = document.getElementById('player2-name-continuous');
+const currentScoreDisplayP1 = document.getElementById('current-score-p1');
+const highRunDisplayP1 = document.getElementById('high-run-p1');
+const inningsDisplayP1 = document.getElementById('innings-p1');
+const currentScoreDisplayP2 = document.getElementById('current-score-p2');
+const highRunDisplayP2 = document.getElementById('high-run-p2');
+const inningsDisplayP2 = document.getElementById('innings-p2');
+const ballsOnTableDisplay = document.getElementById('balls-on-table');
+const newRackBtn = document.getElementById('new-rack');
+const inningDetailsTable = document.getElementById('inning-details');
+const foulBtn = document.getElementById('foul');
+const safetyBtn = document.getElementById('safety');
+const undoBtn = document.getElementById('undo');
+const resetBtn = document.getElementById('reset');
+const ballButtonsContainer = document.querySelector('.ball-buttons');
+const currentPlayerDisplay = document.getElementById('current-player');
+const currentPlayerDisplayParent = document.getElementById('current-player-display');
+const inningTableContainer = document.querySelector('.inning-table-container');
+
+// Modal Elements
+const modalOverlay = document.getElementById('modal-overlay');
+const modalMessage = document.getElementById('modal-message');
+const modalConfirmBtn = document.getElementById('modal-confirm');
+const modalCancelBtn = document.getElementById('modal-cancel');
+
+// Fullscreen modal elements
+const fullscreenModal = document.getElementById('fullscreen-modal');
+const fullscreenConfirmBtn = document.getElementById('fullscreen-confirm');
+const fullscreenCancelBtn = document.getElementById('fullscreen-cancel');
+
+let gameState = {
+    currentScoreP1: 0,
+    highRunP1: 0,
+    inningsP1: 0,
+    currentScoreP2: 0,
+    highRunP2: 0,
+    inningsP2: 0,
+    ballsRemaining: 15,
+    currentInningBallsPotted: 0,
+    history: [],
+    rackHistory: [],
+    inningHistory: [],
+    currentPlayer: 1,
+    gameMode: 1
+};
+
+const initializeGame = () => {
+    createRemainingBallsButtons();
+};
+
+const showGameScreen = (mode) => {
+    document.getElementById('game-selection').style.display = 'none';
+    document.getElementById('player-input').style.display = 'none';
+     document.getElementById('standard-scoreboard').style.display = 'none';
+    document.getElementById('scoreboard').style.display = 'none';
+    document.getElementById('game-screen').style.display = 'flex';
+    document.getElementById('game-title').textContent = mode;
+    
+    gameState.gameMode = (mode === '14.1 Continuous') ? 2 : 1;
+
+    if (mode === '14.1 Continuous Trainer') {
+        playerNameInputP2.parentElement.style.display = 'none';
+        currentScoreDisplayP2.parentElement.style.display = 'none';
+        highRunDisplayP2.parentElement.style.display = 'none';
+        inningsDisplayP2.parentElement.style.display = 'none';
+        currentPlayerDisplayParent.style.display = 'none';
+
+    } else {
+        playerNameInputP2.parentElement.style.display = 'block';
+        currentScoreDisplayP2.parentElement.style.display = 'block';
+        highRunDisplayP2.parentElement.style.display = 'block';
+        inningsDisplayP2.parentElement.style.display = 'block';
+         currentPlayerDisplayParent.style.display = 'block';
+    }
+    resetGame(false);
+    createRemainingBallsButtons();
+    playerNameInputP1.focus();
+};
+
+const loadGameHistory = () => {
+   const history = JSON.parse(localStorage.getItem('gameHistory')) || [];
+    const historyList = document.getElementById('history-list');
+    historyList.innerHTML = ''; // Clear the list
+
+   const limitedHistory = history.slice(-5).reverse();
+
+    if (limitedHistory.length === 0) {
+        const listItem = document.createElement('li');
+        listItem.textContent = 'No games played yet.';
+        historyList.appendChild(listItem);
+    } else {
+        limitedHistory.forEach((game, index) => {
+            const listItem = document.createElement('li');
+            listItem.innerHTML = '';
+            let text = "";
+            if (game.mode === '14.1 Continuous') {
+                text = `<strong>${game.mode}:</strong> ${game.date} - <strong>Player 1:</strong> ${game.player1} (Innings: ${game.inningsP1}, Balls Potted: ${game.ballsPottedP1}); <strong>Player 2:</strong> ${game.player2} (Innings: ${game.inningsP2}, Balls Potted: ${game.ballsPottedP2})`;
+            } else if (game.mode === '14.1 Continuous Trainer') {
+                text = `<strong>${game.mode}:</strong> ${game.date} - Player: ${game.player1} (Innings: ${game.inningsP1}, Balls Potted: ${game.ballsPottedP1})`;
+            }
+            else {
+                text = `<strong>${game.mode}:</strong> ${game.player1} ${game.score1} - ${game.score2} ${game.player2}`;
+            }
+            listItem.innerHTML = text;
+            historyList.appendChild(listItem);
+        });
+    }
+};
+
+const saveGameToHistory = (endedGameMode) => {
+    const history = JSON.parse(localStorage.getItem('gameHistory')) || [];
+    const today = new Date();
+    const dateString = today.toLocaleDateString();
+    const timeString = today.toLocaleTimeString();
+    let gameData = {};
+    if (endedGameMode === '14.1 Continuous') {
+        gameData = {
+            date: `${dateString} ${timeString}`,
+            mode: endedGameMode,
+            player1: playerNameInputP1.value,
+            player2: playerNameInputP2.value,
+            inningsP1: gameState.inningsP1 -1,
+            ballsPottedP1: gameState.currentScoreP1,
+            inningsP2: gameState.inningsP2 - 1,
+            ballsPottedP2: gameState.currentScoreP2
+        };
+    } else if (endedGameMode === '14.1 Continuous Trainer') {
+         gameData = {
+            date: `${dateString} ${timeString}`,
+            mode: endedGameMode,
+            player1: playerNameInputP1.value,
+            player2: null,
+             inningsP1: gameState.inningsP1 -1,
+            ballsPottedP1: gameState.currentScoreP1,
+            inningsP2: null,
+            ballsPottedP2: null
+        };
+    } else {
+        gameData = {
+            mode: endedGameMode,
+            player1: player1Name,
+            player2: player2Name,
+            score1: player1Score,
+            score2: player2Score
+        }
+    }
+    console.log("Saving game data:", gameData);
+
+    history.push(gameData);
+    localStorage.setItem('gameHistory', JSON.stringify(history));
+};
+
+const clearGameHistory = () => {
+    localStorage.removeItem('gameHistory');
+    loadGameHistory();
+};
+
+const exportGameHistory = () => {
+    const history = JSON.parse(localStorage.getItem('gameHistory')) || [];
+    const historyString = JSON.stringify(history);
+    const blob = new Blob([historyString], { type: "application/json" });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.download = 'game_history.json';
+    link.href = url;
+    link.click();
+}
+
+const importGameHistory = (event) => {
+    const file = event.target.files[0];
+    if (file) {
+        const reader = new FileReader();
+        reader.onload = (e) => {
+            try {
+                const importedHistory = JSON.parse(e.target.result);
+                localStorage.setItem('gameHistory', JSON.stringify(importedHistory));
+                loadGameHistory();
+            } catch (error) {
+                console.error("Error importing history", error);
+                alert("Invalid file format. Please select a valid JSON file.");
+            }
+        };
+        reader.readAsText(file);
     }
 }
 
-/* Scoreboard Styling */
-.scoreboard {
-    margin-bottom: 0.3rem;
-    padding: 0.8rem;
- /*   border: 0.3rem solid #ddd; Remove border */
-    border-radius: 0.8rem;
-    background-color: #f4f4f4;
-     /*  box-shadow: 0 0.8rem 1.6rem rgba(0, 0, 0, 0.1); REMOVE SHADOW*/
-     overflow: hidden;
+// Game Functions
+
+const createRemainingBallsButtons = () => {
+    ballButtonsContainer.innerHTML = ''; // Clear existing buttons
+    for (let i = 1; i <= 15; i++) {
+        const button = document.createElement('button');
+        button.textContent = i;
+        button.addEventListener('click', () => setRemainingBalls(i));
+        ballButtonsContainer.appendChild(button);
+    }
+};
+
+const setRemainingBalls = (balls) => {
+    if (balls > gameState.ballsRemaining) {
+        alert('Invalid number of balls remaining. It cannot be greater than the current number of balls on the table.');
+        return;
+    }
+
+    updateInning(balls);
+};
+
+const updateInning = (ballsRemaining) => {
+    const ballsPotted = gameState.ballsRemaining - ballsRemaining;
+        gameState.currentInningBallsPotted = ballsPotted;
+
+    if (gameState.gameMode === 1 || gameState.currentPlayer === 1) {
+        gameState.currentScoreP1 += ballsPotted;
+        gameState.highRunP1 = Math.max(gameState.highRunP1, ballsPotted);
+    } else {
+        gameState.currentScoreP2 += ballsPotted;
+        gameState.highRunP2 = Math.max(gameState.highRunP2, ballsPotted);
+    }
+    gameState.ballsRemaining = ballsRemaining;
+    
+    
+    updateInningTable(ballsPotted);
+    updateDisplay();
+    addToHistory({ type: 'inning', player: gameState.currentPlayer, ballsPotted, score: (gameState.gameMode === 1 || gameState.currentPlayer === 1) ? gameState.currentScoreP1 : gameState.currentScoreP2, remaining: gameState.ballsRemaining });
+    updateInnings(gameState.currentPlayer);
+    switchPlayer();
+};
+
+const handleNewRack = () => {
+    gameState.rackHistory.push({index: gameState.history.length, player: gameState.currentPlayer});
+    gameState.ballsRemaining += 14;
+    updateInningTable(14);
+    updateDisplay();
+    addToHistory({ type: 'rack', player: gameState.currentPlayer, ballsPotted: 14, remaining: gameState.ballsRemaining });
+     //updateInnings(gameState.currentPlayer);  REMOVED THIS
+};
+
+const handleFoul = () => {
+    if (gameState.gameMode === 1 || gameState.currentPlayer === 1) {
+        gameState.currentScoreP1 = Math.max(0, gameState.currentScoreP1 - 1);
+    } else {
+        gameState.currentScoreP2 = Math.max(0, gameState.currentScoreP2 - 1);
+    }
+    updateInnings(gameState.currentPlayer);
+    updateInningTable('Foul');
+    updateDisplay();
+    addToHistory({ type: 'foul', player: gameState.currentPlayer, score: (gameState.gameMode === 1 || gameState.currentPlayer === 1) ? gameState.currentScoreP1 : gameState.currentScoreP2 });
+    switchPlayer();
+};
+
+const handleSafety = () => {
+    updateInnings(gameState.currentPlayer);
+     updateInningTable('Safety');
+    updateDisplay();
+    addToHistory({ type: 'safety', player: gameState.currentPlayer});
+    switchPlayer();
+};
+
+ const undoLastAction = () => {
+    if (gameState.history.length === 0) return;
+
+    const lastAction = gameState.history.pop();
+
+    if (lastAction.type === 'inning') {
+        if (gameState.gameMode === 1) {
+            gameState.currentScoreP1 -= lastAction.ballsPotted;
+             if (gameState.inningsP1 > 1) {
+                gameState.inningsP1--;
+            }
+            gameState.highRunP1 = calculateHighRun(gameState.history.filter(a => a.type === 'inning' && a.player === 1));
+        } else {
+            if (lastAction.player === 1) {
+                gameState.currentScoreP1 -= lastAction.ballsPotted;
+                 if (gameState.inningsP1 > 1) {
+                    gameState.inningsP1--;
+                }
+                gameState.highRunP1 = calculateHighRun(gameState.history.filter(a => a.type === 'inning' && a.player === 1));
+            } else {
+                gameState.currentScoreP2 -= lastAction.ballsPotted;
+                 if (gameState.inningsP2 > 1) {
+                    gameState.inningsP2--;
+                }
+                gameState.highRunP2 = calculateHighRun(gameState.history.filter(a => a.type === 'inning' && a.player === 2));
+            }
+        }
+        gameState.ballsRemaining = lastAction.remaining;
+         gameState.inningHistory.pop();
+    } else if (lastAction.type === 'rack') {
+        gameState.ballsRemaining -= 14;
+         for (let i = gameState.rackHistory.length - 1; i >= 0; i--) {
+            if (gameState.rackHistory[i].index === (gameState.history.length + 1)) {
+                gameState.rackHistory.splice(i, 1);
+                break;
+            }
+        }
+        gameState.inningHistory.pop();
+    } else if (lastAction.type === 'foul') {
+        if (gameState.gameMode === 1) {
+            gameState.currentScoreP1 = lastAction.score + 1;
+           if (gameState.inningsP1 > 1) {
+                gameState.inningsP1--;
+            }
+        } else {
+            if (lastAction.player === 1) {
+                gameState.currentScoreP1 = lastAction.score + 1;
+                 if (gameState.inningsP1 > 1) {
+                    gameState.inningsP1--;
+                }
+            } else {
+                gameState.currentScoreP2 = lastAction.score + 1;
+                 if (gameState.inningsP2 > 1) {
+                    gameState.inningsP2--;
+                }
+            }
+        }
+       gameState.inningHistory.pop();
+    } else if (lastAction.type === 'safety') {
+         if (gameState.gameMode === 1) {
+             if (gameState.inningsP1 > 1) {
+                gameState.inningsP1--;
+            }
+        } else {
+            if (lastAction.player === 1) {
+                if (gameState.inningsP1 > 1) {
+                    gameState.inningsP1--;
+                }
+            } else {
+                 if (gameState.inningsP2 > 1) {
+                    gameState.inningsP2--;
+                }
+            }
+        }
+        gameState.inningHistory.pop();
+    }
+
+    if (gameState.gameMode === 2 && gameState.currentPlayer !== lastAction.player) {
+        switchPlayer();
+    }
+
+    updateDisplay();
+     updateInningTable();
+};
+
+const endGameContinuous = () => {
+    modalMessage.textContent = 'Are you sure you want to end the current game?';
+    modalOverlay.style.display = 'flex';
+
+    modalConfirmBtn.onclick = () => {
+        modalOverlay.style.display = 'none';
+        saveGameToHistory(currentGameMode);
+        resetGameState();
+         loadGameHistory();
+        selectGameMode(null);
+    };
+
+    modalCancelBtn.onclick = () => {
+        modalOverlay.style.display = 'none';
+    };
+};
+
+const resetGame = (saveToHistory = true) => {
+     if (saveToHistory) {
+        saveGameToHistory(currentGameMode);
+    }
+    gameState.currentScoreP1 = 0;
+    gameState.highRunP1 = 0;
+    gameState.inningsP1 = 1;
+    gameState.currentScoreP2 = 0;
+    gameState.highRunP2 = 0;
+    gameState.inningsP2 = 1;
+    gameState.ballsRemaining = 15;
+    gameState.currentInningBallsPotted = 0;
+    gameState.history = [];
+    gameState.rackHistory = [];
+    gameState.inningHistory = [];
+    gameState.currentPlayer = 1;
+    updateDisplay();
+    clearInningTable();
+    updateInningTable();
+    saveGameState();
+};
+
+const resetGameState = () => {
+    // Reset values for standard game modes
+player1Score = 0;
+player2Score = 0;
+updateStandardScoreboard();
+
+// Reset values for 14.1 Continuous game modes
+gameState.currentScoreP1 = 0;
+gameState.highRunP1 = 0;
+gameState.inningsP1 = 1;
+gameState.currentScoreP2 = 0;
+gameState.highRunP2 = 0;
+gameState.inningsP2 = 1;
+gameState.ballsRemaining = 15;
+gameState.currentInningBallsPotted = 0;
+gameState.history = [];
+gameState.rackHistory = [];
+gameState.inningHistory = [];
+gameState.currentPlayer = 1;
+gameState.gameMode = null;
+  loadGameHistory();
+};
+
+const updateDisplay = () => {
+    currentScoreDisplayP1.textContent = gameState.currentScoreP1;
+    highRunDisplayP1.textContent = gameState.highRunP1;
+    inningsDisplayP1.textContent = gameState.inningsP1;
+    currentScoreDisplayP2.textContent = gameState.currentScoreP2;
+    highRunDisplayP2.textContent = gameState.highRunP2;
+    inningsDisplayP2.textContent = gameState.inningsP2;
+    ballsOnTableDisplay.textContent = gameState.ballsRemaining;
+    newRackBtn.disabled = false;
+    currentPlayerDisplay.textContent = gameState.currentPlayer;
+    saveGameState();
+};
+const clearInningTable = () => {
+    while (inningDetailsTable.rows.length > 0) {
+        inningDetailsTable.deleteRow(0);
+    }
+};
+
+ const updateInningTable = (ballsPotted) => {
+    let currentInning = 0;
+    clearInningTable();
+    if (typeof ballsPotted !== 'undefined') {
+
+        // Determine current inning based on the current player's turn
+        if (gameState.gameMode === 1) {
+            currentInning = gameState.inningsP1;
+        } else {
+            currentInning = (gameState.currentPlayer === 1) ? gameState.inningsP1 : gameState.inningsP2;
+        }
+
+        gameState.inningHistory.push({
+            inning: currentInning,
+            player: gameState.gameMode === 1 ? 1 : gameState.currentPlayer,
+            ballsPotted: ballsPotted,
+            score: (gameState.gameMode === 1 || gameState.currentPlayer === 1) ? gameState.currentScoreP1 : gameState.currentScoreP2
+        });
+    }
+   
+
+    gameState.inningHistory.forEach(inning => {
+        const row = inningDetailsTable.insertRow();
+        const inningCell = row.insertCell();
+        const playerCell = row.insertCell();
+        const ballsPottedCell = row.insertCell();
+        const scoreCell = row.insertCell();
+
+        inningCell.textContent = inning.inning;
+        playerCell.textContent = inning.player;
+        ballsPottedCell.textContent = inning.ballsPotted;
+        scoreCell.textContent = inning.score;
+    });
+   inningTableContainer.scrollTop = inningTableContainer.scrollHeight;
+};
+const addToHistory = (action) => {
+    gameState.history.push(action);
+};
+
+const calculateHighRun = (history) => {
+    let highRun = 0;
+    let currentRun = 0;
+    for (let action of history) {
+        if (action.type === 'inning') {
+            currentRun += action.ballsPotted;
+        } else {
+            highRun = Math.max(highRun, currentRun);
+            currentRun = 0;
+        }
+    }
+      return Math.max(highRun, currentRun);
+};
+
+const saveGameState = () => {
+    localStorage.setItem('gameState', JSON.stringify(gameState));
+};
+
+const loadGameState = () => {
+    const savedState = JSON.parse(localStorage.getItem('gameState'));
+    if (savedState) {
+        gameState = savedState;
+        updateInningTable();
+    }
+};
+
+const switchPlayer = () => {
+     if (gameState.gameMode === 2) {
+        gameState.currentPlayer = gameState.currentPlayer === 1 ? 2 : 1;
+        currentPlayerDisplay.textContent = gameState.currentPlayer;
+    }
+};
+
+ const updateInnings = (player) => {
+        if (gameState.gameMode === 1) {
+            gameState.inningsP1++;
+        } else if (player === 1) {
+            gameState.inningsP1++;
+        } else if (player === 2) {
+            gameState.inningsP2++;
+        }
+    };
+
+
+// Fullscreen Prompt Logic
+function isTabletChrome() {
+    const userAgent = navigator.userAgent.toLowerCase();
+    return /ipad|android(?!.*mobile)/.test(userAgent) && /chrome/.test(userAgent);
 }
 
-.scoreboard label {
-    display: block;
-    margin-bottom: 0.2rem;
-    color: #555;
-    font-size: 1rem;
-    font-weight: bold;
+function showFullscreenPrompt() {
+    fullscreenModal.style.display = 'flex';
+
+    fullscreenConfirmBtn.onclick = () => {
+        fullscreenModal.style.display = 'none';
+        requestFullscreen();
+    };
+
+    fullscreenCancelBtn.onclick = () => {
+        fullscreenModal.style.display = 'none';
+    };
 }
 
-.scoreboard span {
-    font-size: 1.7rem;
-    font-weight: bold;
-    color: #004d00;
-}
+function requestFullscreen() {
+    const element = document.documentElement;
 
-/* Continuous Game Scoreboard Styling */
-.scoreboard #current-score-p1,
-.scoreboard #high-run-p1,
-.scoreboard #innings-p1,
-.scoreboard #current-score-p2,
-.scoreboard #high-run-p2,
-.scoreboard #innings-p2
-{
-    font-size: 1.7rem;
-    font-weight: bold;
-}
-
-.player-stats-table {
-    width: 100%;
-}
-
-.player-stats {
-    flex: 0 0 35%;
-    margin: 0;
-}
-
-.middle-stats {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    align-items: stretch;
-    padding: 0 1rem;
-}
-
-/* Input Area Styling */
-.input-area {
-    flex: 1;
-    text-align: center;
-    margin-top: 0.5rem;
-    padding: 0.3rem 0rem;
-  /* border: 0.3rem solid #ddd; Remove Border*/
-    border-radius: 0.8rem;
-    background-color: #f4f4f4;
-   /*  box-shadow: 0 0.8rem 1.6rem rgba(0, 0, 0, 0.1); Removed shadow */
-      overflow: hidden;
-}
-
-.buttons-remaining {
-    margin-bottom: 0.5rem;
-    text-align: center;
-}
-
-.buttons-remaining p {
-    margin-bottom: 0.2rem;
-    color: #555;
-    font-size: 1rem;
-    font-weight: bold;
-}
-
-.ball-buttons {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    gap: 0.3rem;
-    margin-bottom: 1rem;
-}
-
-.ball-buttons button {
-    background-color: #eee;
-    border: 0.1rem solid #ddd;
-    color: #333;
-    padding: 0.6rem;
-    font-size: 1rem;
-    cursor: pointer;
-    border-radius: 0.8rem;
-    transition: background-color 0.2s ease-in-out;
-    /*box-shadow: 0 0 0.3rem rgba(0, 123, 255, 0.5); REMOVE shadow*/
-    font-weight: bold;
-}
-
-.ball-buttons button:hover {
-    background-color: #ddd;
-}
-
-.ball-buttons button:focus {
-    outline: none;
-/*     box-shadow: 0 0 0.3rem rgba(0, 123, 255, 0.5); Remove Shadow */
-}
-
-/* Inning Table Styling */
-.inning-table {
-    overflow: hidden;
-    margin: 0;
-    padding: 0.8rem;
-   /* border: 0.3rem solid #ddd; Removed Border */
-    border-radius: 0.8rem;
-    background-color: #f4f4f4;
-    /*box-shadow: 0 0.8rem 1.6rem rgba(0, 0, 0, 0.1); Removed shadow */
-    width: 100%;
-    max-width: 50vw;
-     display: flex;
-     flex-direction: column;
-    max-height: 50rem;
-}
-
-@media (min-width: 800px) {
-    .inning-table {
-        max-height: 30rem;
-          width: 90%;
-         margin-left: auto;
-        margin-right: auto;
+    if (element.requestFullscreen) {
+        element.requestFullscreen()
+            .catch(err => {
+                console.error(`Error attempting to enable fullscreen: ${err.message} (${err.name})`);
+                alert('Fullscreen mode is not supported or could not be enabled in this browser.');
+            });
+    } else if (element.mozRequestFullScreen) {
+        element.mozRequestFullScreen();
+    } else if (element.webkitRequestFullscreen) {
+        element.webkitRequestFullscreen();
+    } else if (element.msRequestFullscreen) {
+        element.msRequestFullscreen();
+    } else {
+          console.log("Fullscreen API not supported")
+         alert('Fullscreen mode is not supported or could not be enabled in this browser.');
     }
 }
 
-.inning-table h2 {
-    color: #333;
-    margin-bottom: 0.4rem;
-    text-align: center;
-    font-size: 1.2rem;
-    font-weight: bold;
-}
+// Event Listeners for non Continuous game modes
+document.getElementById('clear-history').addEventListener('click', clearGameHistory);
+document.getElementById('export-history').addEventListener('click', exportGameHistory);
+document.getElementById('import-history-button').addEventListener('click', () => document.getElementById('import-history').click());
+document.getElementById('import-history').addEventListener('change', importGameHistory);
 
-.inning-table-container {
-    scroll-behavior: smooth;
-    flex: 1;
-    overflow-y: auto;
-}
+// Event Listeners for Continuous game modes
+newRackBtn.addEventListener('click', handleNewRack);
+foulBtn.addEventListener('click', handleFoul);
+safetyBtn.addEventListener('click', handleSafety);
+undoBtn.addEventListener('click', undoLastAction);
+resetBtn.addEventListener('click', resetGame);
+document.getElementById('end-game').addEventListener('click', endGameContinuous);
 
-.inning-table-container table {
-    width: 100%;
-    border-collapse: collapse;
-    table-layout: fixed;
-}
-
-.inning-table-container th, .inning-table-container td {
-    text-align: left;
-    padding: 0.5rem;
-    border-bottom: 0.1rem solid #ddd;
-    font-size: 1rem;
-    word-break: break-word;
-    font-weight: bold;
-}
-
-.inning-table-container th {
-    background-color: #f0f0f0;
-}
-
-/* Adjust column widths */
-.inning-table-container th:nth-child(1), /* Inning */
-.inning-table-container td:nth-child(1) {
-    width: 20%;
-}
-
-.inning-table-container th:nth-child(2), /* Player */
-.inning-table-container td:nth-child(2) {
-    width: 30%;
-}
-
-.inning-table-container th:nth-child(3), /* Balls Potted */
-.inning-table-container td:nth-child(3) {
-    width: 25%;
-}
-
-.inning-table-container th:nth-child(4), /* Score */
-.inning-table-container td:nth-child(4) {
-    width: 25%;
-}
-/* Modal Styling */
-#modal-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-#modal-dialog {
-    background-color: #fff;
-    padding: 1rem;
-    border-radius: 0.5rem;
-    text-align: center;
-}
-
-#modal-message {
-    margin-bottom: 1rem;
-    font-size: 1.1rem;
-    font-weight: bold;
-}
-
-.primary-button, .secondary-button {
-    border: none;
-    color: white;
-    padding: 1.2rem 1.8rem;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 1.2rem;
-    margin: 0.4rem;
-    cursor: pointer;
-    border-radius: 0.8rem;
-    transition: background-color 0.2s ease-in-out;
-}
-
-.primary-button {
-    background-color: #4CAF50;
-}
-
-.secondary-button {
-    background-color: #f44336;
-}
-
-.primary-button:hover, .secondary-button:hover {
-    opacity: 0.8;
-}
-
-.controls {
-    margin: 0;
-    padding: 0.8rem;
-    border: 0.3rem solid #ddd;
-    border-radius: 0.8rem;
-    background-color: #f4f4f4;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: flex-start;
-    align-items: center;
-}
-
-#game-screen .controls {
-    display: flex;
-    flex-wrap: wrap;
-    margin-top: 0.8rem;
-    justify-content: space-between;
-    align-items: center;
-      padding: 0 0.5rem;
-}
-
-.controls #foul {
-      background-color: #ffeb3b;
-        color: #000;
-}
-
-.controls #safety {
-    background-color: #2ecc71;
-}
-
-.controls #end-game {
-    background-color: #3498db;
-}
-
-
-.controls #undo {
-    background-color: #95a5a6;
-}
-
-.controls #reset {
-      background-color: #e74c3c;
-}
-
-.controls #foul,
-.controls #safety,
-.controls #end-game,
-.controls #undo,
-.controls #reset,
-#new-rack,
-#new-game-1p,
-#new-game-2p,
-#clear-history,
-#export-history,
-#import-history-button {
-    margin-bottom: 0.4rem;
-    margin-right: 1rem;
-    flex-grow: 0;
-}
-#new-rack {
-    background-color: #673ab7;
-    margin-bottom: 0.4rem;
-}
-
-#new-rack:disabled {
-    background-color: #cccccc;
-    cursor: default;
-}
-
-#clear-history {
-    background-color: #f44336;
-}
-
-#export-history, #import-history-button {
-    background-color: #008CBA;
-}
-
-#game-screen {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    overflow-y: auto;
-}
-
-.new-rack-container {
-    display: flex;
-    justify-content: flex-end;
-    align-items: flex-end;
-    margin-top: 1rem;
-    margin-left: 1rem;
-}
-
-/* Fullscreen Modal Styling */
-
-#fullscreen-modal {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 1001;
-}
-
-.fullscreen-modal-dialog {
-    background-color: #fff;
-    padding: 1rem;
-    border-radius: 0.5rem;
-    text-align: center;
-    max-width: 90%;
-    width: 30rem;
-}
-
-.fullscreen-modal-dialog p {
-    margin-bottom: 1rem;
-    font-size: 1.1rem;
-    font-weight: bold;
-}
-.close-button-container {
-    position: absolute;
-    top: 0.5rem;
-    right: 0.5rem;
-    z-index: 1000;
-}
-
-.close-button {
-    color: #666;
-    font-size: 1.5rem;
-    font-weight: bold;
-    text-decoration: none;
-    cursor: pointer;
-     padding: 0.4rem;
-        transition: color 0.3s;
-}
-.close-button:hover {
-    color: #333; /* Slightly darker grey */
-}
+initializeGame();
