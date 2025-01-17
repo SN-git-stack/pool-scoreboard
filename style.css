@@ -2,7 +2,7 @@
 
 /* Root Font Size */
 html {
-    font-size: 14px; /* Base font size */
+    font-size: 16px; /* Increased base font size */
 }
 
 /* Basic Styling */
@@ -48,7 +48,7 @@ h1 {
 
 
 h2 {
-    font-size: 1.8rem;
+    font-size: 2rem; /* Increased h2 font size */
     text-align: center;
     margin-bottom: 0.8rem;
     color: #2c3e50;
@@ -71,9 +71,9 @@ h2 {
 }
 
 #game-selection button {
-    padding: 0.8rem 1.5rem;
-    margin: 0.4rem;
-    font-size: 1rem;
+    padding: 1rem 2rem; /* Increased padding */
+    margin: 0.5rem;
+    font-size: 1.2rem; /* Increased font size */
     cursor: pointer;
     background-color: #3498db;
     color: white;
@@ -90,9 +90,9 @@ h2 {
 }
 
 #game-selection .secondary-button {
-    padding: 0.6rem 1.2rem;
-    margin: 0.4rem;
-    font-size: 0.9rem;
+    padding: 0.8rem 1.5rem;
+    margin: 0.5rem;
+    font-size: 1rem;
     cursor: pointer;
     color: white;
     border: none;
@@ -145,7 +145,7 @@ h2 {
 #player-input h2 {
     margin-top: 0;
     color: #34495e;
-    font-size: 1.5rem;
+    font-size: 1.8rem;
 }
 
 #player-input label {
@@ -153,15 +153,15 @@ h2 {
     width: 8rem;
     text-align: right;
     margin-right: 0.8rem;
-    font-size: 0.9rem;
+    font-size: 1.1rem;
     color: #555;
 }
 
 #player-input input {
-    padding: 0.8rem;
+    padding: 1rem;
     border: 0.2rem solid #ddd;
     border-radius: 0.4rem;
-    font-size: 0.9rem;
+    font-size: 1.1rem;
     margin-bottom: 0.8rem;
     width: calc(100% - 9.8rem);
     box-shadow: inset 0 0.2rem 0.4rem rgba(0, 0, 0, 0.1);
@@ -179,7 +179,7 @@ h2 {
 }
 
 #scoreboard h2 {
-    font-size: 1.8rem;
+    font-size: 2rem;
     color: #e74c3c;
     text-shadow: 0.2rem 0.2rem 0.4rem rgba(0, 0, 0, 0.1);
     margin-bottom: 0.8rem;
@@ -205,13 +205,13 @@ h2 {
 
 .awesome-player h3 {
     margin-top: 0;
-    font-size: 1.2rem;
+    font-size: 1.4rem;
     color: #2c3e50;
     text-align: center;
 }
 
 .score {
-    font-size: 3rem;
+    font-size: 3.5rem; /* Increased Score font size */
     font-weight: bold;
     margin-bottom: 0.8rem;
     text-align: center;
@@ -221,7 +221,7 @@ h2 {
 
 /* Styles for 8,9, and 10 ball game modes*/
 #standard-scoreboard .score {
-  font-size: 2.2rem;
+  font-size: 2.5rem;
 }
 
 .score-controls {
@@ -231,8 +231,8 @@ h2 {
 }
 
 #standard-scoreboard .score-controls button {
-    padding: 1.2rem 2rem;
-    font-size: 1.2rem;
+    padding: 1.5rem 2.5rem; /* Increased padding */
+    font-size: 1.4rem; /* Increased font size */
     cursor: pointer;
     color: white;
     border: none;
@@ -247,8 +247,8 @@ h2 {
 
 /* Styles for 8,9, and 10 ball game modes*/
 #standard-scoreboard .score-controls button {
-      padding: 1.2rem 2rem;
-    font-size: 1.2rem;
+    padding: 1.5rem 2.5rem; /* Increased padding */
+    font-size: 1.4rem; /* Increased font size */
 }
 
 .score-controls button:hover {
@@ -274,8 +274,8 @@ h2 {
 }
 
 #scoreboard button {
-    padding: 0.8rem 1.5rem;
-    font-size: 1.2rem;
+    padding: 1rem 2rem;
+    font-size: 1.4rem;
     cursor: pointer;
     background-color: #7f8c8d;
     color: white;
@@ -311,7 +311,7 @@ h2 {
     border: 0.1rem solid #eee;
     border-radius: 0.6rem;
     background-color: #fdfdfd;
-    font-size: 0.9rem;
+    font-size: 1rem; /* Increase match history list item font size*/
     box-shadow: 0 0.1rem 0.3rem rgba(0, 0, 0, 0.1);
 }
 
@@ -364,11 +364,11 @@ h2 {
     display: block;
     margin-bottom: 0.2rem;
     color: #555;
-    font-size: 0.9rem;
+    font-size: 1rem;
 }
 
 .scoreboard span {
-    font-size: 1.1rem;
+    font-size: 1.3rem;
     font-weight: bold;
     color: #004d00;
 }
@@ -381,7 +381,7 @@ h2 {
 .scoreboard #high-run-p2,
 .scoreboard #innings-p2
 {
-    font-size: 1.2rem;
+    font-size: 1.4rem;
 }
 
 .player-stats-table {
@@ -421,7 +421,7 @@ h2 {
 .buttons-remaining p {
     margin-bottom: 0.2rem;
     color: #555;
-    font-size: 0.9rem;
+    font-size: 1rem;
 }
 
 .ball-buttons {
@@ -435,8 +435,8 @@ h2 {
     background-color: #eee;
     border: 0.1rem solid #ddd;
     color: #333;
-    padding: 0.5rem;
-    font-size: 0.8rem;
+    padding: 0.6rem; /* Increased button padding */
+    font-size: 1rem; /* Increased font size */
     cursor: pointer;
     border-radius: 0.8rem;
     transition: background-color 0.2s ease-in-out;
@@ -480,7 +480,7 @@ h2 {
     color: #333;
     margin-bottom: 0.4rem;
     text-align: center;
-    font-size: 1rem;
+    font-size: 1.2rem;
 }
 
 .inning-table-container {
@@ -497,9 +497,9 @@ h2 {
 
 .inning-table-container th, .inning-table-container td {
     text-align: left;
-    padding: 0.4rem;
+    padding: 0.5rem;
     border-bottom: 0.1rem solid #ddd;
-    font-size: 0.8rem;
+    font-size: 1rem; /* Increase font size for table cells*/
     word-break: break-word;
 }
 
@@ -549,17 +549,17 @@ h2 {
 
 #modal-message {
     margin-bottom: 1rem;
-    font-size: 0.9rem;
+    font-size: 1.1rem;
 }
 
 .primary-button, .secondary-button {
     border: none;
     color: white;
-    padding: 1rem 1.5rem;
+    padding: 1.2rem 1.8rem;
     text-align: center;
     text-decoration: none;
     display: inline-block;
-    font-size: 1rem;
+    font-size: 1.2rem;
     margin: 0.4rem;
     cursor: pointer;
     border-radius: 0.8rem;
@@ -672,5 +672,5 @@ h2 {
 
 .fullscreen-modal-dialog p {
     margin-bottom: 1rem;
-    font-size: 0.9rem;
+    font-size: 1.1rem;
 }
