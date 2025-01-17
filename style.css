@@ -161,11 +161,10 @@ h2 {
 }
 
 #scoreboard {
-    margin-top: 7.5rem;
+    margin-top: 1rem;
     padding: 0.8rem;
    /* border: 0.3rem solid #ddd; Remove Border*/
     border-radius: 0.8rem;
-    background-color: #f4f4f4;
    /* box-shadow: 0 0.8rem 1.6rem rgba(0, 0, 0, 0.1); Removed shadow*/
     display: flex;
     flex-direction: column;
@@ -228,7 +227,7 @@ h2 {
 }
 
 #standard-scoreboard .score-controls button {
-    padding: 0.8rem 1.2rem;
+    padding: 1rem 4rem;
     font-size: 1.4rem;
     cursor: pointer;
     color: white;
@@ -289,7 +288,7 @@ h2 {
     color: white;
     border: none;
     border-radius: 1rem;
-    margin-top: auto;
+    margin-top: 3rem;
     transition: background-color 0.3s ease, transform 0.2s ease-in-out;
     /*box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.3);  REmOVED SHADOW*/
 }
