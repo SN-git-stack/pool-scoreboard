@@ -28,7 +28,7 @@ body {
 
 .container {
     background-color: #fff;
-    border-radius: 1rem;
+    border-radius: 1.5rem;
     box-shadow: 0 0.8rem 2rem rgba(0, 0, 0, 0.2);
     width: 100%;
     max-width: 1250px;
@@ -173,12 +173,13 @@ h2 {
 #scoreboard {
     margin-top: 7.5rem;
     padding: 0.8rem;
-    /* border: 0.3rem solid #ddd; */ /* Removed the border */
+  /*  border: 0.3rem solid #ddd; REMOVED BORDER*/
     border-radius: 0.8rem;
     background-color: #f4f4f4;
     box-shadow: 0 0.8rem 1.6rem rgba(0, 0, 0, 0.1);
     display: flex;
     flex-direction: column;
+        overflow: hidden; /* Added Overflow here */
 }
 
 #scoreboard h2 {
@@ -198,7 +199,7 @@ h2 {
 .awesome-player {
     flex: 1;
     padding: 0.8rem;
-    background-color: #fff;
+    background-color: #f9f9f9; /* set background for player sections*/
     border-radius: 0.8rem;
     box-shadow: 0 0.4rem 0.8rem rgba(0, 0, 0, 0.1);
     margin: 0 0.8rem;
@@ -216,7 +217,7 @@ h2 {
 }
 
 .score {
-    font-size: 3.5rem;
+    font-size: 4rem; /* Increased Score font size */
     font-weight: bold;
     margin-bottom: 0.8rem;
     text-align: center;
@@ -226,7 +227,7 @@ h2 {
 
 /* Styles for 8,9, and 10 ball game modes*/
 #standard-scoreboard .score {
-  font-size: 2.5rem;
+  font-size: 3rem;
 }
 
 .score-controls {
@@ -359,11 +360,9 @@ h2 {
        padding: 0.5rem 0rem;
 }
 
-
 @media (min-width: 800px) {
     .left-section {
        margin-right: 1rem;
-       margin-left: 0.2rem;
     }
 }
 
@@ -371,11 +370,11 @@ h2 {
 .scoreboard {
     margin-bottom: 0.3rem;
     padding: 0.8rem;
-     /* border: 0.3rem solid #ddd;  Removed border from here*/
+  /*  border: 0.3rem solid #ddd; Removed border*/
     border-radius: 0.8rem;
     background-color: #f4f4f4;
     box-shadow: 0 0.8rem 1.6rem rgba(0, 0, 0, 0.1);
-      overflow: hidden;
+     overflow: hidden;
 }
 
 .scoreboard label {
@@ -428,11 +427,11 @@ h2 {
     text-align: center;
     margin-top: 0.5rem;
     padding: 0.3rem 0rem;
-    /* border: 0.3rem solid #ddd; Remove border here */
+   /* border: 0.3rem solid #ddd; Removed border from input area as well*/
     border-radius: 0.8rem;
     background-color: #f4f4f4;
     box-shadow: 0 0.8rem 1.6rem rgba(0, 0, 0, 0.1);
-       overflow: hidden;
+    overflow: hidden;
 }
 
 .buttons-remaining {
@@ -480,14 +479,14 @@ h2 {
     overflow: hidden;
     margin: 0;
     padding: 0.8rem;
-   /* border: 0.3rem solid #ddd; REMOVE BORDER HERE */
+    /* border: 0.3rem solid #ddd; Remove border from inning table */
     border-radius: 0.8rem;
     background-color: #f4f4f4;
     box-shadow: 0 0.8rem 1.6rem rgba(0, 0, 0, 0.1);
     width: 100%;
     max-width: 50vw;
-    display: flex;
-    flex-direction: column;
+     display: flex;
+     flex-direction: column;
     max-height: 50rem;
 }
 
@@ -624,9 +623,6 @@ h2 {
     justify-content: space-between;
     align-items: center;
     padding: 0 0.5rem;
-    margin-left: 0.2rem;
-    margin-right: 0.2rem;
-    margin-bottom: 0.4em;
 }
 
 .controls #foul,
