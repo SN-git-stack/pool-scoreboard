@@ -461,6 +461,7 @@ const endGameContinuous = () => {
         saveGameToHistory(currentGameMode);
         resetGameState();
         selectGameMode(null);
+        loadGameHistory();  // Add to automatically re-render for match history upon 14.1 game completion in `endGameContinuous()` that were missed
     };
 
     modalCancelBtn.onclick = () => {
