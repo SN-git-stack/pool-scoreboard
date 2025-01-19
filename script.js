@@ -1,4 +1,3 @@
---- START OF FILE script.js ---
 let currentGameMode = null;
 let player1Name = 'Home';
 let player2Name = 'Guest';
@@ -9,7 +8,6 @@ const matchHistory = [];
 function selectGameMode(mode) {
     currentGameMode = mode;
 
-    // Ensure elements exist before accessing their style property
     const gameSelection = document.getElementById('game-selection');
     const playerInput = document.getElementById('player-input');
     const scoreboard = document.getElementById('scoreboard');
@@ -32,19 +30,9 @@ function selectGameMode(mode) {
 }
 
 document.addEventListener('DOMContentLoaded', function() {
-    // Select initial game mode to setup the page (e.g., null or a default mode)
-    selectGameMode(null); // or selectGameMode('8-ball'); if you want 8-ball to be the default
-
-    // Now load the game history
+    selectGameMode(null);
     loadGameHistory();
-
-    // Initialize other game elements, if necessary
     initializeGame();
-
-    // Show fullscreen prompt for Chrome on tablets - REMOVED COMPLETELY VIA COMMENT
-    /*if (isTabletChrome()) {
-        showFullscreenPrompt();
-    }*/
 
 });
 function startGame() {
@@ -109,9 +97,6 @@ function endGame() {
       currentGameMode = null;
 }
 
-// Game Screen Functions and Variables
-
-// Game Screen Elements
 const playerNameInputP1 = document.getElementById('player1-name-continuous');
 const playerNameInputP2 = document.getElementById('player2-name-continuous');
 const currentScoreDisplayP1 = document.getElementById('current-score-p1');
@@ -133,19 +118,14 @@ const currentPlayerDisplayParent = document.getElementById('current-player-displ
 const inningTableContainer = document.querySelector('.inning-table-container');
 
 const gameStatusInfoDisplay = document.getElementById('game-status-info');
-// New inputs for max innings and max balls. Note initial HTML will determine a value so parseInt won't produce NaN unless its deleted and user provides some unusual data via their UI/ keyboard. Also that max-balls value has been renamed max-score which seems much more appropriate for user and more aligned
 const maxInningsInput = document.getElementById('max-innings');
 const maxScoreInput = document.getElementById('max-score');
 
-
-
-// Modal Elements
 const modalOverlay = document.getElementById('modal-overlay');
 const modalMessage = document.getElementById('modal-message');
 const modalConfirmBtn = document.getElementById('modal-confirm');
 const modalCancelBtn = document.getElementById('modal-cancel');
 
-// Fullscreen modal elements
 const fullscreenModal = document.getElementById('fullscreen-modal');
 const fullscreenConfirmBtn = document.getElementById('fullscreen-confirm');
 const fullscreenCancelBtn = document.getElementById('fullscreen-cancel');
@@ -163,8 +143,8 @@ let gameState = {
     rackHistory: [],
     inningHistory: [],
     currentPlayer: 1,
-     maxInnings : 15,  // New State Property for limit settings from user values from newly created  HTML/Input fields
-     maxScore : 200, //New State property for score max, as that is what was decided as being clearer usage case than "maxBalls"
+     maxInnings : 15,
+     maxScore : 200,
     gameMode: 1
 };
 
@@ -198,15 +178,13 @@ const showGameScreen = (mode) => {
     }
      resetGame(false);
      createRemainingBallsButtons();
-     //playerNameInputP1.focus(); removed due to keyboard/ text focus (done previously)
-   updateGameStatusDisplay(); // run function which calls text update here also so state persists to UI via text display also.
+   updateGameStatusDisplay();
 };
 
 const loadGameHistory = () => {
    const history = JSON.parse(localStorage.getItem('gameHistory')) || [];
     const historyList = document.getElementById('history-list');
-    historyList.innerHTML = ''; // Clear the list
-
+    historyList.innerHTML = '';
 
     if (history.length === 0) {
         const listItem = document.createElement('li');
@@ -325,7 +303,7 @@ const setRemainingBalls = (balls) => {
         alert('Invalid number of balls remaining. It cannot be greater than the current number of balls on the table.');
         return;
     }
- updateInning(balls); //  put these all first as that is most important function if its a valid choice
+ updateInning(balls);
         const isGameOver  = isGameOverConditions()
      if (isGameOver )  {  endGameContinuous()};
 
@@ -347,12 +325,12 @@ const updateInning = (ballsRemaining) => {
     
     updateInningTable(ballsPotted);
     updateDisplay();
-      updateGameStatusDisplay() // when ever any score /balls etc is updated also do the text message at status via another text variable. that also includes setting "you have lost/ win"
+      updateGameStatusDisplay()
     addToHistory({ type: 'inning', player: gameState.currentPlayer, ballsPotted, score: (gameState.gameMode === 1 || gameState.currentPlayer === 1) ? gameState.currentScoreP1 : gameState.currentScoreP2, remaining: gameState.ballsRemaining });
     updateInnings(gameState.currentPlayer);
     switchPlayer();
-    const isGameOver  = isGameOverConditions() // put those as the last checks after all scores and game data is finished so text update changes etc also registers to use correct last values or changes
-     if (isGameOver )  {  endGameContinuous()}; // perform endgame if max values reached here, so before user hits or click or do action by mistake after end
+    const isGameOver  = isGameOverConditions()
+     if (isGameOver )  {  endGameContinuous()};
 };
 
 const handleNewRack = () => {
@@ -362,7 +340,7 @@ const handleNewRack = () => {
      updateGameStatusDisplay();
      updateDisplay();
     addToHistory({ type: 'rack', player: gameState.currentPlayer, ballsPotted: 14, remaining: gameState.ballsRemaining });
-     //updateInnings(gameState.currentPlayer);  REMOVED THIS
+
 };
 
 const handleFoul = () => {
@@ -372,19 +350,19 @@ const handleFoul = () => {
         gameState.currentScoreP2 = Math.max(0, gameState.currentScoreP2 - 1);
     }
     updateInnings(gameState.currentPlayer);
-     updateGameStatusDisplay(); // update the UI also as they can also fail games via fouls and display as that too
+     updateGameStatusDisplay();
     updateInningTable('Foul');
     updateDisplay();
     addToHistory({ type: 'foul', player: gameState.currentPlayer, score: (gameState.gameMode === 1 || gameState.currentPlayer === 1) ? gameState.currentScoreP1 : gameState.currentScoreP2 });
     switchPlayer();
-    const isGameOver  = isGameOverConditions() // you put those after everything, so logic flow behaves correctly and then apply "if",  to also see "if" you need end at foul actions. Then at set remaining if they choose, you end game after setting their new scores and turns to ensure it does the same as the intended gameplay pattern
+    const isGameOver  = isGameOverConditions()
      if (isGameOver )  {  endGameContinuous()};
 
 };
 
 const handleSafety = () => {
     updateInnings(gameState.currentPlayer);
-     updateGameStatusDisplay()// show safety state and apply new value or new text changes to DOM
+     updateGameStatusDisplay()
      updateInningTable('Safety');
     updateDisplay();
     addToHistory({ type: 'safety', player: gameState.currentPlayer});
@@ -473,7 +451,7 @@ const handleSafety = () => {
     }
 
     updateDisplay();
-      updateGameStatusDisplay()  // check display of status for undo and game state when changed here also
+      updateGameStatusDisplay()
      updateInningTable();
 };
 
@@ -516,7 +494,7 @@ const resetGame = (saveToHistory = true) => {
         gameState.currentPlayer = 1;
 
       updateDisplay();
-   updateGameStatusDisplay();  // reset text area and all visual elements for the new game
+   updateGameStatusDisplay();
         clearInningTable();
     updateInningTable();
 
@@ -545,7 +523,7 @@ const resetGameState = () => {
    gameState.gameMode = null;
 };
 const updateGameStatusDisplay = () => {
- const player1NameValue =   playerNameInputP1.value ? playerNameInputP1.value : "Player 1"  // if player names exist or other case to text labels for use in a state
+ const player1NameValue =   playerNameInputP1.value ? playerNameInputP1.value : "Player 1"
       const player2NameValue =   playerNameInputP2.value ? playerNameInputP2.value : "Player 2"
 
  let statusMessage  = ""
@@ -554,8 +532,7 @@ const updateGameStatusDisplay = () => {
     if (gameState.gameMode === 1 || gameState.currentPlayer === 1)  {
          statusMessage = `${player1NameValue}'s Turn, Balls Left : ${gameState.ballsRemaining}, Max Score : ${gameState.maxScore}`
 
-          if (isGameOver  && gameState.gameMode !== 1)   { // set condition and show all of the relevant details in this code
-      // show which person or if game ended
+          if (isGameOver  && gameState.gameMode !== 1)   {
       if( gameState.currentScoreP1 > gameState.currentScoreP2 )  statusMessage  =   `${player1NameValue}  Wins , Score is ${gameState.currentScoreP1} ! (Max Score ${gameState.maxScore} Reached!)`
        else   statusMessage  =   `${player2NameValue} Wins , Score is ${gameState.currentScoreP2}! (Max Score ${gameState.maxScore} Reached!)`
         }
@@ -566,9 +543,9 @@ const updateGameStatusDisplay = () => {
      } else {
 
     statusMessage =`${player2NameValue}'s Turn, Balls Left : ${gameState.ballsRemaining}, Max Score : ${gameState.maxScore}`;
-   if (isGameOver   )   {  // set end text with current information as normal using  previous logic or add  "you win/loss" details. This works for both single or player vs player also without distinction. Since gameState.gameMode always checks the appropriate conditions anyway.
+   if (isGameOver   )   {
       if(gameState.currentScoreP2 > gameState.currentScoreP1 )  statusMessage =   `${player2NameValue}  Wins , Score is ${gameState.currentScoreP2}  ! (Max Score ${gameState.maxScore} Reached!)`
-        else   statusMessage  =   `${player1NameValue} Wins , Score is ${gameState.currentScoreP1}  ! (Max Score ${gameState.maxScore} Reached!)` // both score comparison in game to end
+        else   statusMessage  =   `${player1NameValue} Wins , Score is ${gameState.currentScoreP1}  ! (Max Score ${gameState.maxScore} Reached!)`
 
   }
 
@@ -584,9 +561,9 @@ const updateGameStatusDisplay = () => {
 
 
  const isGameOverConditions  = () =>  {
-   //  if player hit required score. Use this code for isGameOverCheck method if score is set to specific max or check to remove "high numbers or foul conditions from user to exceed max and go into the negative score range (only for the text outputs using these checks.) also for inninigs also
 
-      if (gameState.currentScoreP1 >= gameState.maxScore  )  { // specific rules
+
+      if (gameState.currentScoreP1 >= gameState.maxScore  )  {
            return true;
       }
    if (gameState.currentScoreP2 >= gameState.maxScore  && gameState.gameMode !== 1)
@@ -596,16 +573,16 @@ const updateGameStatusDisplay = () => {
        if (gameState.inningsP2 > gameState.maxInnings   &&  gameState.gameMode ===2 ) {
         return true;
 
-         } // return value always true to check all end cases with inning
+         }
  return false
   };
 
 
 
 const updateDisplay = () => {
-  maxInningsInput.value = gameState.maxInnings  // this forces text view value (also works other way to assign gameState, but those happen using the reseter for that as default setting) using html element. It is here for reverse read (view), not that direct user modifications happen here with "undo", those need their own set functions since undo logic needs specific behaviour
+  maxInningsInput.value = gameState.maxInnings
 
-    maxScoreInput.value = gameState.maxScore; // apply to max scores or use html default values
+    maxScoreInput.value = gameState.maxScore;
     currentScoreDisplayP1.textContent = gameState.currentScoreP1;
     highRunDisplayP1.textContent = gameState.highRunP1;
     inningsDisplayP1.textContent = gameState.inningsP1;
@@ -706,49 +683,6 @@ const switchPlayer = () => {
         }
     };
 
-
-// Fullscreen Prompt Logic - These Lines Were Modified and Comemnted Out
-/*
-function isTabletChrome() {
-    const userAgent = navigator.userAgent.toLowerCase();
-    return /ipad|android(?!.*mobile)/.test(userAgent) && /chrome/.test(userAgent);
-}
-
-function showFullscreenPrompt() {
-    fullscreenModal.style.display = 'flex';
-
-    fullscreenConfirmBtn.onclick = () => {
-        fullscreenModal.style.display = 'none';
-        requestFullscreen();
-    };
-
-    fullscreenCancelBtn.onclick = () => {
-        fullscreenModal.style.display = 'none';
-    };
-}
-
-function requestFullscreen() {
-    const element = document.documentElement;
-
-    if (element.requestFullscreen) {
-        element.requestFullscreen()
-            .catch(err => {
-                console.error(`Error attempting to enable fullscreen: ${err.message} (${err.name})`);
-                alert('Fullscreen mode is not supported or could not be enabled in this browser.');
-            });
-    } else if (element.mozRequestFullScreen) {
-        element.mozRequestFullScreen();
-    } else if (element.webkitRequestFullscreen) {
-        element.webkitRequestFullscreen();
-    } else if (element.msRequestFullscreen) {
-        element.msRequestFullscreen();
-    } else {
-          console.log("Fullscreen API not supported")
-         alert('Fullscreen mode is not supported or could not be enabled in this browser.');
-    }
-}
-
-*///
 
 
 // Event Listeners for non Continuous game modes
