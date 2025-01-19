@@ -13,14 +13,17 @@ function selectGameMode(mode) {
     const playerInput = document.getElementById('player-input');
     const scoreboard = document.getElementById('scoreboard');
     const gameScreen = document.getElementById('game-screen');
+    const gameSettings141 = document.getElementById('game-settings-14-1');
 
     if (gameSelection) gameSelection.style.display = 'flex';
     if (playerInput) playerInput.style.display = 'none';
     if (scoreboard) scoreboard.style.display = 'none';
     if (gameScreen) gameScreen.style.display = 'none';
+    if (gameSettings141) gameSettings141.style.display = 'none';
 
     if (mode === '14.1 Continuous' || mode === '14.1 Continuous Trainer') {
-        showGameScreen(mode);
+        if (playerInput) playerInput.style.display = 'block';
+        if (gameSettings141) gameSettings141.style.display = 'block';
     } else if (mode) {
         if (mode === '8-ball' || mode === '9-ball' || mode === '10-ball') {
             startGame();
@@ -46,7 +49,35 @@ document.addEventListener('DOMContentLoaded', function() {
     } */
 
 });
+
 function startGame() {
+    // 14.1 Continuous settings
+    let maxInnings = 10; // Default value
+    let maxBalls = 100; // Default value
+
+    if (currentGameMode === '14.1 Continuous' || currentGameMode === '14.1 Continuous Trainer') {
+        // Get values from the input fields
+        maxInnings = parseInt(document.getElementById('max-innings').value);
+        maxBalls = parseInt(document.getElementById('max-balls').value);
+
+        // Validate inputs (optional, but good practice)
+        if (isNaN(maxInnings) || maxInnings < 1) {
+            alert("Please enter a valid number for Max Innings (minimum 1).");
+            return;
+        }
+        if (isNaN(maxBalls) || maxBalls < 1) {
+            alert("Please enter a valid number for Max Balls (minimum 1).");
+            return;
+        }
+
+        // Store these settings in the gameState object or similar
+        gameState.maxInnings = maxInnings;
+        gameState.maxBalls = maxBalls;
+
+        showGameScreen(currentGameMode); // Proceed to the game screen for 14.1 modes
+        return; // Exit the function early for 14.1 modes
+    }
+
     if (currentGameMode !== '8-ball' && currentGameMode !== '9-ball' && currentGameMode !== '10-ball') {
         player1Name = document.getElementById('player1').value;
         player2Name = document.getElementById('player2').value;
@@ -155,7 +186,9 @@ let gameState = {
     rackHistory: [],
     inningHistory: [],
     currentPlayer: 1,
-    gameMode: 1
+    gameMode: 1,
+    maxInnings: 10, // Default for 14.1 Continuous
+    maxBalls: 100   // Default for 14.1 Continuous
 };
 
 const initializeGame = () => {
@@ -335,6 +368,7 @@ const updateInning = (ballsRemaining) => {
     addToHistory({ type: 'inning', player: gameState.currentPlayer, ballsPotted, score: (gameState.gameMode === 1 || gameState.currentPlayer === 1) ? gameState.currentScoreP1 : gameState.currentScoreP2, remaining: gameState.ballsRemaining });
     updateInnings(gameState.currentPlayer);
     switchPlayer();
+    checkGameEnd();
 };
 
 const handleNewRack = () => {
@@ -357,6 +391,7 @@ const handleFoul = () => {
     updateDisplay();
     addToHistory({ type: 'foul', player: gameState.currentPlayer, score: (gameState.gameMode === 1 || gameState.currentPlayer === 1) ? gameState.currentScoreP1 : gameState.currentScoreP2 });
     switchPlayer();
+    checkGameEnd();
 };
 
 const handleSafety = () => {
@@ -365,6 +400,7 @@ const handleSafety = () => {
     updateDisplay();
     addToHistory({ type: 'safety', player: gameState.currentPlayer});
     switchPlayer();
+    checkGameEnd();
 };
 
  const undoLastAction = () => {
@@ -511,6 +547,9 @@ const resetGameState = () => {
     gameState.inningHistory = [];
     gameState.currentPlayer = 1;
     gameState.gameMode = null;
+     // Reset 14.1 settings
+    gameState.maxInnings = 10;
+    gameState.maxBalls = 100;
 };
 
 const updateDisplay = () => {
@@ -613,6 +652,32 @@ const switchPlayer = () => {
         }
     };
 
+// Check for game end in 14.1 Continuous
+const checkGameEnd = () => {
+    if (currentGameMode === '14.1 Continuous') {
+        if (gameState.inningsP1 > gameState.maxInnings || gameState.inningsP2 > gameState.maxInnings) {
+            endGameContinuous();
+            alert(`Game Over! Maximum innings reached (${gameState.maxInnings}).`);
+            return;
+        }
+        if (gameState.currentScoreP1 >= gameState.maxBalls || gameState.currentScoreP2 >= gameState.maxBalls) {
+            endGameContinuous();
+            alert(`Game Over! A player reached the target score of ${gameState.maxBalls}.`);
+            return;
+        }
+    } else if (currentGameMode === '14.1 Continuous Trainer') {
+        if (gameState.inningsP1 > gameState.maxInnings) {
+            endGameContinuous();
+            alert(`Game Over! Maximum innings reached (${gameState.maxInnings}).`);
+            return;
+        }
+        if (gameState.currentScoreP1 >= gameState.maxBalls) {
+            endGameContinuous();
+            alert(`Game Over! You reached the target score of ${gameState.maxBalls}.`);
+            return;
+        }
+    }
+};
 
 // Fullscreen Prompt Logic
 /*
