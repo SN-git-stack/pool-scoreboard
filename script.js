@@ -19,12 +19,17 @@ function selectGameMode(mode) {
     if (gameSettingsInput) gameSettingsInput.style.display = 'none';
     if (gameSettings141) gameSettings141.style.display = 'none';
 
-   if (mode) {
+    if (mode) {
         if (mode === '8-ball' || mode === '9-ball' || mode === '10-ball') {
+            // Display logic for standard game modes
+            if (gameSelection) gameSelection.style.display = 'none';
+            if (scoreboard) scoreboard.style.display = 'block';
+            if (standardScoreboard) standardScoreboard.style.display = 'flex';
             startGame();
         } else {
+            // Display logic for 14.1 Continuous modes
             if (gameSettingsInput) gameSettingsInput.style.display = 'block';
-             if (mode === '14.1 Continuous' || mode === '14.1 Continuous Trainer') {
+            if (mode === '14.1 Continuous' || mode === '14.1 Continuous Trainer') {
                 if (gameSettings141) gameSettings141.style.display = 'block';
             }
         }
@@ -40,7 +45,7 @@ document.addEventListener('DOMContentLoaded', function() {
 function startGame() {
     let maxInnings = 10;
     let maxBalls = 100;
-    
+
     const gameSettingsInput = document.getElementById('game-settings-input');
     const gameSettings141 = document.getElementById('game-settings-14-1');
 
@@ -86,8 +91,8 @@ function startGame() {
     document.getElementById('game-title').textContent = currentGameMode;
     document.getElementById('player1-name').textContent = player1Name;
     document.getElementById('player2-name').textContent = player2Name;
-     if (currentGameMode === '14.1 Continuous' || currentGameMode === '14.1 Continuous Trainer') {
-       showGameScreen(currentGameMode);
+    if (currentGameMode === '14.1 Continuous' || currentGameMode === '14.1 Continuous Trainer') {
+        showGameScreen(currentGameMode);
     }
 }
 
@@ -121,12 +126,12 @@ function endGame() {
     document.getElementById('game-screen').style.display = 'none';
     document.getElementById('standard-scoreboard').style.display = 'none';
     selectGameMode(null);
-    
+
     saveGameToHistory(endedGameMode);
     resetGameState();
-    
+
     loadGameHistory();
-      currentGameMode = null;
+    currentGameMode = null;
 }
 
 const playerNameInputP1 = document.getElementById('player1-name-continuous');
@@ -207,7 +212,7 @@ const showGameScreen = (mode) => {
         highRunDisplayP2.parentElement.style.display = 'block';
         inningsDisplayP2.parentElement.style.display = 'block';
         currentPlayerDisplayParent.style.display = 'block';
-         document.getElementById('player2-name-continuous-display').parentElement.style.display = 'block';
+        document.getElementById('player2-name-continuous-display').parentElement.style.display = 'block';
     }
     resetGame(false);
     createRemainingBallsButtons();
@@ -223,10 +228,10 @@ const loadGameHistory = () => {
         listItem.textContent = 'No games played yet.';
         historyList.appendChild(listItem);
     } else {
-      history.slice().reverse().forEach((game, index) => {
-             const listItem = document.createElement('li');
+        history.slice().reverse().forEach((game, index) => {
+            const listItem = document.createElement('li');
             listItem.innerHTML = '';
-             let text = "";
+            let text = "";
             if (game.mode === '14.1 Continuous') {
                 text = `<strong>${game.mode}:</strong> ${game.date} - <strong>Player 1:</strong> ${game.player1} (Innings: ${game.inningsP1}, Balls Potted: ${game.ballsPottedP1}); <strong>Player 2:</strong> ${game.player2} (Innings: ${game.inningsP2}, Balls Potted: ${game.ballsPottedP2})`;
             } else if (game.mode === '14.1 Continuous Trainer') {
@@ -237,7 +242,7 @@ const loadGameHistory = () => {
             }
             listItem.innerHTML = text;
             historyList.appendChild(listItem);
-      });
+        });
     }
 };
 
@@ -253,18 +258,18 @@ const saveGameToHistory = (endedGameMode) => {
             mode: endedGameMode,
             player1: playerNameInputP1.value,
             player2: playerNameInputP2.value,
-            inningsP1: gameState.inningsP1 -1,
+            inningsP1: gameState.inningsP1 - 1,
             ballsPottedP1: gameState.currentScoreP1,
             inningsP2: gameState.inningsP2 - 1,
             ballsPottedP2: gameState.currentScoreP2
         };
     } else if (endedGameMode === '14.1 Continuous Trainer') {
-         gameData = {
+        gameData = {
             date: `${dateString} ${timeString}`,
             mode: endedGameMode,
             player1: playerNameInputP1.value,
             player2: null,
-             inningsP1: gameState.inningsP1 -1,
+            inningsP1: gameState.inningsP1 - 1,
             ballsPottedP1: gameState.currentScoreP1,
             inningsP2: null,
             ballsPottedP2: null
@@ -339,7 +344,7 @@ const setRemainingBalls = (balls) => {
 
 const updateInning = (ballsRemaining) => {
     const ballsPotted = gameState.ballsRemaining - ballsRemaining;
-        gameState.currentInningBallsPotted = ballsPotted;
+    gameState.currentInningBallsPotted = ballsPotted;
 
     if (gameState.gameMode === 1 || gameState.currentPlayer === 1) {
         gameState.currentScoreP1 += ballsPotted;
@@ -349,8 +354,7 @@ const updateInning = (ballsRemaining) => {
         gameState.highRunP2 = Math.max(gameState.highRunP2, ballsPotted);
     }
     gameState.ballsRemaining = ballsRemaining;
-    
-    
+
     updateInningTable(ballsPotted);
     updateDisplay();
     addToHistory({ type: 'inning', player: gameState.currentPlayer, ballsPotted, score: (gameState.gameMode === 1 || gameState.currentPlayer === 1) ? gameState.currentScoreP1 : gameState.currentScoreP2, remaining: gameState.ballsRemaining });
@@ -360,7 +364,7 @@ const updateInning = (ballsRemaining) => {
 };
 
 const handleNewRack = () => {
-    gameState.rackHistory.push({index: gameState.history.length, player: gameState.currentPlayer});
+    gameState.rackHistory.push({ index: gameState.history.length, player: gameState.currentPlayer });
     gameState.ballsRemaining += 14;
     updateInningTable(14);
     updateDisplay();
@@ -383,14 +387,14 @@ const handleFoul = () => {
 
 const handleSafety = () => {
     updateInnings(gameState.currentPlayer);
-     updateInningTable('Safety');
+    updateInningTable('Safety');
     updateDisplay();
-    addToHistory({ type: 'safety', player: gameState.currentPlayer});
+    addToHistory({ type: 'safety', player: gameState.currentPlayer });
     switchPlayer();
     checkGameEnd();
 };
 
- const undoLastAction = () => {
+const undoLastAction = () => {
     if (gameState.history.length === 0) return;
 
     const lastAction = gameState.history.pop();
@@ -398,30 +402,30 @@ const handleSafety = () => {
     if (lastAction.type === 'inning') {
         if (gameState.gameMode === 1) {
             gameState.currentScoreP1 -= lastAction.ballsPotted;
-             if (gameState.inningsP1 > 1) {
+            if (gameState.inningsP1 > 1) {
                 gameState.inningsP1--;
             }
             gameState.highRunP1 = calculateHighRun(gameState.history.filter(a => a.type === 'inning' && a.player === 1));
         } else {
             if (lastAction.player === 1) {
                 gameState.currentScoreP1 -= lastAction.ballsPotted;
-                 if (gameState.inningsP1 > 1) {
+                if (gameState.inningsP1 > 1) {
                     gameState.inningsP1--;
                 }
                 gameState.highRunP1 = calculateHighRun(gameState.history.filter(a => a.type === 'inning' && a.player === 1));
             } else {
                 gameState.currentScoreP2 -= lastAction.ballsPotted;
-                 if (gameState.inningsP2 > 1) {
+                if (gameState.inningsP2 > 1) {
                     gameState.inningsP2--;
                 }
                 gameState.highRunP2 = calculateHighRun(gameState.history.filter(a => a.type === 'inning' && a.player === 2));
             }
         }
         gameState.ballsRemaining = lastAction.remaining;
-         gameState.inningHistory.pop();
+        gameState.inningHistory.pop();
     } else if (lastAction.type === 'rack') {
         gameState.ballsRemaining -= 14;
-         for (let i = gameState.rackHistory.length - 1; i >= 0; i--) {
+        for (let i = gameState.rackHistory.length - 1; i >= 0; i--) {
             if (gameState.rackHistory[i].index === (gameState.history.length + 1)) {
                 gameState.rackHistory.splice(i, 1);
                 break;
@@ -431,26 +435,26 @@ const handleSafety = () => {
     } else if (lastAction.type === 'foul') {
         if (gameState.gameMode === 1) {
             gameState.currentScoreP1 = lastAction.score + 1;
-           if (gameState.inningsP1 > 1) {
+            if (gameState.inningsP1 > 1) {
                 gameState.inningsP1--;
             }
         } else {
             if (lastAction.player === 1) {
                 gameState.currentScoreP1 = lastAction.score + 1;
-                 if (gameState.inningsP1 > 1) {
+                if (gameState.inningsP1 > 1) {
                     gameState.inningsP1--;
                 }
             } else {
                 gameState.currentScoreP2 = lastAction.score + 1;
-                 if (gameState.inningsP2 > 1) {
+                if (gameState.inningsP2 > 1) {
                     gameState.inningsP2--;
                 }
             }
         }
-       gameState.inningHistory.pop();
+        gameState.inningHistory.pop();
     } else if (lastAction.type === 'safety') {
-         if (gameState.gameMode === 1) {
-             if (gameState.inningsP1 > 1) {
+        if (gameState.gameMode === 1) {
+            if (gameState.inningsP1 > 1) {
                 gameState.inningsP1--;
             }
         } else {
@@ -459,7 +463,7 @@ const handleSafety = () => {
                     gameState.inningsP1--;
                 }
             } else {
-                 if (gameState.inningsP2 > 1) {
+                if (gameState.inningsP2 > 1) {
                     gameState.inningsP2--;
                 }
             }
@@ -472,7 +476,7 @@ const handleSafety = () => {
     }
 
     updateDisplay();
-     updateInningTable();
+    updateInningTable();
 };
 
 const endGameContinuous = () => {
@@ -493,7 +497,7 @@ const endGameContinuous = () => {
 };
 
 const resetGame = (saveToHistory = true) => {
-     if (saveToHistory) {
+    if (saveToHistory) {
         saveGameToHistory(currentGameMode);
     }
     gameState.currentScoreP1 = 0;
@@ -554,7 +558,7 @@ const clearInningTable = () => {
     }
 };
 
- const updateInningTable = (ballsPotted) => {
+const updateInningTable = (ballsPotted) => {
     let currentInning = 0;
     clearInningTable();
     if (typeof ballsPotted !== 'undefined') {
@@ -572,7 +576,7 @@ const clearInningTable = () => {
             score: (gameState.gameMode === 1 || gameState.currentPlayer === 1) ? gameState.currentScoreP1 : gameState.currentScoreP2
         });
     }
-   
+
     gameState.inningHistory.forEach(inning => {
         const row = inningDetailsTable.insertRow();
         const inningCell = row.insertCell();
@@ -585,7 +589,7 @@ const clearInningTable = () => {
         ballsPottedCell.textContent = inning.ballsPotted;
         scoreCell.textContent = inning.score;
     });
-   inningTableContainer.scrollTop = inningTableContainer.scrollHeight;
+    inningTableContainer.scrollTop = inningTableContainer.scrollHeight;
 };
 const addToHistory = (action) => {
     gameState.history.push(action);
@@ -602,7 +606,7 @@ const calculateHighRun = (history) => {
             currentRun = 0;
         }
     }
-      return Math.max(highRun, currentRun);
+    return Math.max(highRun, currentRun);
 };
 
 const saveGameState = () => {
@@ -618,21 +622,21 @@ const loadGameState = () => {
 };
 
 const switchPlayer = () => {
-     if (gameState.gameMode === 2) {
+    if (gameState.gameMode === 2) {
         gameState.currentPlayer = gameState.currentPlayer === 1 ? 2 : 1;
         currentPlayerDisplay.textContent = gameState.currentPlayer;
     }
 };
 
- const updateInnings = (player) => {
-        if (gameState.gameMode === 1) {
-            gameState.inningsP1++;
-        } else if (player === 1) {
-            gameState.inningsP1++;
-        } else if (player === 2) {
-            gameState.inningsP2++;
-        }
-    };
+const updateInnings = (player) => {
+    if (gameState.gameMode === 1) {
+        gameState.inningsP1++;
+    } else if (player === 1) {
+        gameState.inningsP1++;
+    } else if (player === 2) {
+        gameState.inningsP2++;
+    }
+};
 
 const checkGameEnd = () => {
     if (currentGameMode === '14.1 Continuous') {
