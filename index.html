@@ -19,7 +19,7 @@
                 <button onclick="selectGameMode('14.1 Continuous')">14.1 Continuous</button>
                 <button onclick="selectGameMode('14.1 Continuous Trainer')">14.1 Continuous Trainer</button>
             </div>
-             <h2 id="match-history-header">Match History</h2>
+             <h2 id="match-history-header">Match History</h2> <!-- Match history header here -->
             <div id="match-history">
               
                 <ul id="history-list"></ul>
@@ -75,19 +75,8 @@
             <div class="close-button-container">
                <span class="close-button" onclick="selectGameMode(null)">×</span>
            </div>
-                 <section class="input-parameters">
-                     <div class ="input-box">
-                          <label for="max-innings">Max Innings</label>
-                            <input type="number" id="max-innings" value="15" min="1">
-                      </div>
 
-                       <div class ="input-box">
-                           <label for="max-score">Max Score </label>
-                           <input type="number" id="max-score" value="200" min="1">
-                       </div>
-                  </section>
-
-               <div class="main-content">
+                <div class="main-content">
                     <div class="left-section-wrapper">
                          <section class="left-section">
                             <section class="scoreboard">
@@ -167,7 +156,6 @@
                                 </table>
                             </div>
                         </section>
-                           <div class ="game-status"> <span id = "game-status-info"></span></div>
                     </section>
                 </div>
                  <section class="controls">
@@ -176,7 +164,7 @@
                     <button id="undo" class="secondary-button">Undo</button>
                     <button id="reset" class="secondary-button">Reset Game</button>
                     <button id="end-game" class="secondary-button">End Game</button>
-                     <button id="new-rack" class="primary-button" disabled>New Rack (+14 balls)</button>
+                    <button id="new-rack" class="primary-button" disabled>New Rack (+14 balls)</button>
                 </section>
             </div>
     </div>

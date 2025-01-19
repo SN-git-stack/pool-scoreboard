@@ -8,6 +8,7 @@ const matchHistory = [];
 function selectGameMode(mode) {
     currentGameMode = mode;
 
+    // Ensure elements exist before accessing their style property
     const gameSelection = document.getElementById('game-selection');
     const playerInput = document.getElementById('player-input');
     const scoreboard = document.getElementById('scoreboard');
@@ -30,9 +31,19 @@ function selectGameMode(mode) {
 }
 
 document.addEventListener('DOMContentLoaded', function() {
-    selectGameMode(null);
+    // Select initial game mode to setup the page (e.g., null or a default mode)
+    selectGameMode(null); // or selectGameMode('8-ball'); if you want 8-ball to be the default
+
+    // Now load the game history
     loadGameHistory();
+
+    // Initialize other game elements, if necessary
     initializeGame();
+
+    // Show fullscreen prompt for Chrome on tablets
+/*    if (isTabletChrome()) {
+        showFullscreenPrompt();
+    } */
 
 });
 function startGame() {
@@ -97,6 +108,9 @@ function endGame() {
       currentGameMode = null;
 }
 
+// Game Screen Functions and Variables
+
+// Game Screen Elements
 const playerNameInputP1 = document.getElementById('player1-name-continuous');
 const playerNameInputP2 = document.getElementById('player2-name-continuous');
 const currentScoreDisplayP1 = document.getElementById('current-score-p1');
@@ -117,15 +131,13 @@ const currentPlayerDisplay = document.getElementById('current-player');
 const currentPlayerDisplayParent = document.getElementById('current-player-display');
 const inningTableContainer = document.querySelector('.inning-table-container');
 
-const gameStatusInfoDisplay = document.getElementById('game-status-info');
-const maxInningsInput = document.getElementById('max-innings');
-const maxScoreInput = document.getElementById('max-score');
-
+// Modal Elements
 const modalOverlay = document.getElementById('modal-overlay');
 const modalMessage = document.getElementById('modal-message');
 const modalConfirmBtn = document.getElementById('modal-confirm');
 const modalCancelBtn = document.getElementById('modal-cancel');
 
+// Fullscreen modal elements
 const fullscreenModal = document.getElementById('fullscreen-modal');
 const fullscreenConfirmBtn = document.getElementById('fullscreen-confirm');
 const fullscreenCancelBtn = document.getElementById('fullscreen-cancel');
@@ -143,8 +155,6 @@ let gameState = {
     rackHistory: [],
     inningHistory: [],
     currentPlayer: 1,
-     maxInnings : 15,
-     maxScore : 200,
     gameMode: 1
 };
 
@@ -176,25 +186,24 @@ const showGameScreen = (mode) => {
         inningsDisplayP2.parentElement.style.display = 'block';
          currentPlayerDisplayParent.style.display = 'block';
     }
-     resetGame(false);
-     createRemainingBallsButtons();
-   updateGameStatusDisplay();
+    resetGame(false);
+    createRemainingBallsButtons();
 };
 
 const loadGameHistory = () => {
-   const history = JSON.parse(localStorage.getItem('gameHistory')) || [];
+    const history = JSON.parse(localStorage.getItem('gameHistory')) || [];
     const historyList = document.getElementById('history-list');
-    historyList.innerHTML = '';
+    historyList.innerHTML = ''; // Clear the list
 
     if (history.length === 0) {
         const listItem = document.createElement('li');
         listItem.textContent = 'No games played yet.';
         historyList.appendChild(listItem);
     } else {
-         history.slice().reverse().forEach((game, index) => {
-            const listItem = document.createElement('li');
+      history.slice().reverse().forEach((game, index) => {
+             const listItem = document.createElement('li');
             listItem.innerHTML = '';
-            let text = "";
+             let text = "";
             if (game.mode === '14.1 Continuous') {
                 text = `<strong>${game.mode}:</strong> ${game.date} - <strong>Player 1:</strong> ${game.player1} (Innings: ${game.inningsP1}, Balls Potted: ${game.ballsPottedP1}); <strong>Player 2:</strong> ${game.player2} (Innings: ${game.inningsP2}, Balls Potted: ${game.ballsPottedP2})`;
             } else if (game.mode === '14.1 Continuous Trainer') {
@@ -205,7 +214,7 @@ const loadGameHistory = () => {
             }
             listItem.innerHTML = text;
             historyList.appendChild(listItem);
-        });
+      });
     }
 };
 
@@ -303,10 +312,8 @@ const setRemainingBalls = (balls) => {
         alert('Invalid number of balls remaining. It cannot be greater than the current number of balls on the table.');
         return;
     }
- updateInning(balls);
-        const isGameOver  = isGameOverConditions()
-     if (isGameOver )  {  endGameContinuous()};
 
+    updateInning(balls);
 };
 
 const updateInning = (ballsRemaining) => {
@@ -325,22 +332,18 @@ const updateInning = (ballsRemaining) => {
     
     updateInningTable(ballsPotted);
     updateDisplay();
-      updateGameStatusDisplay()
     addToHistory({ type: 'inning', player: gameState.currentPlayer, ballsPotted, score: (gameState.gameMode === 1 || gameState.currentPlayer === 1) ? gameState.currentScoreP1 : gameState.currentScoreP2, remaining: gameState.ballsRemaining });
     updateInnings(gameState.currentPlayer);
     switchPlayer();
-    const isGameOver  = isGameOverConditions()
-     if (isGameOver )  {  endGameContinuous()};
 };
 
 const handleNewRack = () => {
     gameState.rackHistory.push({index: gameState.history.length, player: gameState.currentPlayer});
     gameState.ballsRemaining += 14;
     updateInningTable(14);
-     updateGameStatusDisplay();
-     updateDisplay();
+    updateDisplay();
     addToHistory({ type: 'rack', player: gameState.currentPlayer, ballsPotted: 14, remaining: gameState.ballsRemaining });
-
+     //updateInnings(gameState.currentPlayer);  REMOVED THIS
 };
 
 const handleFoul = () => {
@@ -350,19 +353,14 @@ const handleFoul = () => {
         gameState.currentScoreP2 = Math.max(0, gameState.currentScoreP2 - 1);
     }
     updateInnings(gameState.currentPlayer);
-     updateGameStatusDisplay();
     updateInningTable('Foul');
     updateDisplay();
     addToHistory({ type: 'foul', player: gameState.currentPlayer, score: (gameState.gameMode === 1 || gameState.currentPlayer === 1) ? gameState.currentScoreP1 : gameState.currentScoreP2 });
     switchPlayer();
-    const isGameOver  = isGameOverConditions()
-     if (isGameOver )  {  endGameContinuous()};
-
 };
 
 const handleSafety = () => {
     updateInnings(gameState.currentPlayer);
-     updateGameStatusDisplay()
      updateInningTable('Safety');
     updateDisplay();
     addToHistory({ type: 'safety', player: gameState.currentPlayer});
@@ -451,11 +449,10 @@ const handleSafety = () => {
     }
 
     updateDisplay();
-      updateGameStatusDisplay()
      updateInningTable();
 };
 
- const endGameContinuous = () => {
+const endGameContinuous = () => {
     modalMessage.textContent = 'Are you sure you want to end the current game?';
     modalOverlay.style.display = 'flex';
 
@@ -463,20 +460,18 @@ const handleSafety = () => {
         modalOverlay.style.display = 'none';
         saveGameToHistory(currentGameMode);
         resetGameState();
-         selectGameMode(null);
-        loadGameHistory();
+        selectGameMode(null);
+        loadGameHistory();  // Add to automatically re-render for match history upon 14.1 game completion in `endGameContinuous()` that were missed
     };
 
     modalCancelBtn.onclick = () => {
         modalOverlay.style.display = 'none';
     };
 };
-  // we add table and reset functions from previous as usual so no modification was done other than setting the max inninings to 1 for single view for all users per the documentation instructions
-  // The previous function has also added the additional calls
 
 const resetGame = (saveToHistory = true) => {
-   if (saveToHistory) {
-    saveGameToHistory(currentGameMode);
+     if (saveToHistory) {
+        saveGameToHistory(currentGameMode);
     }
     gameState.currentScoreP1 = 0;
     gameState.highRunP1 = 0;
@@ -489,15 +484,10 @@ const resetGame = (saveToHistory = true) => {
     gameState.history = [];
     gameState.rackHistory = [];
     gameState.inningHistory = [];
-      gameState.maxInnings =  parseInt(maxInningsInput.value, 10);
-       gameState.maxScore =  parseInt(maxScoreInput.value, 10);
-        gameState.currentPlayer = 1;
-
-      updateDisplay();
-   updateGameStatusDisplay();
-        clearInningTable();
+    gameState.currentPlayer = 1;
+    updateDisplay();
+    clearInningTable();
     updateInningTable();
-
     saveGameState();
 };
 
@@ -508,81 +498,22 @@ const resetGameState = () => {
     updateStandardScoreboard();
 
     // Reset values for 14.1 Continuous game modes
-   gameState.currentScoreP1 = 0;
+    gameState.currentScoreP1 = 0;
     gameState.highRunP1 = 0;
     gameState.inningsP1 = 1;
     gameState.currentScoreP2 = 0;
     gameState.highRunP2 = 0;
     gameState.inningsP2 = 1;
-     gameState.ballsRemaining = 15;
+    gameState.ballsRemaining = 15;
     gameState.currentInningBallsPotted = 0;
     gameState.history = [];
-     gameState.rackHistory = [];
+    gameState.rackHistory = [];
     gameState.inningHistory = [];
     gameState.currentPlayer = 1;
-   gameState.gameMode = null;
+    gameState.gameMode = null;
 };
-const updateGameStatusDisplay = () => {
- const player1NameValue =   playerNameInputP1.value ? playerNameInputP1.value : "Player 1"
-      const player2NameValue =   playerNameInputP2.value ? playerNameInputP2.value : "Player 2"
-
- let statusMessage  = ""
-   const isGameOver = isGameOverConditions();
-
-    if (gameState.gameMode === 1 || gameState.currentPlayer === 1)  {
-         statusMessage = `${player1NameValue}'s Turn, Balls Left : ${gameState.ballsRemaining}, Max Score : ${gameState.maxScore}`
-
-          if (isGameOver  && gameState.gameMode !== 1)   {
-      if( gameState.currentScoreP1 > gameState.currentScoreP2 )  statusMessage  =   `${player1NameValue}  Wins , Score is ${gameState.currentScoreP1} ! (Max Score ${gameState.maxScore} Reached!)`
-       else   statusMessage  =   `${player2NameValue} Wins , Score is ${gameState.currentScoreP2}! (Max Score ${gameState.maxScore} Reached!)`
-        }
-
-           if (gameState.inningsP1 >  gameState.maxInnings &&  !isGameOver && gameState.gameMode !== 1 )  statusMessage = `Max Innings (${gameState.maxInnings} )Reached: Game Over`
-
-
-     } else {
-
-    statusMessage =`${player2NameValue}'s Turn, Balls Left : ${gameState.ballsRemaining}, Max Score : ${gameState.maxScore}`;
-   if (isGameOver   )   {
-      if(gameState.currentScoreP2 > gameState.currentScoreP1 )  statusMessage =   `${player2NameValue}  Wins , Score is ${gameState.currentScoreP2}  ! (Max Score ${gameState.maxScore} Reached!)`
-        else   statusMessage  =   `${player1NameValue} Wins , Score is ${gameState.currentScoreP1}  ! (Max Score ${gameState.maxScore} Reached!)`
-
-  }
-
-
-   if (gameState.inningsP2 > gameState.maxInnings && !isGameOver && gameState.gameMode ===2)    statusMessage  =  `Max Innings (${gameState.maxInnings} )Reached :Game Over `;
-       if (gameState.inningsP1 > gameState.maxInnings && !isGameOver && gameState.gameMode !==2 && gameState.gameMode !== 1 ) statusMessage  =  `Max Innings (${gameState.maxInnings} ) Reached:Game Over`;
-       if ( gameState.inningsP1 > gameState.maxInnings  && !isGameOver  &&  gameState.gameMode === 1 ) statusMessage  =   `Max Innings (${gameState.maxInnings} )Reachecd, Training End`;
-
-     }
-
- gameStatusInfoDisplay.textContent  =  statusMessage
-  };
-
-
- const isGameOverConditions  = () =>  {
-
-
-      if (gameState.currentScoreP1 >= gameState.maxScore  )  {
-           return true;
-      }
-   if (gameState.currentScoreP2 >= gameState.maxScore  && gameState.gameMode !== 1)
-    {  return true ;  }
-       if (gameState.inningsP1 >  gameState.maxInnings && gameState.gameMode !== 1 )
-    {   return true }
-       if (gameState.inningsP2 > gameState.maxInnings   &&  gameState.gameMode ===2 ) {
-        return true;
-
-         }
- return false
-  };
-
-
 
 const updateDisplay = () => {
-  maxInningsInput.value = gameState.maxInnings
-
-    maxScoreInput.value = gameState.maxScore;
     currentScoreDisplayP1.textContent = gameState.currentScoreP1;
     highRunDisplayP1.textContent = gameState.highRunP1;
     inningsDisplayP1.textContent = gameState.inningsP1;
@@ -592,9 +523,8 @@ const updateDisplay = () => {
     ballsOnTableDisplay.textContent = gameState.ballsRemaining;
     newRackBtn.disabled = false;
     currentPlayerDisplay.textContent = gameState.currentPlayer;
-   saveGameState();
+    saveGameState();
 };
-
 const clearInningTable = () => {
     while (inningDetailsTable.rows.length > 0) {
         inningDetailsTable.deleteRow(0);
@@ -684,6 +614,47 @@ const switchPlayer = () => {
     };
 
 
+// Fullscreen Prompt Logic
+/*
+function isTabletChrome() {
+    const userAgent = navigator.userAgent.toLowerCase();
+    return /ipad|android(?!.*mobile)/.test(userAgent) && /chrome/.test(userAgent);
+}
+
+function showFullscreenPrompt() {
+    fullscreenModal.style.display = 'flex';
+
+    fullscreenConfirmBtn.onclick = () => {
+        fullscreenModal.style.display = 'none';
+        requestFullscreen();
+    };
+
+    fullscreenCancelBtn.onclick = () => {
+        fullscreenModal.style.display = 'none';
+    };
+}
+
+function requestFullscreen() {
+    const element = document.documentElement;
+
+    if (element.requestFullscreen) {
+        element.requestFullscreen()
+            .catch(err => {
+                console.error(`Error attempting to enable fullscreen: ${err.message} (${err.name})`);
+                alert('Fullscreen mode is not supported or could not be enabled in this browser.');
+            });
+    } else if (element.mozRequestFullScreen) {
+        element.mozRequestFullScreen();
+    } else if (element.webkitRequestFullscreen) {
+        element.webkitRequestFullscreen();
+    } else if (element.msRequestFullscreen) {
+        element.msRequestFullscreen();
+    } else {
+          console.log("Fullscreen API not supported")
+         alert('Fullscreen mode is not supported or could not be enabled in this browser.');
+    }
+}
+*/
 
 // Event Listeners for non Continuous game modes
 document.getElementById('clear-history').addEventListener('click', clearGameHistory);
