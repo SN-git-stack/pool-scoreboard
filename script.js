@@ -1,4 +1,3 @@
---- START OF FILE script.js ---
 let currentGameMode = null;
 let player1Name = 'Home';
 let player2Name = 'Guest';
