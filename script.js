@@ -12,6 +12,7 @@ function selectGameMode(mode) {
     const gameScreen = document.getElementById('game-screen');
     const gameSettingsInput = document.getElementById('game-settings-input');
     const gameSettings141 = document.getElementById('game-settings-14-1');
+    const standardScoreboard = document.getElementById('standard-scoreboard');
 
     if (gameSelection) gameSelection.style.display = 'flex';
     if (scoreboard) scoreboard.style.display = 'none';
@@ -28,6 +29,7 @@ function selectGameMode(mode) {
             startGame();
         } else if (mode === '14.1 Continuous' || mode === '14.1 Continuous Trainer') {
             // Display logic for 14.1 Continuous modes
+            if (gameSelection) gameSelection.style.display = 'none';
             if (gameSettingsInput) gameSettingsInput.style.display = 'block';
             if (gameSettings141) gameSettings141.style.display = 'block';
         }
@@ -43,8 +45,8 @@ document.addEventListener('DOMContentLoaded', function() {
 function startGame() {
     if (currentGameMode === '8-ball' || currentGameMode === '9-ball' || currentGameMode === '10-ball') {
         // Standard game modes logic
-        player1Name = document.getElementById('player1-name-continuous').value;
-        player2Name = document.getElementById('player2-name-continuous').value;
+        player1Name = document.getElementById('player1-name').value;
+        player2Name = document.getElementById('player2-name').value;
 
         if (!player1Name || !player2Name) {
             alert('Please enter names for both players.');
@@ -62,10 +64,7 @@ function startGame() {
         document.getElementById('game-title').textContent = currentGameMode;
         document.getElementById('player1-name').textContent = player1Name;
         document.getElementById('player2-name').textContent = player2Name;
-    } else if (currentGameMode === '14.1 Continuous' || currentGameMode === '14.1 Continuous Trainer') {
-        // 14.1 Continuous game modes logic
-        start141Game();
-    }
+    } 
 }
 
 function start141Game() {

@@ -31,7 +31,22 @@
                 <button id="import-history-button" class="secondary-button">Import History</button>
            </div>
         </div>
-
+        <div id="game-settings-input" style="display: none;">
+            <div id="player-names-input">
+                <label for="player1-name-continuous">Player 1:</label>
+                <input type="text" id="player1-name-continuous" value="Player 1"><br>
+                <label for="player2-name-continuous">Player 2:</label>
+                <input type="text" id="player2-name-continuous" value="Player 2"><br>
+            </div>
+            <div id="game-settings-14-1">
+                <h3>14.1 Continuous Settings</h3>
+                <label for="max-innings">Max Innings:</label>
+                <input type="number" id="max-innings" min="1" value="10"><br>
+                <label for="max-balls">Max Balls:</label>
+                <input type="number" id="max-balls" min="1" value="100"><br>
+            </div>
+            <button onclick="start141Game()">Start Game</button>
+        </div>
         <div id="scoreboard" style="display: none;">
            <div class="close-button-container">
                <span class="close-button" onclick="selectGameMode(null)">×</span>
@@ -62,22 +77,6 @@
             <div class="close-button-container">
                <span class="close-button" onclick="endGame()">×</span>
            </div>
-    <div id="game-settings-input" style="display: none;">
-        <div id="player-names-input">
-            <label for="player1-name-continuous">Player 1:</label>
-            <input type="text" id="player1-name-continuous" value="Player 1"><br>
-            <label for="player2-name-continuous">Player 2:</label>
-            <input type="text" id="player2-name-continuous" value="Player 2"><br>
-        </div>
-        <div id="game-settings-14-1">
-            <h3>14.1 Continuous Settings</h3>
-            <label for="max-innings">Max Innings:</label>
-            <input type="number" id="max-innings" min="1" value="10"><br>
-            <label for="max-balls">Max Balls:</label>
-            <input type="number" id="max-balls" min="1" value="100"><br>
-        </div>
-        <button onclick="startGame()">Start Game</button>
-    </div>
                 <div class="main-content">
                     <div class="left-section-wrapper">
                          <section class="left-section">
