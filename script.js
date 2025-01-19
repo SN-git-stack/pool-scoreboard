@@ -1,3 +1,4 @@
+--- START OF FILE script.js ---
 let currentGameMode = null;
 let player1Name = 'Home';
 let player2Name = 'Guest';
@@ -40,10 +41,10 @@ document.addEventListener('DOMContentLoaded', function() {
     // Initialize other game elements, if necessary
     initializeGame();
 
-    // Show fullscreen prompt for Chrome on tablets
-/*    if (isTabletChrome()) {
+    // Show fullscreen prompt for Chrome on tablets - REMOVED COMPLETELY VIA COMMENT
+    /*if (isTabletChrome()) {
         showFullscreenPrompt();
-    } */
+    }*/
 
 });
 function startGame() {
@@ -131,6 +132,13 @@ const currentPlayerDisplay = document.getElementById('current-player');
 const currentPlayerDisplayParent = document.getElementById('current-player-display');
 const inningTableContainer = document.querySelector('.inning-table-container');
 
+const gameStatusInfoDisplay = document.getElementById('game-status-info');
+// New inputs for max innings and max balls. Note initial HTML will determine a value so parseInt won't produce NaN unless its deleted and user provides some unusual data via their UI/ keyboard. Also that max-balls value has been renamed max-score which seems much more appropriate for user and more aligned
+const maxInningsInput = document.getElementById('max-innings');
+const maxScoreInput = document.getElementById('max-score');
+
+
+
 // Modal Elements
 const modalOverlay = document.getElementById('modal-overlay');
 const modalMessage = document.getElementById('modal-message');
@@ -155,6 +163,8 @@ let gameState = {
     rackHistory: [],
     inningHistory: [],
     currentPlayer: 1,
+     maxInnings : 15,  // New State Property for limit settings from user values from newly created  HTML/Input fields
+     maxScore : 200, //New State property for score max, as that is what was decided as being clearer usage case than "maxBalls"
     gameMode: 1
 };
 
@@ -186,24 +196,27 @@ const showGameScreen = (mode) => {
         inningsDisplayP2.parentElement.style.display = 'block';
          currentPlayerDisplayParent.style.display = 'block';
     }
-    resetGame(false);
-    createRemainingBallsButtons();
+     resetGame(false);
+     createRemainingBallsButtons();
+     //playerNameInputP1.focus(); removed due to keyboard/ text focus (done previously)
+   updateGameStatusDisplay(); // run function which calls text update here also so state persists to UI via text display also.
 };
 
 const loadGameHistory = () => {
-    const history = JSON.parse(localStorage.getItem('gameHistory')) || [];
+   const history = JSON.parse(localStorage.getItem('gameHistory')) || [];
     const historyList = document.getElementById('history-list');
     historyList.innerHTML = ''; // Clear the list
+
 
     if (history.length === 0) {
         const listItem = document.createElement('li');
         listItem.textContent = 'No games played yet.';
         historyList.appendChild(listItem);
     } else {
-      history.slice().reverse().forEach((game, index) => {
-             const listItem = document.createElement('li');
+         history.slice().reverse().forEach((game, index) => {
+            const listItem = document.createElement('li');
             listItem.innerHTML = '';
-             let text = "";
+            let text = "";
             if (game.mode === '14.1 Continuous') {
                 text = `<strong>${game.mode}:</strong> ${game.date} - <strong>Player 1:</strong> ${game.player1} (Innings: ${game.inningsP1}, Balls Potted: ${game.ballsPottedP1}); <strong>Player 2:</strong> ${game.player2} (Innings: ${game.inningsP2}, Balls Potted: ${game.ballsPottedP2})`;
             } else if (game.mode === '14.1 Continuous Trainer') {
@@ -214,7 +227,7 @@ const loadGameHistory = () => {
             }
             listItem.innerHTML = text;
             historyList.appendChild(listItem);
-      });
+        });
     }
 };
 
@@ -312,8 +325,10 @@ const setRemainingBalls = (balls) => {
         alert('Invalid number of balls remaining. It cannot be greater than the current number of balls on the table.');
         return;
     }
+ updateInning(balls); //  put these all first as that is most important function if its a valid choice
+        const isGameOver  = isGameOverConditions()
+     if (isGameOver )  {  endGameContinuous()};
 
-    updateInning(balls);
 };
 
 const updateInning = (ballsRemaining) => {
@@ -332,16 +347,20 @@ const updateInning = (ballsRemaining) => {
     
     updateInningTable(ballsPotted);
     updateDisplay();
+      updateGameStatusDisplay() // when ever any score /balls etc is updated also do the text message at status via another text variable. that also includes setting "you have lost/ win"
     addToHistory({ type: 'inning', player: gameState.currentPlayer, ballsPotted, score: (gameState.gameMode === 1 || gameState.currentPlayer === 1) ? gameState.currentScoreP1 : gameState.currentScoreP2, remaining: gameState.ballsRemaining });
     updateInnings(gameState.currentPlayer);
     switchPlayer();
+    const isGameOver  = isGameOverConditions() // put those as the last checks after all scores and game data is finished so text update changes etc also registers to use correct last values or changes
+     if (isGameOver )  {  endGameContinuous()}; // perform endgame if max values reached here, so before user hits or click or do action by mistake after end
 };
 
 const handleNewRack = () => {
     gameState.rackHistory.push({index: gameState.history.length, player: gameState.currentPlayer});
     gameState.ballsRemaining += 14;
     updateInningTable(14);
-    updateDisplay();
+     updateGameStatusDisplay();
+     updateDisplay();
     addToHistory({ type: 'rack', player: gameState.currentPlayer, ballsPotted: 14, remaining: gameState.ballsRemaining });
      //updateInnings(gameState.currentPlayer);  REMOVED THIS
 };
@@ -353,14 +372,19 @@ const handleFoul = () => {
         gameState.currentScoreP2 = Math.max(0, gameState.currentScoreP2 - 1);
     }
     updateInnings(gameState.currentPlayer);
+     updateGameStatusDisplay(); // update the UI also as they can also fail games via fouls and display as that too
     updateInningTable('Foul');
     updateDisplay();
     addToHistory({ type: 'foul', player: gameState.currentPlayer, score: (gameState.gameMode === 1 || gameState.currentPlayer === 1) ? gameState.currentScoreP1 : gameState.currentScoreP2 });
     switchPlayer();
+    const isGameOver  = isGameOverConditions() // you put those after everything, so logic flow behaves correctly and then apply "if",  to also see "if" you need end at foul actions. Then at set remaining if they choose, you end game after setting their new scores and turns to ensure it does the same as the intended gameplay pattern
+     if (isGameOver )  {  endGameContinuous()};
+
 };
 
 const handleSafety = () => {
     updateInnings(gameState.currentPlayer);
+     updateGameStatusDisplay()// show safety state and apply new value or new text changes to DOM
      updateInningTable('Safety');
     updateDisplay();
     addToHistory({ type: 'safety', player: gameState.currentPlayer});
@@ -449,10 +473,11 @@ const handleSafety = () => {
     }
 
     updateDisplay();
+      updateGameStatusDisplay()  // check display of status for undo and game state when changed here also
      updateInningTable();
 };
 
-const endGameContinuous = () => {
+ const endGameContinuous = () => {
     modalMessage.textContent = 'Are you sure you want to end the current game?';
     modalOverlay.style.display = 'flex';
 
@@ -460,18 +485,20 @@ const endGameContinuous = () => {
         modalOverlay.style.display = 'none';
         saveGameToHistory(currentGameMode);
         resetGameState();
-        selectGameMode(null);
-        loadGameHistory();  // Add to automatically re-render for match history upon 14.1 game completion in `endGameContinuous()` that were missed
+         selectGameMode(null);
+        loadGameHistory();
     };
 
     modalCancelBtn.onclick = () => {
         modalOverlay.style.display = 'none';
     };
 };
+  // we add table and reset functions from previous as usual so no modification was done other than setting the max inninings to 1 for single view for all users per the documentation instructions
+  // The previous function has also added the additional calls
 
 const resetGame = (saveToHistory = true) => {
-     if (saveToHistory) {
-        saveGameToHistory(currentGameMode);
+   if (saveToHistory) {
+    saveGameToHistory(currentGameMode);
     }
     gameState.currentScoreP1 = 0;
     gameState.highRunP1 = 0;
@@ -484,10 +511,15 @@ const resetGame = (saveToHistory = true) => {
     gameState.history = [];
     gameState.rackHistory = [];
     gameState.inningHistory = [];
-    gameState.currentPlayer = 1;
-    updateDisplay();
-    clearInningTable();
+      gameState.maxInnings =  parseInt(maxInningsInput.value, 10);
+       gameState.maxScore =  parseInt(maxScoreInput.value, 10);
+        gameState.currentPlayer = 1;
+
+      updateDisplay();
+   updateGameStatusDisplay();  // reset text area and all visual elements for the new game
+        clearInningTable();
     updateInningTable();
+
     saveGameState();
 };
 
@@ -498,22 +530,82 @@ const resetGameState = () => {
     updateStandardScoreboard();
 
     // Reset values for 14.1 Continuous game modes
-    gameState.currentScoreP1 = 0;
+   gameState.currentScoreP1 = 0;
     gameState.highRunP1 = 0;
     gameState.inningsP1 = 1;
     gameState.currentScoreP2 = 0;
     gameState.highRunP2 = 0;
     gameState.inningsP2 = 1;
-    gameState.ballsRemaining = 15;
+     gameState.ballsRemaining = 15;
     gameState.currentInningBallsPotted = 0;
     gameState.history = [];
-    gameState.rackHistory = [];
+     gameState.rackHistory = [];
     gameState.inningHistory = [];
     gameState.currentPlayer = 1;
-    gameState.gameMode = null;
+   gameState.gameMode = null;
 };
+const updateGameStatusDisplay = () => {
+ const player1NameValue =   playerNameInputP1.value ? playerNameInputP1.value : "Player 1"  // if player names exist or other case to text labels for use in a state
+      const player2NameValue =   playerNameInputP2.value ? playerNameInputP2.value : "Player 2"
+
+ let statusMessage  = ""
+   const isGameOver = isGameOverConditions();
+
+    if (gameState.gameMode === 1 || gameState.currentPlayer === 1)  {
+         statusMessage = `${player1NameValue}'s Turn, Balls Left : ${gameState.ballsRemaining}, Max Score : ${gameState.maxScore}`
+
+          if (isGameOver  && gameState.gameMode !== 1)   { // set condition and show all of the relevant details in this code
+      // show which person or if game ended
+      if( gameState.currentScoreP1 > gameState.currentScoreP2 )  statusMessage  =   `${player1NameValue}  Wins , Score is ${gameState.currentScoreP1} ! (Max Score ${gameState.maxScore} Reached!)`
+       else   statusMessage  =   `${player2NameValue} Wins , Score is ${gameState.currentScoreP2}! (Max Score ${gameState.maxScore} Reached!)`
+        }
+
+           if (gameState.inningsP1 >  gameState.maxInnings &&  !isGameOver && gameState.gameMode !== 1 )  statusMessage = `Max Innings (${gameState.maxInnings} )Reached: Game Over`
+
+
+     } else {
+
+    statusMessage =`${player2NameValue}'s Turn, Balls Left : ${gameState.ballsRemaining}, Max Score : ${gameState.maxScore}`;
+   if (isGameOver   )   {  // set end text with current information as normal using  previous logic or add  "you win/loss" details. This works for both single or player vs player also without distinction. Since gameState.gameMode always checks the appropriate conditions anyway.
+      if(gameState.currentScoreP2 > gameState.currentScoreP1 )  statusMessage =   `${player2NameValue}  Wins , Score is ${gameState.currentScoreP2}  ! (Max Score ${gameState.maxScore} Reached!)`
+        else   statusMessage  =   `${player1NameValue} Wins , Score is ${gameState.currentScoreP1}  ! (Max Score ${gameState.maxScore} Reached!)` // both score comparison in game to end
+
+  }
+
+
+   if (gameState.inningsP2 > gameState.maxInnings && !isGameOver && gameState.gameMode ===2)    statusMessage  =  `Max Innings (${gameState.maxInnings} )Reached :Game Over `;
+       if (gameState.inningsP1 > gameState.maxInnings && !isGameOver && gameState.gameMode !==2 && gameState.gameMode !== 1 ) statusMessage  =  `Max Innings (${gameState.maxInnings} ) Reached:Game Over`;
+       if ( gameState.inningsP1 > gameState.maxInnings  && !isGameOver  &&  gameState.gameMode === 1 ) statusMessage  =   `Max Innings (${gameState.maxInnings} )Reachecd, Training End`;
+
+     }
+
+ gameStatusInfoDisplay.textContent  =  statusMessage
+  };
+
+
+ const isGameOverConditions  = () =>  {
+   //  if player hit required score. Use this code for isGameOverCheck method if score is set to specific max or check to remove "high numbers or foul conditions from user to exceed max and go into the negative score range (only for the text outputs using these checks.) also for inninigs also
+
+      if (gameState.currentScoreP1 >= gameState.maxScore  )  { // specific rules
+           return true;
+      }
+   if (gameState.currentScoreP2 >= gameState.maxScore  && gameState.gameMode !== 1)
+    {  return true ;  }
+       if (gameState.inningsP1 >  gameState.maxInnings && gameState.gameMode !== 1 )
+    {   return true }
+       if (gameState.inningsP2 > gameState.maxInnings   &&  gameState.gameMode ===2 ) {
+        return true;
+
+         } // return value always true to check all end cases with inning
+ return false
+  };
+
+
 
 const updateDisplay = () => {
+  maxInningsInput.value = gameState.maxInnings  // this forces text view value (also works other way to assign gameState, but those happen using the reseter for that as default setting) using html element. It is here for reverse read (view), not that direct user modifications happen here with "undo", those need their own set functions since undo logic needs specific behaviour
+
+    maxScoreInput.value = gameState.maxScore; // apply to max scores or use html default values
     currentScoreDisplayP1.textContent = gameState.currentScoreP1;
     highRunDisplayP1.textContent = gameState.highRunP1;
     inningsDisplayP1.textContent = gameState.inningsP1;
@@ -523,8 +615,9 @@ const updateDisplay = () => {
     ballsOnTableDisplay.textContent = gameState.ballsRemaining;
     newRackBtn.disabled = false;
     currentPlayerDisplay.textContent = gameState.currentPlayer;
-    saveGameState();
+   saveGameState();
 };
+
 const clearInningTable = () => {
     while (inningDetailsTable.rows.length > 0) {
         inningDetailsTable.deleteRow(0);
@@ -614,7 +707,7 @@ const switchPlayer = () => {
     };
 
 
-// Fullscreen Prompt Logic
+// Fullscreen Prompt Logic - These Lines Were Modified and Comemnted Out
 /*
 function isTabletChrome() {
     const userAgent = navigator.userAgent.toLowerCase();
@@ -654,7 +747,9 @@ function requestFullscreen() {
          alert('Fullscreen mode is not supported or could not be enabled in this browser.');
     }
 }
+
 */
+
 
 // Event Listeners for non Continuous game modes
 document.getElementById('clear-history').addEventListener('click', clearGameHistory);
