@@ -67,6 +67,9 @@ function startGame() {
 
         gameState.player1Name = document.getElementById('player1-name-continuous').value;
         gameState.player2Name = document.getElementById('player2-name-continuous').value;
+        
+        showGameScreen(currentGameMode);
+        return; // Exit the function early for 14.1 modes
     }
 
     if (currentGameMode !== '8-ball' && currentGameMode !== '9-ball' && currentGameMode !== '10-ball') {
@@ -91,9 +94,6 @@ function startGame() {
     document.getElementById('game-title').textContent = currentGameMode;
     document.getElementById('player1-name').textContent = player1Name;
     document.getElementById('player2-name').textContent = player2Name;
-    if (currentGameMode === '14.1 Continuous' || currentGameMode === '14.1 Continuous Trainer') {
-        showGameScreen(currentGameMode);
-    }
 }
 
 function incrementScore(player) {
