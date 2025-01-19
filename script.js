@@ -748,7 +748,7 @@ function requestFullscreen() {
     }
 }
 
-*/
+*///
 
 
 // Event Listeners for non Continuous game modes
