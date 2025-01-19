@@ -21,7 +21,7 @@
             </div>
              <h2 id="match-history-header">Match History</h2>
             <div id="match-history">
-              
+
                 <ul id="history-list"></ul>
             </div>
            <div id="history-controls">
@@ -30,25 +30,6 @@
                 <input type="file" id="import-history" accept=".json" style="display: none;">
                 <button id="import-history-button" class="secondary-button">Import History</button>
            </div>
-        </div>
-
-        <div id="player-input" style="display: none;">
-          <div class="close-button-container">
-             <span class="close-button" onclick="selectGameMode(null)">×</span>
-          </div>
-            <h2>Enter Player Names</h2>
-            <label for="player1">Home:</label>
-            <input type="text" id="player1" placeholder="Home Player Name" value="Home"><br>
-            <label for="player2">Guest:</label>
-            <input type="text" id="player2" placeholder="Guest Player Name" value="Guest"><br>
-            <div id="game-settings-14-1" style="display: none;">
-                <h3>14.1 Continuous Settings</h3>
-                <label for="max-innings">Max Innings:</label>
-                <input type="number" id="max-innings" min="1" value="10"><br>
-                <label for="max-balls">Max Balls:</label>
-                <input type="number" id="max-balls" min="1" value="100"><br>
-            </div>
-            <button onclick="startGame()">Start Game</button>
         </div>
 
         <div id="scoreboard" style="display: none;">
@@ -76,22 +57,36 @@
             </div>
              <button onclick="endGame()">End Game</button>
         </div>
-        
-        
+
   <div id="game-screen" style="display: none;">
             <div class="close-button-container">
                <span class="close-button" onclick="selectGameMode(null)">×</span>
            </div>
-
+    <div id="game-settings-input" style="display: none;">
+        <div id="player-names-input">
+            <label for="player1-name-continuous">Player 1:</label>
+            <input type="text" id="player1-name-continuous" value="Player 1"><br>
+            <label for="player2-name-continuous">Player 2:</label>
+            <input type="text" id="player2-name-continuous" value="Player 2"><br>
+        </div>
+        <div id="game-settings-14-1">
+            <h3>14.1 Continuous Settings</h3>
+            <label for="max-innings">Max Innings:</label>
+            <input type="number" id="max-innings" min="1" value="10"><br>
+            <label for="max-balls">Max Balls:</label>
+            <input type="number" id="max-balls" min="1" value="100"><br>
+        </div>
+        <button onclick="startGame()">Start Game</button>
+    </div>
                 <div class="main-content">
                     <div class="left-section-wrapper">
                          <section class="left-section">
                             <section class="scoreboard">
                                 <table class="player-stats-table">
                                     <tr>
-                                        <td class="player-label"><input type="text" id="player1-name-continuous" value="Player 1"></td>
+                                        <td class="player-label"><span id="player1-name-continuous-display"></span></td>
                                         <td class="empty-cell"></td>
-                                        <td class="player-label"><input type="text" id="player2-name-continuous" value="Player 2"></td>
+                                        <td class="player-label"><span id="player2-name-continuous-display"></span></td>
                                     </tr>
                                     <tr>
                                         <td class="player-stats">
@@ -117,7 +112,7 @@
                                                 <label for="balls-on-table">Balls on Table:</label>
                                                 <span id="balls-on-table">15</span>
                                             </div>
-            
+
                                         </td>
                                         <td class="player-stats">
                                             <div class="stat">
@@ -183,7 +178,7 @@
             <button id="modal-cancel" class="secondary-button">No</button>
         </div>
     </div>
-    
+
      <div id="fullscreen-modal" style="display: none;">
         <div class="fullscreen-modal-dialog">
             <p>For the best experience, please enable Fullscreen mode on your tablet.</p>

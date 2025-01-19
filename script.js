@@ -7,60 +7,47 @@ const matchHistory = [];
 
 function selectGameMode(mode) {
     currentGameMode = mode;
-
-    // Ensure elements exist before accessing their style property
     const gameSelection = document.getElementById('game-selection');
-    const playerInput = document.getElementById('player-input');
     const scoreboard = document.getElementById('scoreboard');
     const gameScreen = document.getElementById('game-screen');
+    const gameSettingsInput = document.getElementById('game-settings-input');
     const gameSettings141 = document.getElementById('game-settings-14-1');
 
     if (gameSelection) gameSelection.style.display = 'flex';
-    if (playerInput) playerInput.style.display = 'none';
     if (scoreboard) scoreboard.style.display = 'none';
     if (gameScreen) gameScreen.style.display = 'none';
+    if (gameSettingsInput) gameSettingsInput.style.display = 'none';
     if (gameSettings141) gameSettings141.style.display = 'none';
 
-    if (mode === '14.1 Continuous' || mode === '14.1 Continuous Trainer') {
-        if (playerInput) playerInput.style.display = 'block';
-        if (gameSettings141) gameSettings141.style.display = 'block';
-    } else if (mode) {
+   if (mode) {
         if (mode === '8-ball' || mode === '9-ball' || mode === '10-ball') {
             startGame();
         } else {
-            if (playerInput) playerInput.style.display = 'block';
+            if (gameSettingsInput) gameSettingsInput.style.display = 'block';
+             if (mode === '14.1 Continuous' || mode === '14.1 Continuous Trainer') {
+                if (gameSettings141) gameSettings141.style.display = 'block';
+            }
         }
     }
 }
 
 document.addEventListener('DOMContentLoaded', function() {
-    // Select initial game mode to setup the page (e.g., null or a default mode)
-    selectGameMode(null); // or selectGameMode('8-ball'); if you want 8-ball to be the default
-
-    // Now load the game history
+    selectGameMode(null);
     loadGameHistory();
-
-    // Initialize other game elements, if necessary
     initializeGame();
-
-    // Show fullscreen prompt for Chrome on tablets
-/*    if (isTabletChrome()) {
-        showFullscreenPrompt();
-    } */
-
 });
 
 function startGame() {
-    // 14.1 Continuous settings
-    let maxInnings = 10; // Default value
-    let maxBalls = 100; // Default value
+    let maxInnings = 10;
+    let maxBalls = 100;
+    
+    const gameSettingsInput = document.getElementById('game-settings-input');
+    const gameSettings141 = document.getElementById('game-settings-14-1');
 
     if (currentGameMode === '14.1 Continuous' || currentGameMode === '14.1 Continuous Trainer') {
-        // Get values from the input fields
         maxInnings = parseInt(document.getElementById('max-innings').value);
         maxBalls = parseInt(document.getElementById('max-balls').value);
 
-        // Validate inputs (optional, but good practice)
         if (isNaN(maxInnings) || maxInnings < 1) {
             alert("Please enter a valid number for Max Innings (minimum 1).");
             return;
@@ -70,17 +57,16 @@ function startGame() {
             return;
         }
 
-        // Store these settings in the gameState object or similar
         gameState.maxInnings = maxInnings;
         gameState.maxBalls = maxBalls;
 
-        showGameScreen(currentGameMode); // Proceed to the game screen for 14.1 modes
-        return; // Exit the function early for 14.1 modes
+        gameState.player1Name = document.getElementById('player1-name-continuous').value;
+        gameState.player2Name = document.getElementById('player2-name-continuous').value;
     }
 
     if (currentGameMode !== '8-ball' && currentGameMode !== '9-ball' && currentGameMode !== '10-ball') {
-        player1Name = document.getElementById('player1').value;
-        player2Name = document.getElementById('player2').value;
+        player1Name = document.getElementById('player1-name-continuous').value;
+        player2Name = document.getElementById('player2-name-continuous').value;
 
         if (!player1Name || !player2Name) {
             alert('Please enter names for both players.');
@@ -92,13 +78,17 @@ function startGame() {
     player2Score = 0;
     updateStandardScoreboard();
     document.getElementById('game-selection').style.display = 'none';
-    document.getElementById('player-input').style.display = 'none';
+    if (gameSettingsInput) gameSettingsInput.style.display = 'none';
+    if (gameSettings141) gameSettings141.style.display = 'none';
     document.getElementById('scoreboard').style.display = 'block';
     document.getElementById('standard-scoreboard').style.display = 'flex';
     document.getElementById('game-screen').style.display = 'none';
     document.getElementById('game-title').textContent = currentGameMode;
     document.getElementById('player1-name').textContent = player1Name;
     document.getElementById('player2-name').textContent = player2Name;
+     if (currentGameMode === '14.1 Continuous' || currentGameMode === '14.1 Continuous Trainer') {
+       showGameScreen(currentGameMode);
+    }
 }
 
 function incrementScore(player) {
@@ -139,9 +129,6 @@ function endGame() {
       currentGameMode = null;
 }
 
-// Game Screen Functions and Variables
-
-// Game Screen Elements
 const playerNameInputP1 = document.getElementById('player1-name-continuous');
 const playerNameInputP2 = document.getElementById('player2-name-continuous');
 const currentScoreDisplayP1 = document.getElementById('current-score-p1');
@@ -162,13 +149,11 @@ const currentPlayerDisplay = document.getElementById('current-player');
 const currentPlayerDisplayParent = document.getElementById('current-player-display');
 const inningTableContainer = document.querySelector('.inning-table-container');
 
-// Modal Elements
 const modalOverlay = document.getElementById('modal-overlay');
 const modalMessage = document.getElementById('modal-message');
 const modalConfirmBtn = document.getElementById('modal-confirm');
 const modalCancelBtn = document.getElementById('modal-cancel');
 
-// Fullscreen modal elements
 const fullscreenModal = document.getElementById('fullscreen-modal');
 const fullscreenConfirmBtn = document.getElementById('fullscreen-confirm');
 const fullscreenCancelBtn = document.getElementById('fullscreen-cancel');
@@ -187,8 +172,8 @@ let gameState = {
     inningHistory: [],
     currentPlayer: 1,
     gameMode: 1,
-    maxInnings: 10, // Default for 14.1 Continuous
-    maxBalls: 100   // Default for 14.1 Continuous
+    maxInnings: 10,
+    maxBalls: 100
 };
 
 const initializeGame = () => {
@@ -197,13 +182,16 @@ const initializeGame = () => {
 
 const showGameScreen = (mode) => {
     document.getElementById('game-selection').style.display = 'none';
-    document.getElementById('player-input').style.display = 'none';
-     document.getElementById('standard-scoreboard').style.display = 'none';
+    document.getElementById('game-settings-input').style.display = 'none';
+    document.getElementById('standard-scoreboard').style.display = 'none';
     document.getElementById('scoreboard').style.display = 'none';
     document.getElementById('game-screen').style.display = 'flex';
     document.getElementById('game-title').textContent = mode;
-    
+
     gameState.gameMode = (mode === '14.1 Continuous') ? 2 : 1;
+
+    document.getElementById('player1-name-continuous-display').textContent = gameState.player1Name;
+    document.getElementById('player2-name-continuous-display').textContent = gameState.player2Name;
 
     if (mode === '14.1 Continuous Trainer') {
         playerNameInputP2.parentElement.style.display = 'none';
@@ -211,13 +199,15 @@ const showGameScreen = (mode) => {
         highRunDisplayP2.parentElement.style.display = 'none';
         inningsDisplayP2.parentElement.style.display = 'none';
         currentPlayerDisplayParent.style.display = 'none';
+        document.getElementById('player2-name-continuous-display').parentElement.style.display = 'none';
 
     } else {
         playerNameInputP2.parentElement.style.display = 'block';
         currentScoreDisplayP2.parentElement.style.display = 'block';
         highRunDisplayP2.parentElement.style.display = 'block';
         inningsDisplayP2.parentElement.style.display = 'block';
-         currentPlayerDisplayParent.style.display = 'block';
+        currentPlayerDisplayParent.style.display = 'block';
+         document.getElementById('player2-name-continuous-display').parentElement.style.display = 'block';
     }
     resetGame(false);
     createRemainingBallsButtons();
@@ -226,7 +216,7 @@ const showGameScreen = (mode) => {
 const loadGameHistory = () => {
     const history = JSON.parse(localStorage.getItem('gameHistory')) || [];
     const historyList = document.getElementById('history-list');
-    historyList.innerHTML = ''; // Clear the list
+    historyList.innerHTML = '';
 
     if (history.length === 0) {
         const listItem = document.createElement('li');
@@ -328,10 +318,8 @@ const importGameHistory = (event) => {
     }
 }
 
-// Game Functions
-
 const createRemainingBallsButtons = () => {
-    ballButtonsContainer.innerHTML = ''; // Clear existing buttons
+    ballButtonsContainer.innerHTML = '';
     for (let i = 1; i <= 15; i++) {
         const button = document.createElement('button');
         button.textContent = i;
@@ -377,7 +365,6 @@ const handleNewRack = () => {
     updateInningTable(14);
     updateDisplay();
     addToHistory({ type: 'rack', player: gameState.currentPlayer, ballsPotted: 14, remaining: gameState.ballsRemaining });
-     //updateInnings(gameState.currentPlayer);  REMOVED THIS
 };
 
 const handleFoul = () => {
@@ -497,7 +484,7 @@ const endGameContinuous = () => {
         saveGameToHistory(currentGameMode);
         resetGameState();
         selectGameMode(null);
-        loadGameHistory();  // Add to automatically re-render for match history upon 14.1 game completion in `endGameContinuous()` that were missed
+        loadGameHistory();
     };
 
     modalCancelBtn.onclick = () => {
@@ -528,12 +515,10 @@ const resetGame = (saveToHistory = true) => {
 };
 
 const resetGameState = () => {
-        // Reset values for standard game modes
     player1Score = 0;
     player2Score = 0;
     updateStandardScoreboard();
 
-    // Reset values for 14.1 Continuous game modes
     gameState.currentScoreP1 = 0;
     gameState.highRunP1 = 0;
     gameState.inningsP1 = 1;
@@ -547,7 +532,6 @@ const resetGameState = () => {
     gameState.inningHistory = [];
     gameState.currentPlayer = 1;
     gameState.gameMode = null;
-     // Reset 14.1 settings
     gameState.maxInnings = 10;
     gameState.maxBalls = 100;
 };
@@ -575,7 +559,6 @@ const clearInningTable = () => {
     clearInningTable();
     if (typeof ballsPotted !== 'undefined') {
 
-        // Determine current inning based on the current player's turn
         if (gameState.gameMode === 1) {
             currentInning = gameState.inningsP1;
         } else {
@@ -590,7 +573,6 @@ const clearInningTable = () => {
         });
     }
    
-
     gameState.inningHistory.forEach(inning => {
         const row = inningDetailsTable.insertRow();
         const inningCell = row.insertCell();
@@ -652,7 +634,6 @@ const switchPlayer = () => {
         }
     };
 
-// Check for game end in 14.1 Continuous
 const checkGameEnd = () => {
     if (currentGameMode === '14.1 Continuous') {
         if (gameState.inningsP1 > gameState.maxInnings || gameState.inningsP2 > gameState.maxInnings) {
@@ -679,55 +660,11 @@ const checkGameEnd = () => {
     }
 };
 
-// Fullscreen Prompt Logic
-/*
-function isTabletChrome() {
-    const userAgent = navigator.userAgent.toLowerCase();
-    return /ipad|android(?!.*mobile)/.test(userAgent) && /chrome/.test(userAgent);
-}
-
-function showFullscreenPrompt() {
-    fullscreenModal.style.display = 'flex';
-
-    fullscreenConfirmBtn.onclick = () => {
-        fullscreenModal.style.display = 'none';
-        requestFullscreen();
-    };
-
-    fullscreenCancelBtn.onclick = () => {
-        fullscreenModal.style.display = 'none';
-    };
-}
-
-function requestFullscreen() {
-    const element = document.documentElement;
-
-    if (element.requestFullscreen) {
-        element.requestFullscreen()
-            .catch(err => {
-                console.error(`Error attempting to enable fullscreen: ${err.message} (${err.name})`);
-                alert('Fullscreen mode is not supported or could not be enabled in this browser.');
-            });
-    } else if (element.mozRequestFullScreen) {
-        element.mozRequestFullScreen();
-    } else if (element.webkitRequestFullscreen) {
-        element.webkitRequestFullscreen();
-    } else if (element.msRequestFullscreen) {
-        element.msRequestFullscreen();
-    } else {
-          console.log("Fullscreen API not supported")
-         alert('Fullscreen mode is not supported or could not be enabled in this browser.');
-    }
-}
-*/
-
-// Event Listeners for non Continuous game modes
 document.getElementById('clear-history').addEventListener('click', clearGameHistory);
 document.getElementById('export-history').addEventListener('click', exportGameHistory);
 document.getElementById('import-history-button').addEventListener('click', () => document.getElementById('import-history').click());
 document.getElementById('import-history').addEventListener('change', importGameHistory);
 
-// Event Listeners for Continuous game modes
 newRackBtn.addEventListener('click', handleNewRack);
 foulBtn.addEventListener('click', handleFoul);
 safetyBtn.addEventListener('click', handleSafety);
