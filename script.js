@@ -10,31 +10,35 @@ function selectGameMode(mode) {
     const gameSelection = document.getElementById('game-selection');
     const scoreboard = document.getElementById('scoreboard');
     const gameScreen = document.getElementById('game-screen');
-    const gameSettingsInput = document.getElementById('game-settings-input');
+    const playerInput = document.getElementById('player-input');
     const gameSettings141 = document.getElementById('game-settings-14-1');
     const standardScoreboard = document.getElementById('standard-scoreboard');
+
 
     if (gameSelection) gameSelection.style.display = 'flex';
     if (scoreboard) scoreboard.style.display = 'none';
     if (gameScreen) gameScreen.style.display = 'none';
-    if (gameSettingsInput) gameSettingsInput.style.display = 'none';
+   if (playerInput) playerInput.style.display = 'none';
     if (gameSettings141) gameSettings141.style.display = 'none';
 
+
     if (mode) {
-        if (mode === '8-ball' || mode === '9-ball' || mode === '10-ball') {
-            // Display logic for standard game modes
-            if (gameSelection) gameSelection.style.display = 'none';
-            if (scoreboard) scoreboard.style.display = 'block';
-            if (standardScoreboard) standardScoreboard.style.display = 'flex';
-            startGame();
-        } else if (mode === '14.1 Continuous' || mode === '14.1 Continuous Trainer') {
-            // Display logic for 14.1 Continuous modes
-            if (gameSelection) gameSelection.style.display = 'none';
-            if (gameSettingsInput) gameSettingsInput.style.display = 'block';
-            if (gameSettings141) gameSettings141.style.display = 'block';
+         if (mode === '8-ball' || mode === '9-ball' || mode === '10-ball') {
+             // Display logic for standard game modes
+             if (gameSelection) gameSelection.style.display = 'none';
+             if (scoreboard) scoreboard.style.display = 'block';
+             if (standardScoreboard) standardScoreboard.style.display = 'flex';
+             startGame();
+         }
+           else if (mode === '14.1 Continuous' || mode === '14.1 Continuous Trainer') {
+           if(playerInput) playerInput.style.display = 'block';
+           if (gameSettings141) gameSettings141.style.display = 'block';
+            
+           }
         }
-    }
+    
 }
+
 
 document.addEventListener('DOMContentLoaded', function() {
     selectGameMode(null);
@@ -43,10 +47,37 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 function startGame() {
-    if (currentGameMode === '8-ball' || currentGameMode === '9-ball' || currentGameMode === '10-ball') {
-        // Standard game modes logic
-        player1Name = document.getElementById('player1-name').value;
-        player2Name = document.getElementById('player2-name').value;
+   let maxInnings = 10;
+    let maxBalls = 100;
+
+     if (currentGameMode === '14.1 Continuous' || currentGameMode === '14.1 Continuous Trainer') {
+        // 14.1 Continuous settings
+         maxInnings = parseInt(document.getElementById('max-innings').value);
+        maxBalls = parseInt(document.getElementById('max-balls').value);
+
+        if (isNaN(maxInnings) || maxInnings < 1) {
+            alert("Please enter a valid number for Max Innings (minimum 1).");
+            return;
+        }
+        if (isNaN(maxBalls) || maxBalls < 1) {
+            alert("Please enter a valid number for Max Balls (minimum 1).");
+            return;
+        }
+
+        // Store these settings in the gameState object or similar
+        gameState.maxInnings = maxInnings;
+        gameState.maxBalls = maxBalls;
+
+        gameState.player1Name = document.getElementById('player1-name-continuous').value;
+        gameState.player2Name = document.getElementById('player2-name-continuous').value;
+
+
+         showGameScreen(currentGameMode);
+        return;
+    }
+        player1Name = document.getElementById('player1-name-continuous').value;
+        player2Name = document.getElementById('player2-name-continuous').value;
+
 
         if (!player1Name || !player2Name) {
             alert('Please enter names for both players.');
@@ -57,45 +88,17 @@ function startGame() {
         player2Score = 0;
         updateStandardScoreboard();
         document.getElementById('game-selection').style.display = 'none';
-        document.getElementById('game-settings-input').style.display = 'none';
+        document.getElementById('player-input').style.display = 'none';
         document.getElementById('scoreboard').style.display = 'block';
         document.getElementById('standard-scoreboard').style.display = 'flex';
         document.getElementById('game-screen').style.display = 'none';
         document.getElementById('game-title').textContent = currentGameMode;
         document.getElementById('player1-name').textContent = player1Name;
         document.getElementById('player2-name').textContent = player2Name;
-    } 
+
 }
 
-function start141Game() {
-    let maxInnings = 10;
-    let maxBalls = 100;
 
-    maxInnings = parseInt(document.getElementById('max-innings').value);
-    maxBalls = parseInt(document.getElementById('max-balls').value);
-
-    if (isNaN(maxInnings) || maxInnings < 1) {
-        alert("Please enter a valid number for Max Innings (minimum 1).");
-        return;
-    }
-    if (isNaN(maxBalls) || maxBalls < 1) {
-        alert("Please enter a valid number for Max Balls (minimum 1).");
-        return;
-    }
-
-    gameState.maxInnings = maxInnings;
-    gameState.maxBalls = maxBalls;
-
-    gameState.player1Name = document.getElementById('player1-name-continuous').value;
-    gameState.player2Name = document.getElementById('player2-name-continuous').value;
-
-    document.getElementById('game-selection').style.display = 'none';
-    document.getElementById('game-settings-input').style.display = 'none';
-    document.getElementById('standard-scoreboard').style.display = 'none';
-    document.getElementById('scoreboard').style.display = 'none';
-
-    showGameScreen(currentGameMode);
-}
 
 function incrementScore(player) {
     if (player === 1) {
@@ -188,7 +191,7 @@ const initializeGame = () => {
 
 const showGameScreen = (mode) => {
     document.getElementById('game-selection').style.display = 'none';
-    document.getElementById('game-settings-input').style.display = 'none';
+    document.getElementById('player-input').style.display = 'none';
     document.getElementById('standard-scoreboard').style.display = 'none';
     document.getElementById('scoreboard').style.display = 'none';
     document.getElementById('game-screen').style.display = 'flex';

@@ -19,37 +19,36 @@
                 <button onclick="selectGameMode('14.1 Continuous')">14.1 Continuous</button>
                 <button onclick="selectGameMode('14.1 Continuous Trainer')">14.1 Continuous Trainer</button>
             </div>
-             <h2 id="match-history-header">Match History</h2>
+            <h2 id="match-history-header">Match History</h2>
             <div id="match-history">
-
                 <ul id="history-list"></ul>
             </div>
-           <div id="history-controls">
+            <div id="history-controls">
                 <button id="clear-history" class="secondary-button">Clear History</button>
                 <button id="export-history" class="secondary-button">Export History</button>
                 <input type="file" id="import-history" accept=".json" style="display: none;">
                 <button id="import-history-button" class="secondary-button">Import History</button>
+            </div>
+        </div>
+         <div id="player-input" style="display: none;">
+          <div class="close-button-container">
+             <span class="close-button" onclick="selectGameMode(null)">×</span>
            </div>
+             <h2>Enter Player Names</h2>
+             <label for="player1-name-continuous">Home:</label>
+             <input type="text" id="player1-name-continuous" placeholder="Home Player Name" value="Player 1"><br>
+            <label for="player2-name-continuous">Guest:</label>
+            <input type="text" id="player2-name-continuous" placeholder="Guest Player Name" value="Player 2"><br>
+           <div id="game-settings-14-1" style="display: none;">
+            <h3>14.1 Continuous Settings</h3>
+            <label for="max-innings">Max Innings:</label>
+            <input type="number" id="max-innings" min="1" value="10"><br>
+            <label for="max-balls">Max Balls:</label>
+            <input type="number" id="max-balls" min="1" value="100"><br>
         </div>
-         <div id="game-settings-input" style="display: none;">
-            <div class="close-button-container">
-               <span class="close-button" onclick="selectGameMode(null)">×</span>
-            </div>
-            <div id="player-names-input">
-                <label for="player1-name-continuous">Player 1:</label>
-                <input type="text" id="player1-name-continuous" value="Player 1"><br>
-                <label for="player2-name-continuous">Player 2:</label>
-                <input type="text" id="player2-name-continuous" value="Player 2"><br>
-            </div>
-            <div id="game-settings-14-1">
-                <h3>14.1 Continuous Settings</h3>
-                <label for="max-innings">Max Innings:</label>
-                <input type="number" id="max-innings" min="1" value="10"><br>
-                <label for="max-balls">Max Balls:</label>
-                <input type="number" id="max-balls" min="1" value="100"><br>
-            </div>
-            <button onclick="start141Game()">Start Game</button>
-        </div>
+         <button onclick="startGame()">Start Game</button>
+    </div>
+
         <div id="scoreboard" style="display: none;">
            <div class="close-button-container">
                <span class="close-button" onclick="selectGameMode(null)">×</span>
@@ -78,7 +77,7 @@
 
   <div id="game-screen" style="display: none;">
             <div class="close-button-container">
-               <span class="close-button" onclick="endGame()">×</span>
+               <span class="close-button" onclick="selectGameMode(null)">×</span>
            </div>
                 <div class="main-content">
                     <div class="left-section-wrapper">
