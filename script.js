@@ -14,13 +14,11 @@ function selectGameMode(mode) {
     const gameSettings141 = document.getElementById('game-settings-14-1');
     const standardScoreboard = document.getElementById('standard-scoreboard');
 
-
     if (gameSelection) gameSelection.style.display = 'flex';
     if (scoreboard) scoreboard.style.display = 'none';
     if (gameScreen) gameScreen.style.display = 'none';
-   if (playerInput) playerInput.style.display = 'none';
+    if (playerInput) playerInput.style.display = 'none';
     if (gameSettings141) gameSettings141.style.display = 'none';
-
 
     if (mode) {
          if (mode === '8-ball' || mode === '9-ball' || mode === '10-ball') {
@@ -38,7 +36,6 @@ function selectGameMode(mode) {
         }
     
 }
-
 
 document.addEventListener('DOMContentLoaded', function() {
     selectGameMode(null);
@@ -97,8 +94,6 @@ function startGame() {
         document.getElementById('player2-name').textContent = player2Name;
 
 }
-
-
 
 function incrementScore(player) {
     if (player === 1) {
