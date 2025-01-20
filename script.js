@@ -21,20 +21,19 @@ function selectGameMode(mode) {
     if (gameSettings141) gameSettings141.style.display = 'none';
 
     if (mode) {
-         if (mode === '8-ball' || mode === '9-ball' || mode === '10-ball') {
-             // Display logic for standard game modes
-             if (gameSelection) gameSelection.style.display = 'none';
-             if (scoreboard) scoreboard.style.display = 'block';
-             if (standardScoreboard) standardScoreboard.style.display = 'flex';
-             startGame();
-         }
-           else if (mode === '14.1 Continuous' || mode === '14.1 Continuous Trainer') {
-           if(playerInput) playerInput.style.display = 'block';
-           if (gameSettings141) gameSettings141.style.display = 'block';
-            
-           }
+        if (mode === '8-ball' || mode === '9-ball' || mode === '10-ball') {
+            // Display logic for standard game modes
+            if (gameSelection) gameSelection.style.display = 'none';
+            if (scoreboard) scoreboard.style.display = 'block';
+            if (standardScoreboard) standardScoreboard.style.display = 'flex';
+            startGame();
+        } else if (mode === '14.1 Continuous' || mode === '14.1 Continuous Trainer') {
+            // Display logic for 14.1 Continuous modes
+            if (gameSelection) gameSelection.style.display = 'none';
+            if (playerInput) playerInput.style.display = 'block';
+            if (gameSettings141) gameSettings141.style.display = 'block';
         }
-    
+    }
 }
 
 document.addEventListener('DOMContentLoaded', function() {
@@ -44,11 +43,10 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 function startGame() {
-   let maxInnings = 10;
+    let maxInnings = 10;
     let maxBalls = 100;
 
-     if (currentGameMode === '14.1 Continuous' || currentGameMode === '14.1 Continuous Trainer') {
-        // 14.1 Continuous settings
+    if (currentGameMode === '14.1 Continuous' || currentGameMode === '14.1 Continuous Trainer') {
          maxInnings = parseInt(document.getElementById('max-innings').value);
         maxBalls = parseInt(document.getElementById('max-balls').value);
 
@@ -70,12 +68,12 @@ function startGame() {
 
 
          showGameScreen(currentGameMode);
-        return;
+       return;
     }
+    
         player1Name = document.getElementById('player1-name-continuous').value;
         player2Name = document.getElementById('player2-name-continuous').value;
-
-
+        
         if (!player1Name || !player2Name) {
             alert('Please enter names for both players.');
             return;
@@ -92,8 +90,8 @@ function startGame() {
         document.getElementById('game-title').textContent = currentGameMode;
         document.getElementById('player1-name').textContent = player1Name;
         document.getElementById('player2-name').textContent = player2Name;
+    }
 
-}
 
 function incrementScore(player) {
     if (player === 1) {
