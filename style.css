@@ -26,7 +26,7 @@ body {
 .container {
     background-color: #fff;
     border-radius: 1.5rem;
-     /* box-shadow: 0 0.8rem 2rem rgba(0, 0, 0, 0.2); REMOVE Shadow*/
+    /* box-shadow: 0 0.8rem 2rem rgba(0, 0, 0, 0.2); REMOVE Shadow*/
     width: 100%;
     max-width: 1250px;
     display: flex;
@@ -42,13 +42,12 @@ h1 {
     display: none;
 }
 
-
 h2 {
     font-size: 2rem;
     text-align: center;
     margin-bottom: 0.8rem;
     color: #2c3e50;
-   /*  text-shadow: 0.2rem 0.2rem 0.4rem rgba(0, 0, 0, 0.1); Remove Text Shadow */
+    /*  text-shadow: 0.2rem 0.2rem 0.4rem rgba(0, 0, 0, 0.1); Remove Text Shadow */
     font-weight: bold;
 }
 
@@ -58,7 +57,7 @@ h2 {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    
+
 }
 
 .game-buttons {
@@ -78,13 +77,13 @@ h2 {
     border: none;
     border-radius: 1rem;
     transition: background-color 0.3s ease, transform 0.2s ease-in-out;
-   /*  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.3); Remove SHadow*/
+    /*  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.3); Remove SHadow*/
 }
 
 #game-selection button:hover {
     background-color: #2980b9;
     transform: scale(1.05);
-   /*  box-shadow: 0 0.8rem 1.4rem rgba(0, 0, 0, 0.4); Remove Shadow */
+    /*  box-shadow: 0 0.8rem 1.4rem rgba(0, 0, 0, 0.4); Remove Shadow */
 }
 
 #game-selection .secondary-button {
@@ -102,7 +101,7 @@ h2 {
 #game-selection .secondary-button:hover {
     background-color: #2980b9;
     transform: scale(1.05);
-   /*  box-shadow: 0 0.8rem 1.4rem rgba(0, 0, 0, 0.4); Remove SHadow */
+    /*  box-shadow: 0 0.8rem 1.4rem rgba(0, 0, 0, 0.4); Remove SHadow */
 }
 
 #game-selection #clear-history,
@@ -163,12 +162,12 @@ h2 {
 #scoreboard {
     margin-top: 1rem;
     padding: 0.8rem;
-   /* border: 0.3rem solid #ddd; Remove Border*/
+    /* border: 0.3rem solid #ddd; Remove Border*/
     border-radius: 0.8rem;
-   /* box-shadow: 0 0.8rem 1.6rem rgba(0, 0, 0, 0.1); Removed shadow*/
+    /* box-shadow: 0 0.8rem 1.6rem rgba(0, 0, 0, 0.1); Removed shadow*/
     display: flex;
     flex-direction: column;
-         overflow: hidden;
+    overflow: hidden;
 }
 
 #scoreboard h2 {
@@ -190,7 +189,7 @@ h2 {
     padding: 0.8rem;
     background-color: #f9f9f9;
     border-radius: 0.8rem;
- /*  box-shadow: 0 0.4rem 0.8rem rgba(0, 0, 0, 0.1); REMOVE Shadow*/
+    /*  box-shadow: 0 0.4rem 0.8rem rgba(0, 0, 0, 0.1); REMOVE Shadow*/
     margin: 0 0.8rem;
     display: flex;
     flex-direction: column;
@@ -203,7 +202,7 @@ h2 {
     color: #2c3e50;
     text-align: center;
     font-weight: bold;
-        margin-bottom: 0.2rem;
+    margin-bottom: 0.2rem;
 }
 
 .score {
@@ -212,12 +211,12 @@ h2 {
     margin-bottom: 0.8rem;
     text-align: center;
     color: #3498db;
-  /*  text-shadow: 0.2rem 0.2rem 0.4rem rgba(0, 0, 0, 0.1); remove shadow */
+    /*  text-shadow: 0.2rem 0.2rem 0.4rem rgba(0, 0, 0, 0.1); remove shadow */
 }
 
 /* Styles for 8,9, and 10 ball game modes*/
 #standard-scoreboard .score {
-  font-size: 3rem;
+    font-size: 3rem;
 }
 
 .score-controls {
@@ -235,26 +234,25 @@ h2 {
     border-radius: 1rem;
     margin: -0.2rem 0.8rem;
     transition: background-color 0.3s ease, transform 0.2s ease-in-out;
-  /*  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.3); remove shadow */
+    /*  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.3); remove shadow */
     display: flex;
-       text-align: center;
+    text-align: center;
     align-items: center;
-        justify-content: center;
+    justify-content: center;
 }
 
 #standard-scoreboard .score-controls button:hover {
     transform: scale(1.05);
-   /*  box-shadow: 0 0.8rem 1.4rem rgba(0, 0, 0, 0.4); REMOVE SHADOW */
+    /*  box-shadow: 0 0.8rem 1.4rem rgba(0, 0, 0, 0.4); REMOVE SHADOW */
 }
-
 
 /* Styles for 8,9, and 10 ball game modes*/
 #standard-scoreboard .score-controls button span {
-   display: flex;
-       align-items: center;
-       justify-content: center;
-         margin-bottom: 0rem;
-        font-size: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 0rem;
+    font-size: 1.5rem;
 }
 
 #standard-scoreboard .score-controls button:first-child {
@@ -277,7 +275,8 @@ h2 {
     padding: 1rem 2rem;
     font-size: 1.4rem;
     cursor: pointer;
-     background-color: #3498db; /*Correct Blue*/
+    background-color: #3498db;
+    /*Correct Blue*/
     color: white;
     border: none;
     border-radius: 1rem;
@@ -289,15 +288,18 @@ h2 {
 #scoreboard button:hover {
     background-color: #2980b9;
     transform: scale(1.05);
- /*  box-shadow: 0 0.8rem 1.4rem rgba(0, 0, 0, 0.4);  removed Shadow*/
+    /*  box-shadow: 0 0.8rem 1.4rem rgba(0, 0, 0, 0.4);  removed Shadow*/
 }
 
 #match-history {
     margin-top: 0rem;
-   /* max-width: 100%; REMOVE MAX-WIDTH */
-        width: 60%; /* Set to 80% */
-    margin-left: auto; /* Center the element horizontally */
-    margin-right: auto; /* Center the element horizontally */
+    /* max-width: 100%; REMOVE MAX-WIDTH */
+    width: 60%;
+    /* Set to 80% */
+    margin-left: auto;
+    /* Center the element horizontally */
+    margin-right: auto;
+    /* Center the element horizontally */
 }
 
 #match-history-header {
@@ -309,10 +311,11 @@ h2 {
 }
 
 #history-list {
-     overflow-y: auto;
-          max-height: 11rem;
+    overflow-y: auto;
+    max-height: 11rem;
 }
- #history-controls {
+
+#history-controls {
     display: flex;
     justify-content: center;
     width: 100%;
@@ -327,7 +330,7 @@ h2 {
     border-radius: 0.6rem;
     background-color: #fdfdfd;
     font-size: 1rem;
-   /*  box-shadow: 0 0.1rem 0.3rem rgba(0, 0, 0, 0.1); REmOVED SHadow */
+    /*  box-shadow: 0 0.1rem 0.3rem rgba(0, 0, 0, 0.1); REmOVED SHadow */
     font-weight: bold;
 }
 
@@ -360,19 +363,20 @@ h2 {
     flex-direction: column;
 }
 
-.left-section, .right-section {
-      display: flex;
+.left-section,
+.right-section {
+    display: flex;
     flex-direction: column;
     flex: 1;
     margin-right: auto;
     margin-left: 0.3rem;
     overflow-y: hidden;
-       padding: 0.5rem 0rem;
+    padding: 0.5rem 0rem;
 }
 
 @media (min-width: 800px) {
     .left-section {
-       margin-right: 1rem;
+        margin-right: 1rem;
     }
 }
 
@@ -380,10 +384,10 @@ h2 {
 .scoreboard {
     margin-bottom: 0.3rem;
     padding: 0.8rem;
-  /*  border: 0.3rem solid #ddd; remove border*/
+    /*  border: 0.3rem solid #ddd; remove border*/
     border-radius: 0.8rem;
     background-color: #f4f4f4;
-   /*  box-shadow: 0 0.8rem 1.6rem rgba(0, 0, 0, 0.1); REmOVE SHadow */
+    /*  box-shadow: 0 0.8rem 1.6rem rgba(0, 0, 0, 0.1); REmOVE SHadow */
     overflow: hidden;
 }
 
@@ -407,8 +411,7 @@ h2 {
 .scoreboard #innings-p1,
 .scoreboard #current-score-p2,
 .scoreboard #high-run-p2,
-.scoreboard #innings-p2
-{
+.scoreboard #innings-p2 {
     font-size: 1.7rem;
     font-weight: bold;
 }
@@ -420,6 +423,22 @@ h2 {
 .player-stats {
     flex: 0 0 35%;
     margin: 0;
+}
+
+.player-stats-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 0.5rem;
+}
+
+.player-stats-row .stat {
+    flex: 1;
+    margin-right: 0.5rem;
+}
+
+.player-stats-row .stat:last-child {
+    margin-right: 0;
 }
 
 .middle-stats {
@@ -436,11 +455,11 @@ h2 {
     text-align: center;
     margin-top: 0.5rem;
     padding: 0.3rem 0.5rem;
- /*   border: 0.3rem solid #ddd; Remove Border */
+    /*   border: 0.3rem solid #ddd; Remove Border */
     border-radius: 0.8rem;
     background-color: #f4f4f4;
-   /*  box-shadow: 0 0.8rem 1.6rem rgba(0, 0, 0, 0.1); Remove Shadow */
-     overflow: hidden;
+    /*  box-shadow: 0 0.8rem 1.6rem rgba(0, 0, 0, 0.1); Remove Shadow */
+    overflow: hidden;
 }
 
 .buttons-remaining {
@@ -471,7 +490,7 @@ h2 {
     cursor: pointer;
     border-radius: 0.8rem;
     transition: background-color 0.2s ease-in-out;
-   /*  box-shadow: 0 0 0.3rem rgba(0, 123, 255, 0.5); REMOVE SHADOW */
+    /*  box-shadow: 0 0 0.3rem rgba(0, 123, 255, 0.5); REMOVE SHADOW */
     font-weight: bold;
 }
 
@@ -481,7 +500,7 @@ h2 {
 
 .ball-buttons button:focus {
     outline: none;
- /*     box-shadow: 0 0 0.3rem rgba(0, 123, 255, 0.5); removed Shadow */
+    /*     box-shadow: 0 0 0.3rem rgba(0, 123, 255, 0.5); removed Shadow */
 }
 
 /* Inning Table Styling */
@@ -489,22 +508,22 @@ h2 {
     overflow: hidden;
     margin: 0;
     padding: 0.8rem;
-  /*  border: 0.3rem solid #ddd; REmOVE BORDER*/
+    /*  border: 0.3rem solid #ddd; REmOVE BORDER*/
     border-radius: 0.8rem;
     background-color: #f4f4f4;
-  /*  box-shadow: 0 0.8rem 1.6rem rgba(0, 0, 0, 0.1); remove SHADOW */
+    /*  box-shadow: 0 0.8rem 1.6rem rgba(0, 0, 0, 0.1); remove SHADOW */
     width: 100%;
-    max-width: 50vw;
-      display: flex;
-     flex-direction: column;
+    max-width: 40vw;
+    display: flex;
+    flex-direction: column;
     max-height: 50rem;
 }
 
 @media (min-width: 800px) {
     .inning-table {
         max-height: 30rem;
-          width: 90%;
-         margin-left: auto;
+        width: 90%;
+        margin-left: auto;
         margin-right: auto;
     }
 }
@@ -529,7 +548,8 @@ h2 {
     table-layout: fixed;
 }
 
-.inning-table-container th, .inning-table-container td {
+.inning-table-container th,
+.inning-table-container td {
     text-align: left;
     padding: 0.5rem;
     border-bottom: 0.1rem solid #ddd;
@@ -543,25 +563,30 @@ h2 {
 }
 
 /* Adjust column widths */
-.inning-table-container th:nth-child(1), /* Inning */
+.inning-table-container th:nth-child(1),
+/* Inning */
 .inning-table-container td:nth-child(1) {
     width: 20%;
 }
 
-.inning-table-container th:nth-child(2), /* Player */
+.inning-table-container th:nth-child(2),
+/* Player */
 .inning-table-container td:nth-child(2) {
     width: 30%;
 }
 
-.inning-table-container th:nth-child(3), /* Balls Potted */
+.inning-table-container th:nth-child(3),
+/* Balls Potted */
 .inning-table-container td:nth-child(3) {
     width: 25%;
 }
 
-.inning-table-container th:nth-child(4), /* Score */
+.inning-table-container th:nth-child(4),
+/* Score */
 .inning-table-container td:nth-child(4) {
     width: 25%;
 }
+
 /* Modal Styling */
 #modal-overlay {
     position: fixed;
@@ -588,7 +613,8 @@ h2 {
     font-weight: bold;
 }
 
-.primary-button, .secondary-button {
+.primary-button,
+.secondary-button {
     border: none;
     color: white;
     padding: 1.2rem 1.8rem;
@@ -610,7 +636,8 @@ h2 {
     background-color: #f44336;
 }
 
-.primary-button:hover, .secondary-button:hover {
+.primary-button:hover,
+.secondary-button:hover {
     opacity: 0.8;
 }
 
@@ -631,12 +658,12 @@ h2 {
     margin-bottom: 0.5rem;
     justify-content: space-between;
     align-items: center;
-     padding: 0 0.5rem;
+    padding: 0 0.5rem;
 }
 
 .controls #foul {
-     background-color: #ffeb3b;
-         color: #000;
+    background-color: #ffeb3b;
+    color: #000;
 }
 
 .controls #safety {
@@ -644,7 +671,7 @@ h2 {
 }
 
 .controls #end-game {
-       background-color: #3498db;
+    background-color: #3498db;
 }
 
 .controls #undo {
@@ -652,7 +679,7 @@ h2 {
 }
 
 .controls #reset {
-       background-color: #e74c3c;
+    background-color: #e74c3c;
 }
 
 .controls #foul,
@@ -670,6 +697,7 @@ h2 {
     margin-right: 1rem;
     flex-grow: 0;
 }
+
 #new-rack {
     background-color: #673ab7;
     margin-bottom: 0.4rem;
@@ -684,7 +712,8 @@ h2 {
     background-color: #f44336;
 }
 
-#export-history, #import-history-button {
+#export-history,
+#import-history-button {
     background-color: #008CBA;
 }
 
@@ -732,6 +761,11 @@ h2 {
     font-size: 1.1rem;
     font-weight: bold;
 }
+
+.fullscreen-modal-dialog .primary-button {
+    margin-right: 1rem;
+}
+
 .close-button-container {
     position: absolute;
     top: 0.5rem;
@@ -746,8 +780,9 @@ h2 {
     text-decoration: none;
     cursor: pointer;
     padding: 0.4rem;
-      transition: color 0.3s;
+    transition: color 0.3s;
 }
+
 .close-button:hover {
     color: #333;
 }
