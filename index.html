@@ -21,6 +21,7 @@
             </div>
              <h2 id="match-history-header">Match History</h2>
             <div id="match-history">
+
                 <ul id="history-list"></ul>
             </div>
            <div id="history-controls">
@@ -30,30 +31,23 @@
                 <button id="import-history-button" class="secondary-button">Import History</button>
            </div>
         </div>
-           <div id="player-input" style="display: none;">
-              <div class="close-button-container">
-               <span class="close-button" onclick="selectGameMode(null)">×</span>
-           </div>
-                <h2>Enter Player Names</h2>
-               <label for="player1-name-continuous">Home:</label>
-                 <input type="text" id="player1-name-continuous" placeholder="Home Player Name" value="Player 1"><br>
-                <label for="player2-name-continuous">Guest:</label>
-                 <input type="text" id="player2-name-continuous" placeholder="Guest Player Name" value="Player 2"><br>
-            <div id="game-settings-14-1" style="display: none;">
-            <h3>14.1 Continuous Settings</h3>
-             <label for="max-innings">Max Innings:</label>
-            <input type="number" id="max-innings" min="1" value="10"><br>
-            <label for="max-balls">Max Balls:</label>
-            <input type="number" id="max-balls" min="1" value="100"><br>
-        </div>
-         <button onclick="startGame()">Start Game</button>
-        </div>
 
+        <div id="player-input" style="display: none;">
+          <div class="close-button-container">
+             <span class="close-button" onclick="selectGameMode(null)">×</span>
+          </div>
+            <h2>Enter Player Names</h2>
+            <label for="player1">Home:</label>
+            <input type="text" id="player1" placeholder="Home Player Name" value="Home"><br>
+            <label for="player2">Guest:</label>
+            <input type="text" id="player2" placeholder="Guest Player Name" value="Guest"><br>
+            <button onclick="startGame()">Start Game</button>
+        </div>
 
         <div id="scoreboard" style="display: none;">
            <div class="close-button-container">
                <span class="close-button" onclick="selectGameMode(null)">×</span>
-           </div>
+            </div>
             <h2 id="game-title"></h2>
             <div id="standard-scoreboard" style="display: none;">
                 <div class="player awesome-player">
@@ -76,19 +70,32 @@
              <button onclick="endGame()">End Game</button>
         </div>
 
+
   <div id="game-screen" style="display: none;">
             <div class="close-button-container">
-               <span class="close-button" onclick="endGame()">×</span>
+               <span class="close-button" onclick="selectGameMode(null)">×</span>
            </div>
-                <div class="main-content">
+                 <section class="input-parameters">
+                     <div class ="input-box">
+                          <label for="max-innings">Max Innings</label>
+                            <input type="number" id="max-innings" value="15" min="1">
+                      </div>
+
+                       <div class ="input-box">
+                           <label for="max-score">Max Score </label>
+                           <input type="number" id="max-score" value="200" min="1">
+                       </div>
+                  </section>
+
+               <div class="main-content">
                     <div class="left-section-wrapper">
                          <section class="left-section">
                             <section class="scoreboard">
                                 <table class="player-stats-table">
                                     <tr>
-                                        <td class="player-label"><span id="player1-name-continuous-display"></span></td>
+                                        <td class="player-label"><input type="text" id="player1-name-continuous" value="Player 1"></td>
                                         <td class="empty-cell"></td>
-                                        <td class="player-label"><span id="player2-name-continuous-display"></span></td>
+                                        <td class="player-label"><input type="text" id="player2-name-continuous" value="Player 2"></td>
                                     </tr>
                                     <tr>
                                         <td class="player-stats">
@@ -160,6 +167,7 @@
                                 </table>
                             </div>
                         </section>
+                           <div class ="game-status"> <span id = "game-status-info"></span></div>
                     </section>
                 </div>
                  <section class="controls">
@@ -168,7 +176,7 @@
                     <button id="undo" class="secondary-button">Undo</button>
                     <button id="reset" class="secondary-button">Reset Game</button>
                     <button id="end-game" class="secondary-button">End Game</button>
-                    <button id="new-rack" class="primary-button" disabled>New Rack (+14 balls)</button>
+                     <button id="new-rack" class="primary-button" disabled>New Rack (+14 balls)</button>
                 </section>
             </div>
     </div>
@@ -189,6 +197,5 @@
         </div>
     </div>
 
-    <script src="script.js"></script>
+    <script src="script.js" defer></script>
 </body>
-</html>
