@@ -3,7 +3,8 @@ let player1Name = 'Home';
 let player2Name = 'Guest';
 let player1Score = 0;
 let player2Score = 0;
-const matchHistory = [];
+let matchHistory = []; // Modified const to let
+const API_BASE_URL = 'http://localhost:3000/api'; // Replace with your API URL
 
 function selectGameMode(mode) {
     currentGameMode = mode;
@@ -100,10 +101,10 @@ function endGame() {
     document.getElementById('game-screen').style.display = 'none';
     document.getElementById('standard-scoreboard').style.display = 'none';
     selectGameMode(null);
-    
+
     saveGameToHistory(endedGameMode);
     resetGameState();
-    
+
     loadGameHistory();
       currentGameMode = null;
 }
@@ -169,7 +170,7 @@ const showGameScreen = (mode) => {
     document.getElementById('scoreboard').style.display = 'none';
     document.getElementById('game-screen').style.display = 'flex';
     document.getElementById('game-title').textContent = mode;
-    
+
     gameState.gameMode = (mode === '14.1 Continuous') ? 2 : 1;
 
     if (mode === '14.1 Continuous Trainer') {
@@ -190,36 +191,47 @@ const showGameScreen = (mode) => {
     createRemainingBallsButtons();
 };
 
-const loadGameHistory = () => {
-    const history = JSON.parse(localStorage.getItem('gameHistory')) || [];
-    const historyList = document.getElementById('history-list');
-    historyList.innerHTML = ''; // Clear the list
+// Replace the loadGameHistory function
+const loadGameHistory = async () => {
+    try {
+        const response = await fetch(`${API_BASE_URL}/gameHistory`);
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        matchHistory = await response.json();
+        const historyList = document.getElementById('history-list');
+        historyList.innerHTML = ''; // Clear the list
 
-    if (history.length === 0) {
-        const listItem = document.createElement('li');
-        listItem.textContent = 'No games played yet.';
-        historyList.appendChild(listItem);
-    } else {
-      history.slice().reverse().forEach((game, index) => {
-             const listItem = document.createElement('li');
-            listItem.innerHTML = '';
-             let text = "";
-            if (game.mode === '14.1 Continuous') {
-                text = `<strong>${game.mode}:</strong> ${game.date} - <strong>Player 1:</strong> ${game.player1} (Innings: ${game.inningsP1}, Balls Potted: ${game.ballsPottedP1}); <strong>Player 2:</strong> ${game.player2} (Innings: ${game.inningsP2}, Balls Potted: ${game.ballsPottedP2})`;
-            } else if (game.mode === '14.1 Continuous Trainer') {
-                text = `<strong>${game.mode}:</strong> ${game.date} - Player: ${game.player1} (Innings: ${game.inningsP1}, Balls Potted: ${game.ballsPottedP1})`;
-            }
-            else {
-                text = `<strong>${game.mode}:</strong> ${game.player1} ${game.score1} - ${game.score2} ${game.player2}`;
-            }
-            listItem.innerHTML = text;
+        if (matchHistory.length === 0) {
+            const listItem = document.createElement('li');
+            listItem.textContent = 'No games played yet.';
             historyList.appendChild(listItem);
-      });
+        } else {
+           matchHistory.slice().reverse().forEach((game, index) => {
+                const listItem = document.createElement('li');
+                listItem.innerHTML = '';
+                let text = "";
+                if (game.mode === '14.1 Continuous') {
+                    text = `<strong>${game.mode}:</strong> ${game.date} - <strong></strong> ${game.player1} (Innings: ${game.inningsP1}, Balls Potted: ${game.ballsPottedP1}); <strong></strong> ${game.player2} (Innings: ${game.inningsP2}, Balls Potted: ${game.ballsPottedP2})`;
+                } else if (game.mode === '14.1 Continuous Trainer') {
+                    text = `<strong>${game.mode}:</strong> ${game.date} - Player: ${game.player1} (Innings: ${game.inningsP1}, Balls Potted: ${game.ballsPottedP1})`;
+                }
+                else {
+                    text = `<strong>${game.mode}:</strong> ${game.player1} ${game.score1} - ${game.score2} ${game.player2}`;
+                }
+                listItem.innerHTML = text;
+                historyList.appendChild(listItem);
+           });
+        }
+    } catch (error) {
+        console.error("Failed to load game history:", error);
+        const historyList = document.getElementById('history-list');
+        historyList.innerHTML = '<li>Failed to load history.</li>';
     }
 };
 
-const saveGameToHistory = (endedGameMode) => {
-    const history = JSON.parse(localStorage.getItem('gameHistory')) || [];
+// Replace saveGameToHistory function
+const saveGameToHistory = async (endedGameMode) => {
     const today = new Date();
     const dateString = today.toLocaleDateString();
     const timeString = today.toLocaleTimeString();
@@ -230,18 +242,18 @@ const saveGameToHistory = (endedGameMode) => {
             mode: endedGameMode,
             player1: playerNameInputP1.value,
             player2: playerNameInputP2.value,
-            inningsP1: gameState.inningsP1 -1,
+            inningsP1: gameState.inningsP1 - 1,
             ballsPottedP1: gameState.currentScoreP1,
             inningsP2: gameState.inningsP2 - 1,
             ballsPottedP2: gameState.currentScoreP2
         };
     } else if (endedGameMode === '14.1 Continuous Trainer') {
-         gameData = {
+        gameData = {
             date: `${dateString} ${timeString}`,
             mode: endedGameMode,
             player1: playerNameInputP1.value,
             player2: null,
-             inningsP1: gameState.inningsP1 -1,
+            inningsP1: gameState.inningsP1 - 1,
             ballsPottedP1: gameState.currentScoreP1,
             inningsP2: null,
             ballsPottedP2: null
@@ -255,45 +267,48 @@ const saveGameToHistory = (endedGameMode) => {
             score2: player2Score
         }
     }
-    console.log("Saving game data:", gameData);
 
-    history.push(gameData);
-    localStorage.setItem('gameHistory', JSON.stringify(history));
-};
+    try {
+        const response = await fetch(`${API_BASE_URL}/gameHistory`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(gameData),
+        });
 
-const clearGameHistory = () => {
-    localStorage.removeItem('gameHistory');
-    loadGameHistory();
-};
-
-const exportGameHistory = () => {
-    const history = JSON.parse(localStorage.getItem('gameHistory')) || [];
-    const historyString = JSON.stringify(history);
-    const blob = new Blob([historyString], { type: "application/json" });
-    const url = URL.createObjectURL(blob);
-    const link = document.createElement('a');
-    link.download = 'game_history.json';
-    link.href = url;
-    link.click();
-}
-
-const importGameHistory = (event) => {
-    const file = event.target.files[0];
-    if (file) {
-        const reader = new FileReader();
-        reader.onload = (e) => {
-            try {
-                const importedHistory = JSON.parse(e.target.result);
-                localStorage.setItem('gameHistory', JSON.stringify(importedHistory));
-                loadGameHistory();
-            } catch (error) {
-                console.error("Error importing history", error);
-                alert("Invalid file format. Please select a valid JSON file.");
-            }
-        };
-        reader.readAsText(file);
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        const savedGame = await response.json();
+        matchHistory.push(savedGame);
+        loadGameHistory(); // Refresh the history display
+    } catch (error) {
+        console.error("Failed to save game:", error);
+        alert("Failed to save game history.");
     }
-}
+};
+
+// Modify clearGameHistory function to call the DELETE API
+const clearGameHistory = async () => {
+    try {
+        const response = await fetch(`${API_BASE_URL}/gameHistory`, {
+            method: 'DELETE',
+        });
+
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        matchHistory = []; // Clear local history
+        loadGameHistory(); // Refresh the history display
+    } catch (error) {
+        console.error("Failed to clear game history:", error);
+        alert("Failed to clear game history.");
+    }
+};
+
+// Remove the exportGameHistory and importGameHistory functions because they are not compatible
 
 // Game Functions
 
@@ -328,8 +343,8 @@ const updateInning = (ballsRemaining) => {
         gameState.highRunP2 = Math.max(gameState.highRunP2, ballsPotted);
     }
     gameState.ballsRemaining = ballsRemaining;
-    
-    
+
+
     updateInningTable(ballsPotted);
     updateDisplay();
     addToHistory({ type: 'inning', player: gameState.currentPlayer, ballsPotted, score: (gameState.gameMode === 1 || gameState.currentPlayer === 1) ? gameState.currentScoreP1 : gameState.currentScoreP2, remaining: gameState.ballsRemaining });
@@ -550,7 +565,7 @@ const clearInningTable = () => {
             score: (gameState.gameMode === 1 || gameState.currentPlayer === 1) ? gameState.currentScoreP1 : gameState.currentScoreP2
         });
     }
-   
+
 
     gameState.inningHistory.forEach(inning => {
         const row = inningDetailsTable.insertRow();
@@ -658,9 +673,9 @@ function requestFullscreen() {
 
 // Event Listeners for non Continuous game modes
 document.getElementById('clear-history').addEventListener('click', clearGameHistory);
-document.getElementById('export-history').addEventListener('click', exportGameHistory);
-document.getElementById('import-history-button').addEventListener('click', () => document.getElementById('import-history').click());
-document.getElementById('import-history').addEventListener('change', importGameHistory);
+//document.getElementById('export-history').addEventListener('click', exportGameHistory); REMOVE
+//document.getElementById('import-history-button').addEventListener('click', () => document.getElementById('import-history').click()); REMOVE
+//document.getElementById('import-history').addEventListener('change', importGameHistory); REMOVE
 
 // Event Listeners for Continuous game modes
 newRackBtn.addEventListener('click', handleNewRack);

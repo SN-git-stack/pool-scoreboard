@@ -1,0 +1,26 @@
+{
+  "name": "pool-scoreboard",
+  "version": "1.0.0",
+  "description": "A sleek, responsive web application for effortlessly tracking scores in your favorite pool and billiards games. 🎱 Designed for an optimal user experience on tablets, smartphones, and desktops alike! ✨",
+  "main": "script.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/stephannjo/pool-scoreboard.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/stephannjo/pool-scoreboard/issues"
+  },
+  "homepage": "https://github.com/stephannjo/pool-scoreboard#readme",
+  "dependencies": {
+    "body-parser": "^1.20.3",
+    "cors": "^2.8.5",
+    "express": "^4.21.2"
+  }
+}
