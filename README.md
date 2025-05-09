@@ -2,7 +2,7 @@
 
 A sleek, responsive web application for effortlessly tracking scores in your favorite pool and billiards games. 🎱 Designed for an optimal user experience on tablets, smartphones, and desktops alike! ✨
 
-[🚀 **Live Demo**](https://stephannjo.github.io/pool-scoreboard/)
+[🚀 **Live Demo**](https://sn-git-stack.github.io/pool-scoreboard/)
 
 <br>
 
@@ -41,17 +41,17 @@ A sleek, responsive web application for effortlessly tracking scores in your fav
 
  <div align="center">
 
-<p> <img src="https://stephannjo.github.io/pool-scoreboard/assets/game_selection.png" width= 280px height= auto alt = "Game Selection Screen">
+<p> <img src="https://sn-git-stack.github.io/pool-scoreboard/assets/game_selection.png" width= 280px height= auto alt = "Game Selection Screen">
 <br> The home screen for choosing your different pool modes </p>
 <br>
 
-<p><img src="https://stephannjo.github.io/pool-scoreboard/assets/standard_game_mode.png"  width= 280px height= auto alt="Standard Game Mode Screen">
+<p><img src="https://sn-git-stack.github.io/pool-scoreboard/assets/standard_game_mode.png"  width= 280px height= auto alt="Standard Game Mode Screen">
 <br>Basic scoring screen for typical 2 player scoring</p>
 <br>
-<p> <img src="https://stephannjo.github.io/pool-scoreboard/assets/continuous_game_mode.png" width= 280px height= auto  alt="14.1 Continuous Game Screen">
+<p> <img src="https://sn-git-stack.github.io/pool-scoreboard/assets/continuous_game_mode.png" width= 280px height= auto  alt="14.1 Continuous Game Screen">
  <br> Continuous game mode screen where we track number of potted balls</p>
 <br>
-<p> <img src="https://stephannjo.github.io/pool-scoreboard/assets/trainer_mode.png"  width= 280px height= auto alt ="14.1 Continuous Trainer Game Mode Screen">
+<p> <img src="https://sn-git-stack.github.io/pool-scoreboard/assets/trainer_mode.png"  width= 280px height= auto alt ="14.1 Continuous Trainer Game Mode Screen">
  <br> A view at the 14.1 continuous training view of score management.</p>
 </div>
 
@@ -59,7 +59,7 @@ A sleek, responsive web application for effortlessly tracking scores in your fav
 
 ## ⚙️ Getting Started
 
-1.  Access the Scoreboard via your web browser using [this link](https://stephannjo.github.io/pool-scoreboard/).
+1.  Access the Scoreboard via your web browser using [this link](https://sn-git-stack.github.io/pool-scoreboard/).
 2.  Select your desired pool game on the initial splash page
 3.  Follow on screen prompts, or enjoy the 14.1 functionality via your appropriate interface.
 
